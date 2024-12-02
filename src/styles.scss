@@ -1,0 +1,55 @@
+// Переменные SCSS
+$primary-color: #4CAF50;
+$hover-primary-color: #58ac5a;
+$secondary-color: #007BFF;
+$text-color: #333;
+$background-color: #f4f4f9;
+$header-height: 3rem;
+$footer-height: 3rem;
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: $background-color;
+  color: $text-color;
+
+
+  header {
+    flex-basis: $header-height;
+    background-color: $primary-color;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  main {
+    flex-grow: 1;
+    padding: 2rem;
+  }
+
+  footer {
+    flex-basis: $footer-height;
+    background-color: $text-color;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+  }
+
+  button {
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+
+    &:hover {
+      background-color: $hover-primary-color;
+    }
+  }
+}
