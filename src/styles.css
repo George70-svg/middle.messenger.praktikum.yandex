@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "NunitoSans";
+  src: local("NunitoSans"), url(/src/assets/fonts/NunitoSans.ttf) format("truetype");
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100dvw;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+  font-family: NunitoSans, sans-serif;
+}
+
+h1 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/*# sourceMappingURL=styles.css.map */

@@ -7,49 +7,29 @@ $background-color: #f4f4f9;
 $header-height: 3rem;
 $footer-height: 3rem;
 
+@font-face {
+  font-family: 'NunitoSans';
+  src: local('NunitoSans'), url(/src/assets/fonts/NunitoSans.ttf) format('truetype');
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  display: flex;
-  flex-direction: column;
+  width: 100dvw;
   height: 100dvh;
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: $background-color;
   color: $text-color;
+  font-family: NunitoSans, sans-serif;
+}
 
+h1 {
+  margin: 0;
+}
 
-  header {
-    flex-basis: $header-height;
-    background-color: $primary-color;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-  }
-
-  main {
-    flex-grow: 1;
-    padding: 2rem;
-  }
-
-  footer {
-    flex-basis: $footer-height;
-    background-color: $text-color;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    margin-top: 2rem;
-  }
-
-  button {
-    background-color: $primary-color;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-
-    &:hover {
-      background-color: $hover-primary-color;
-    }
-  }
+p {
+  margin: 0;
 }

@@ -1,0 +1,13 @@
+<!-- templates/page500.hbs -->
+<div class='login-page'>
+  <form>
+    <h1 class='title'>Авторизация</h1>
+    <div class='field'>
+      {{> input type='text' id='login-username' class='username' name='username' placeholder='Имя пользователя' }}
+    </div>
+    <div class='field'>
+      {{> input type='password' id='login-password' class='password' name='password' placeholder='Пароль' }}
+    </div>
+    {{> button class='login-button' text='Вперёд' }}
+  </form>
+</div>
