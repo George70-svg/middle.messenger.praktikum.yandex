@@ -1,0 +1,24 @@
+{
+  "extends": ["prettier"],
+  "rules": {
+    "prefer-const": "warn",
+    "quotes": ["warn", "single"],
+    "indent": ["warn", 2],
+    "max-len": "off",
+    "semi": ["warn", "never"],
+    "object-curly-spacing": ["warn", "always"],
+    "no-multi-spaces": "error",
+    "space-in-parens": "error",
+    "no-multiple-empty-lines": "error",
+    "no-use-before-define": "error",
+    "no-useless-return":  "off",
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
+        "newlines-between": "always"
+      }
+    ]
+  },
+  "plugins": ["prettier"]
+}
