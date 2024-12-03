@@ -1,4 +1,4 @@
-{
+/*{
   "extends": ["prettier"],
   "rules": {
     "prefer-const": "warn",
@@ -21,4 +21,4 @@
     ]
   },
   "plugins": ["prettier"]
-}
+}*/

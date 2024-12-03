@@ -5,22 +5,31 @@ import tsParser from '@typescript-eslint/parser'
 
 /** @type {import('eslint').Linter.Config} */
 export default {
-  files: ['**/*.{js,mjs,cjs,ts}'], // Файлы, которые анализируются
+  files: ['**/*.{js,mjs,cjs,ts,css,scss}'],
   languageOptions: {
     parser: tsParser,
     parserOptions: {
-      ecmaVersion: 2020, // Версия ECMAScript
-      sourceType: 'module', // Тип модулей
+      ecmaVersion: 2020,
+      sourceType: 'module',
     },
-    globals: globals.browser, // Глобальные переменные для браузера
+    globals: globals.browser,
   },
   plugins: {
-    '@typescript-eslint': tsEslint, // Плагин TypeScript
+    '@typescript-eslint': tsEslint,
   },
   rules: {
-    ...pluginJs.configs.recommended.rules, // Базовые правила ESLint
-    ...tsEslint.configs.recommended.rules, // Рекомендации для TypeScript
-    quotes: ['warn', 'single'], // Установка правила кавычек
+    ...pluginJs.configs.recommended.rules,
+    ...tsEslint.configs.recommended.rules,
+    quotes: ['warn', 'single'],
     semi: ['warn', 'never'],
+    indent: ['warn', 2],
+    'prefer-const': 'warn',
+    'max-len': 'off',
+    'object-curly-spacing': ['warn', 'always'],
+    'no-multi-spaces': 'warn',
+    'space-in-parens': 'error',
+    'no-multiple-empty-lines': 'error',
+    'no-use-before-define': 'error',
+    'no-useless-return': 'off',
   },
 }
