@@ -1,0 +1,6 @@
+export { loginPage } from './login/loginPage.ts'
+export { registrationPage } from './registration/registrationPage.ts'
+export { messengerPage } from './messenger/messengerPage.ts'
+export { profilePage } from './profile/profilePage.ts'
+export { page404 } from './404/page404.ts'
+export { page500 } from './500/page500.ts'
