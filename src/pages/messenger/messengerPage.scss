@@ -1,3 +1,124 @@
 .messenger-page {
+  --chat-header-height: 55px;
+  --chat-footer-height: 55px;
 
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .chat-list-container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 310px;
+    background-color: var(--grey-color);
+    border-right: 1px solid var(--secondary-grey-color);
+
+    .chat-list-header {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem 0.5rem;
+
+      .go-to-profile {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        gap: 0.5rem;
+
+        p {
+          font-size: 12px;
+          color: var(--secondary-text-color);
+        }
+
+        img {
+          margin-top: 1px;
+        }
+      }
+
+      .field-container {
+        width: 100%;
+
+        .search-chat {
+          width: 100%;
+          height: 32px;
+          padding: 0 1rem;
+          background-color: var(--secondary-grey-color);
+          border-radius: var(--border-radius-xs);
+        }
+      }
+    }
+
+    .chat-list {
+      overflow-y: auto;
+    }
+  }
+
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
+    padding: 0 1rem;
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      flex-basis: var(--chat-header-height);
+      gap: 1rem;
+      border-bottom: 1px solid var(--secondary-grey-color);
+
+      .avatar {
+        width: 34px;
+        height: 34px;
+        background-color: var(--secondary-grey-color);
+        border-radius: 50%;
+      }
+
+      .name {
+        flex-grow: 1;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .menu {
+
+      }
+    }
+
+    .chat-body {
+      flex-grow: 1;
+    }
+
+    .chat-footer {
+      display: flex;
+      align-items: center;
+      flex-basis: var(--chat-footer-height);
+      gap: 1rem;
+      border-top: 1px solid var(--secondary-grey-color);
+
+      .file {
+
+      }
+
+      .message {
+        flex-grow: 1;
+        width: 100%;
+        height: 32px;
+        padding: 0 1rem;
+        background-color: var(--secondary-grey-color);
+        border-radius: var(--border-radius-s);
+      }
+
+      .round-button {
+        img {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  .footer {
+    top: 0;
+  }
 }

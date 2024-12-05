@@ -44,4 +44,15 @@ h1, h2, h3, p {
   margin: 0;
 }
 
+*::-webkit-scrollbar {
+  width: 6px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
 /*# sourceMappingURL=styles.css.map */

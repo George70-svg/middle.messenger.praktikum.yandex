@@ -68,6 +68,10 @@
             color: var(--secondary-text-color)
           }
         }
+
+        .info-field:last-child {
+          border: none;
+        }
       }
 
       .save-container {
@@ -90,6 +94,10 @@
 
         .exit {
           color: var(--red-color);
+        }
+
+        p:last-child {
+          border: none;
         }
       }
     }

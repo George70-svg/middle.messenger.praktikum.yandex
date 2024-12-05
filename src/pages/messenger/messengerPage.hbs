@@ -1,3 +1,42 @@
 <div class='messenger-page'>
+  <div class="chat-list-container">
+    <div class="chat-list-header">
+      <div class="go-to-profile">
+        <p>Профиль</p>
+        <img src="../../../public/svg/simpleArrow.svg" alt="simple arrow">
+      </div>
+
+      <div class='field-container'>
+        {{> input type='text' id='search-chat' class='search-chat' name='search-chat' placeholder='Поиск' }}
+      </div>
+    </div>
+
+    <div class="chat-list">
+      {{#each chatList}}
+        {{> chatListItem name=this.name date='2 мая' lastMessage='Непрочитанное сообщение' unreadMessageNumber='5' }}
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="avatar"></div>
+      <p class="name">Вадим</p>
+      <div class="menu">
+        <img src="../../../public/svg/doteMenu.svg" alt="menu">
+      </div>
+    </div>
+
+    <div class="chat-body"></div>
+
+    <div class="chat-footer">
+      <img class='file' src="../../../public/svg/file.svg" alt="file">
+      {{> input type='text' id='message' class='message' name='message' placeholder='Сообщение' }}
+      <div class="round-button back-button">
+        <img src="../../../public/svg/arrow.svg" alt="arrow image">
+      </div>
+    </div>
+  </div>
+
   {{> footer class='footer' }}
 </div>
