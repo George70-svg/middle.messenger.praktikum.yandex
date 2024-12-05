@@ -1,5 +1,15 @@
 input {
-  padding: 0.5rem 1rem;
+  font-family: NunitoSans, sans-serif;
+  outline: none;
+  border: none;
+}
+
+.field {
+  font-size: 13px;
+  padding: 0.25rem 0;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--blue-color);
 }
 
 /*# sourceMappingURL=input.css.map */

@@ -7,7 +7,8 @@
   height: 100%;
 }
 .page-404 img {
-  width: 50%;
+  min-width: 500px;
+  width: 25%;
 }
 
 /*# sourceMappingURL=page404.css.map */

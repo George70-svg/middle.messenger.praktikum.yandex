@@ -1,3 +1,23 @@
+:root {
+  --text-color: #1E1E1E;
+  --secondary-text-color: #999999;
+  --text-light-color: #FFFFFF;
+  --background-color: #FFFFFF;
+  --grey-color: #FBFBFB;
+  --secondary-grey-color: #EFEFEF;
+  --blue-color: #3369F3;
+  --blue-hover-color: #225df3;
+  --red-color: #FF0000;
+  --header-height: 3rem;
+  --footer-height: 3rem;
+  --border-radius-xxs: 0.25rem;
+  --border-radius-xs: 0.5rem;
+  --border-radius-s: 1rem;
+  --border-radius-m: 1.5rem;
+  --border-radius-l: 2rem;
+  --border-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14) ;
+}
+
 @font-face {
   font-family: "NunitoSans";
   src: local("NunitoSans"), url(/src/assets/fonts/NunitoSans.ttf) format("truetype");
@@ -11,8 +31,8 @@ body {
   height: 100dvh;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f9;
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--text-color);
   font-family: NunitoSans, sans-serif;
 }
 body #root {
@@ -20,7 +40,7 @@ body #root {
   height: 100%;
 }
 
-h1, h2, p {
+h1, h2, h3, p {
   margin: 0;
 }
 

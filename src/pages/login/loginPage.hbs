@@ -1,15 +1,20 @@
 <!-- templates/page500.hbs -->
 <div class='login-page'>
-  <form>
-    <h1 class='title'>Авторизация</h1>
-    <div class='field'>
-      {{> input type='text' id='login-username' class='username' name='username' placeholder='Имя пользователя' }}
-    </div>
-    <div class='field'>
-      {{> input type='password' id='login-password' class='password' name='password' placeholder='Пароль' }}
-    </div>
-    {{> button class='login-button' text='Вперёд' }}
-  </form>
+  <div class="login-container">
+    <h1 class='title'>Вход</h1>
+
+    <form>
+      <div class='field-container'>
+        {{> input type='text' id='login-username' class='username field' name='username' placeholder='Логин' }}
+      </div>
+      <div class='field-container'>
+        {{> input type='password' id='login-password' class='password field' name='password' placeholder='Пароль' }}
+      </div>
+    </form>
+
+    {{> button class='button' text='Авторизоваться' }}
+    {{> link class='link' href='registrationPage' data-page='registrationPage' text='Нет аккаунта?' }}
+  </div>
 
   {{> footer class='footer' }}
 </div>

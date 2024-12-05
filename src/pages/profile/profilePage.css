@@ -1,3 +1,80 @@
-
+.profile-page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.profile-page .nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 64px;
+  background-color: var(--grey-color);
+  border-right: 1px solid var(--secondary-grey-color);
+}
+.profile-page .profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+.profile-page .profile-container .profile {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 510px;
+}
+.profile-page .profile-container .profile .avatar-container {
+  display: flex;
+  justify-content: center;
+}
+.profile-page .profile-container .profile .avatar-container .avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 130px;
+  background-color: var(--secondary-grey-color);
+  border-radius: 50%;
+}
+.profile-page .profile-container .profile .name-container {
+  display: flex;
+  justify-content: center;
+}
+.profile-page .profile-container .profile .name-container .name {
+  font-size: 16px;
+  font-weight: 800;
+}
+.profile-page .profile-container .profile .info-container .info-field {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--secondary-grey-color);
+}
+.profile-page .profile-container .profile .info-container .info-field p {
+  font-size: 13px;
+}
+.profile-page .profile-container .profile .info-container .info-field p:first-child {
+  font-weight: bold;
+}
+.profile-page .profile-container .profile .info-container .info-field p:last-child {
+  color: var(--secondary-text-color);
+}
+.profile-page .profile-container .profile .save-container {
+  display: flex;
+  justify-content: center;
+}
+.profile-page .profile-container .profile .edit-container p {
+  padding: 0.5rem 0;
+  font-size: 13px;
+  font-weight: bold;
+  border-bottom: 1px solid var(--secondary-grey-color);
+  cursor: pointer;
+}
+.profile-page .profile-container .profile .edit-container .change-info, .profile-page .profile-container .profile .edit-container .change-password {
+  color: var(--blue-color);
+}
+.profile-page .profile-container .profile .edit-container .exit {
+  color: var(--red-color);
+}
 
 /*# sourceMappingURL=profilePage.css.map */
