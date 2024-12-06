@@ -1,0 +1,12 @@
+a {
+  font-size: 14px;
+  color: var(--blue-color);
+  text-decoration: none;
+}
+
+.link {
+  font-size: 11px;
+  color: var(--blue-color);
+}
+
+/*# sourceMappingURL=link.css.map */
