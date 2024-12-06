@@ -66,7 +66,7 @@ export default class App {
       const chatLastText = document.querySelectorAll('#chat-message')
       chatLastText.forEach(message => {
         if(message.innerHTML.length >= 50) {
-          message.innerHTML = message.innerHTML.substring(0, MESSAGE_LENGTH) + '...'
+          message.textContent = message.textContent?.substring(0, MESSAGE_LENGTH) + '...'
         }
       })
     }

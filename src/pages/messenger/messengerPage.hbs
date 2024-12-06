@@ -1,6 +1,6 @@
-<div class='messenger-page'>
+<main class='messenger-page'>
   <div class="chat-list-container">
-    <div class="chat-list-header">
+    <header class="chat-list-header">
       <div class="go-to-profile">
         <p>Профиль</p>
         <img src="svg/simpleArrow.svg" alt="simple arrow">
@@ -9,7 +9,7 @@
       <div class='field-container'>
         {{> input type='text' id='search-chat' class='search-chat' name='search-chat' placeholder='Поиск' }}
       </div>
-    </div>
+    </header>
 
     <div class="chat-list">
       {{#each chatList}}
@@ -43,4 +43,4 @@
   </div>
 
   {{> footer class='footer' }}
-</div>
+</main>
