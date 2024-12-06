@@ -3,33 +3,35 @@
 **My Start Messenger**  
 A simple project to demonstrate messenger templates.
 
-### Technologies Used
+### Technologies used
 - **HTML**
 - **JavaScript/TypeScript**
 - **CSS/SCSS**
 - **Handlebars**
 
 ### Project URL
-Netlify: https://start-messenger.netlify.app/
+To navigate through pages, links have been implemented at the bottom of the page.
+#### Netlify: https://start-messenger.netlify.app/
 
 ### Figma template
 https://www.figma.com/design/cJQjsbMsSzxSyKjykPVKWE/Yandex-messenger?node-id=0-1&node-type=canvas&t=jcXaGxhhFpXoFKrJ-0
 
 ### Setup Project Instructions
 
+#### Start and build project
+```bash
+npm run start
+```
+
+#### Start dev server
 ```bash
 npm run dev
 ```
 
-### Setup SCSS Instructions
-
+#### Preview build project
 ```bash
-npm install -g sass 'Install SCSS'
-sass --version 'Check SCSS Version'
-sass src/styles.scss src/styles.css 'SCSS Compilation Example'
-sass --watch src/styles.scss:src/styles.css 'Watch for Changes (Alternative Compilation)'
+npm run preview
 ```
-
 ### Author
 **Anton Siuraev**
 
