@@ -1,0 +1,49 @@
+<main class='profile-page'>
+  <aside class='nav-container'>
+    <div class='round-button back-button'>
+      <img src='svg/arrow.svg' alt='arrow'>
+    </div>
+  </aside>
+
+  <section class='profile-container'>
+    <div class='profile'>
+      <div class='avatar-container'>
+        <div class='avatar'>
+          <img src='svg/image.svg' alt='default'>
+        </div>
+      </div>
+
+      <div class='info-container'>
+        <div class='email info-field'>
+          {{> input type='email' id='email-profileEdit' name='email' placeholder='pochta@yandex.ru' labelText='Почта' }}
+        </div>
+
+        <div class='login info-field'>
+          {{> input type='text' id='login-profile-edit' name='login' placeholder='ivanivanov' labelText='Логин' }}
+        </div>
+
+        <div class='first-name info-field'>
+          {{> input type='text' id='first-name-profile-edit'name='first_name' placeholder='Иван' labelText='Имя' }}
+        </div>
+
+        <div class='second-name info-field'>
+          {{> input type='text' id='second-name-profile-edit' name='second_name' placeholder='Иванов' labelText='Фамилия' }}
+        </div>
+
+        <div class='display-name info-field'>
+          {{> input type='text' id='display-name-profile-edit' name='display_name' placeholder='Иван' labelText='Имя в чате' }}
+        </div>
+
+        <div class='phone info-field'>
+          {{> input type='tel' id='phone-profile-edit' name='phone' placeholder='+7 (909) 967 30 30' labelText='Телефон' }}
+        </div>
+      </div>
+
+      <div class='save-container'>
+        {{> button class='button' text='Сохранить' }}
+      </div>
+    </div>
+  </section>
+
+  {{> pageNavigation class='pageNavigation' }}
+</main>

@@ -117,7 +117,9 @@
     }
   }
 
-  .footer {
+  nav {
     top: 0;
+    justify-content: end;
+    padding-right: 3rem;
   }
 }

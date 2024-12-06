@@ -36,27 +36,29 @@
   background-color: var(--secondary-grey-color);
   border-radius: 50%;
 }
-.profile-page .profile-container .profile .name-container {
-  display: flex;
-  justify-content: center;
-}
-.profile-page .profile-container .profile .name-container .name {
-  font-size: 16px;
-  font-weight: 800;
-}
 .profile-page .profile-container .profile .info-container .info-field {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--secondary-grey-color);
 }
-.profile-page .profile-container .profile .info-container .info-field p {
+.profile-page .profile-container .profile .info-container .info-field label {
+  height: 18px;
+  flex-basis: fit-content;
   font-size: 13px;
-}
-.profile-page .profile-container .profile .info-container .info-field p:first-child {
   font-weight: bold;
+  line-height: 18px;
 }
-.profile-page .profile-container .profile .info-container .info-field p:last-child {
+.profile-page .profile-container .profile .info-container .info-field input {
+  height: 18px;
+  flex-grow: 1;
+  font-size: 13px;
+  text-align: end;
+  color: var(--secondary-text-color);
+  line-height: 18px;
+}
+.profile-page .profile-container .profile .info-container .info-field input::placeholder {
   color: var(--secondary-text-color);
 }
 .profile-page .profile-container .profile .info-container .info-field:last-child {
@@ -66,21 +68,5 @@
   display: flex;
   justify-content: center;
 }
-.profile-page .profile-container .profile .edit-container p {
-  padding: 0.5rem 0;
-  font-size: 13px;
-  font-weight: bold;
-  border-bottom: 1px solid var(--secondary-grey-color);
-  cursor: pointer;
-}
-.profile-page .profile-container .profile .edit-container .change-info, .profile-page .profile-container .profile .edit-container .change-password {
-  color: var(--blue-color);
-}
-.profile-page .profile-container .profile .edit-container .exit {
-  color: var(--red-color);
-}
-.profile-page .profile-container .profile .edit-container p:last-child {
-  border: none;
-}
 
-/*# sourceMappingURL=profilePage.css.map */
+/*# sourceMappingURL=profileEditPage.css.map */
