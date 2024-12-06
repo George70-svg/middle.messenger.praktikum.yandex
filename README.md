@@ -13,7 +13,7 @@ A simple project to demonstrate messenger templates.
 Netlify: https://start-messenger.netlify.app/
 
 ### Figma template
-https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE?node-id=0-1&node-type=canvas&t=Dxhs1Dv20rPGcCu3-0&type=design&mode=design&fuid=1084120142836118711
+https://www.figma.com/design/cJQjsbMsSzxSyKjykPVKWE/Yandex-messenger?node-id=0-1&node-type=canvas&t=jcXaGxhhFpXoFKrJ-0
 
 ### Setup Project Instructions
 
@@ -29,9 +29,6 @@ sass --version 'Check SCSS Version'
 sass src/styles.scss src/styles.css 'SCSS Compilation Example'
 sass --watch src/styles.scss:src/styles.css 'Watch for Changes (Alternative Compilation)'
 ```
-
-### Features
-
 
 ### Author
 **Anton Siuraev**

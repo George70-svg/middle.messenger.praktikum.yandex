@@ -15,6 +15,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-grow: 1;
+  padding-left: 0.5rem;
 }
 .chat-item .chat-container .chat-info {
   display: flex;
@@ -41,10 +43,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20px;
-  height: 20px;
+  max-width: 20px;
+  min-width: 20px;
+  max-height: 20px;
+  min-height: 20px;
   color: var(--text-light-color);
-  font-size: 11px;
+  font-size: 9px;
   background-color: var(--blue-color);
   border-radius: 50%;
 }

@@ -6,18 +6,22 @@ import { input } from './components/input/input.ts'
 import { link } from './components/link/link.ts'
 import { footer } from './components/footer/footer.ts'
 import { chatListItem } from './components/chatLstItem/chatListItem.ts'
+import { messageItem } from './components/messageItem/messageItem.ts'
 import { ChatListItem, chatListMock } from './mock/chatList.ts'
+import { MessageListItem, messageListMock } from './mock/messageList.ts'
 
 Handlebars.registerPartial('button', button)
 Handlebars.registerPartial('input', input)
 Handlebars.registerPartial('link', link)
 Handlebars.registerPartial('footer', footer)
 Handlebars.registerPartial('chatListItem', chatListItem)
+Handlebars.registerPartial('messageItem', messageItem)
 
 export default class App {
   private state: {
     currentPage: PageType,
     chatList: ChatListItem[]
+    messageList: MessageListItem[]
   }
   private readonly appElement: HTMLElement | null
   
@@ -25,6 +29,7 @@ export default class App {
     this.state = {
       currentPage: 'loginPage',
       chatList: chatListMock,
+      messageList: messageListMock,
     }
     this.appElement = document.getElementById('root')
   }
@@ -35,6 +40,7 @@ export default class App {
       const template = Handlebars.compile(Pages[currentPage])
       this.appElement.innerHTML = template({
         chatList: this.state.chatList,
+        messageList: this.state.messageList
       })
     }
     
@@ -53,6 +59,17 @@ export default class App {
         }
       })
     })
+    
+    // Сокращаю длинные сообщения до определённого количества символов
+    if(this.state.currentPage === 'messengerPage') {
+      const MESSAGE_LENGTH = 50
+      const chatLastText = document.querySelectorAll('#chat-message')
+      chatLastText.forEach(message => {
+        if(message.innerHTML.length >= 50) {
+          message.innerHTML = message.innerHTML.substring(0, MESSAGE_LENGTH) + '...'
+        }
+      })
+    }
   }
   
   changePage(page: PageType | undefined) {

@@ -13,12 +13,12 @@
 
     <div class="chat-list">
       {{#each chatList}}
-        {{> chatListItem name=this.name date='2 мая' lastMessage='Непрочитанное сообщение' unreadMessageNumber='5' }}
+        {{> chatListItem name=this.name date=this.date lastMessage=this.lastMessage unreadMessageNumber=this.unreadMessageNumber }}
       {{/each}}
     </div>
   </div>
 
-  <div class="chat-container">
+  <div class="messages-container">
     <div class="chat-header">
       <div class="avatar"></div>
       <p class="name">Вадим</p>
@@ -27,7 +27,11 @@
       </div>
     </div>
 
-    <div class="chat-body"></div>
+    <div class="chat-body">
+      {{#each messageList}}
+        {{> messageItem class=this.class text=this.text time=this.time }}
+      {{/each}}
+    </div>
 
     <div class="chat-footer">
       <img class='file' src="../../../public/svg/file.svg" alt="file">

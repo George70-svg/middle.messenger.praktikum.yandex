@@ -1,0 +1,31 @@
+.message-item-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  max-width: 400px;
+  min-width: 150px;
+  width: fit-content;
+  padding: 0.5rem;
+  background-color: var(--message-background-color);
+  border-radius: var(--border-radius-xs);
+
+  .text {
+    font-size: 12px;
+  }
+
+  .time {
+    align-self: end;
+    color: var(--secondary-text-color);
+    font-size: 9px;
+  }
+}
+
+.me {
+  align-self: end;
+  background-color: var(--my-message-background-color);
+  border-bottom-right-radius: 0;
+
+  .time {
+    color: var(--blue-color)
+  }
+}
