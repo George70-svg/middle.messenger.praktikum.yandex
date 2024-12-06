@@ -1,0 +1,12 @@
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  height: var(--footer-height);
+}
+
+/*# sourceMappingURL=footer.css.map */

@@ -1,0 +1,42 @@
+button {
+  font-family: NunitoSans, sans-serif;
+  background-color: #007BFF;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.button {
+  height: 37px;
+  width: 280px;
+  font-size: 13px;
+  color: var(--text-light-color);
+  background-color: var(--blue-color);
+  border-radius: var(--border-radius-xs);
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: var(--blue-hover-color);
+    transition: background-color 0.3s;
+  }
+}
+
+.round-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 28px;
+  width: 28px;
+  min-height: 28px;
+  height: 28px;
+  background-color: var(--blue-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: var(--blue-hover-color);
+    transition: background-color 0.3s;
+  }
+}
