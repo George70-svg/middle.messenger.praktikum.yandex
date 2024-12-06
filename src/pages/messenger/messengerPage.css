@@ -98,8 +98,10 @@
 .messenger-page .messages-container .chat-footer .round-button img {
   transform: rotate(180deg);
 }
-.messenger-page .footer {
+.messenger-page nav {
   top: 0;
+  justify-content: end;
+  padding-right: 3rem;
 }
 
 /*# sourceMappingURL=messengerPage.css.map */

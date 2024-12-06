@@ -1,6 +1,5 @@
 button {
   font-family: NunitoSans, sans-serif;
-  background-color: #007BFF;
   outline: none;
   border: none;
   cursor: pointer;
@@ -13,7 +12,6 @@ button {
   color: var(--text-light-color);
   background-color: var(--blue-color);
   border-radius: var(--border-radius-xs);
-  cursor: pointer;
   transition: background-color 0.3s;
 }
 .button:hover {
@@ -31,7 +29,6 @@ button {
   height: 28px;
   background-color: var(--blue-color);
   border-radius: 50%;
-  cursor: pointer;
   transition: background-color 0.3s;
 }
 .round-button:hover {

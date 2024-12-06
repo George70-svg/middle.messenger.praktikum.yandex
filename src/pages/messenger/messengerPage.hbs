@@ -1,9 +1,9 @@
 <main class='messenger-page'>
-  <div class="chat-list-container">
-    <header class="chat-list-header">
-      <div class="go-to-profile">
+  <section class='chat-list-container'>
+    <header class='chat-list-header'>
+      <div class='go-to-profile'>
         <p>Профиль</p>
-        <img src="svg/simpleArrow.svg" alt="simple arrow">
+        <img src='svg/simpleArrow.svg' alt='simple arrow'>
       </div>
 
       <div class='field-container'>
@@ -11,36 +11,36 @@
       </div>
     </header>
 
-    <div class="chat-list">
+    <section class='chat-list'>
       {{#each chatList}}
         {{> chatListItem name=this.name date=this.date lastMessage=this.lastMessage unreadMessageNumber=this.unreadMessageNumber }}
       {{/each}}
-    </div>
-  </div>
+    </section>
+  </section>
 
-  <div class="messages-container">
-    <div class="chat-header">
-      <div class="avatar"></div>
-      <p class="name">Вадим</p>
-      <div class="menu">
-        <img src="svg/doteMenu.svg" alt="menu">
+  <section class='messages-container'>
+    <header class='chat-header'>
+      <div class='avatar'></div>
+      <p class='name'>Вадим</p>
+      <div class='menu'>
+        <img src='svg/doteMenu.svg' alt='menu'>
       </div>
-    </div>
+    </header>
 
-    <div class="chat-body">
+    <div class='chat-body'>
       {{#each messageList}}
         {{> messageItem class=this.class text=this.text time=this.time }}
       {{/each}}
     </div>
 
-    <div class="chat-footer">
-      <img class='file' src="svg/file.svg" alt="file">
+    <footer class='chat-footer'>
+      <img class='file' src='svg/file.svg' alt='file'>
       {{> input type='text' id='message' class='message' name='message' placeholder='Сообщение' }}
-      <div class="round-button back-button">
-        <img src="svg/arrow.svg" alt="arrow image">
+      <div class='round-button back-button'>
+        <img src='svg/arrow.svg' alt='arrow image'>
       </div>
-    </div>
-  </div>
+    </footer>
+  </section>
 
-  {{> footer class='footer' }}
+  {{> pageNavigation class='pageNavigation' }}
 </main>

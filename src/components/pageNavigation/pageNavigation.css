@@ -1,4 +1,4 @@
-footer {
+nav {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,4 +9,4 @@ footer {
   height: var(--footer-height);
 }
 
-/*# sourceMappingURL=footer.css.map */
+/*# sourceMappingURL=pageNavigation.css.map */

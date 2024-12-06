@@ -4,7 +4,7 @@ import { isPageType, PageType } from './pages/types.ts'
 import { button } from './components/button/button.ts'
 import { input } from './components/input/input.ts'
 import { link } from './components/link/link.ts'
-import { footer } from './components/footer/footer.ts'
+import { pageNavigation } from './components/pageNavigation/pageNavigation.ts'
 import { chatListItem } from './components/chatLstItem/chatListItem.ts'
 import { messageItem } from './components/messageItem/messageItem.ts'
 import { ChatListItem, chatListMock } from './mock/chatList.ts'
@@ -13,7 +13,7 @@ import { MessageListItem, messageListMock } from './mock/messageList.ts'
 Handlebars.registerPartial('button', button)
 Handlebars.registerPartial('input', input)
 Handlebars.registerPartial('link', link)
-Handlebars.registerPartial('footer', footer)
+Handlebars.registerPartial('pageNavigation', pageNavigation)
 Handlebars.registerPartial('chatListItem', chatListItem)
 Handlebars.registerPartial('messageItem', messageItem)
 
@@ -48,7 +48,7 @@ export default class App {
   }
   
   attachEventListeners() {
-    const footerLinks = document.querySelectorAll('.footer-link')
+    const footerLinks = document.querySelectorAll('.pageNavigation-link')
     footerLinks.forEach(link => {
       link.addEventListener('click', (event) => {
         event.preventDefault()
