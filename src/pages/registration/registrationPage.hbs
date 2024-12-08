@@ -1,0 +1,34 @@
+<main class='registration-page'>
+  <section class='registration-container'>
+    <h1 class='title'>Регистрация</h1>
+
+    <form>
+      <div class='field-container'>
+        {{> input type='email' id='registration-email' class='email field' name='email' placeholder='Почта' }}
+      </div>
+      <div class='field-container'>
+        {{> input type='text' id='registration-username' class='username field' name='login' placeholder='Логин' }}
+      </div>
+      <div class='field-container'>
+        {{> input type='text' id='registration-first-name' class='name field' name='first_name' placeholder='Имя' }}
+      </div>
+      <div class='field-container'>
+        {{> input type='text' id='registration-second-name' class='surname field' name='second_name' placeholder='Фамилия' }}
+      </div>
+      <div class='field-container'>
+        {{> input type='tel' id='registration-phone' class='phone field' name='phone' placeholder='Телефон' }}
+      </div>
+      <div class='field-container'>
+        {{> input type='password' id='registration-password' class='password field' name='password' placeholder='Пароль' }}
+      </div>
+      <div class='field-container'>
+        {{> input type='password' id='registration-confirm-password' class='confirm-password field' name='password' placeholder='Пароль (ещё раз)' }}
+      </div>
+    </form>
+
+    {{> button class='button' text='Зарегистрироваться' }}
+    {{> link class='link' href='registrationPage' data-page='registrationPage' text='Войти' }}
+  </section>
+
+  {{> pageNavigation class='pageNavigation' }}
+</main>

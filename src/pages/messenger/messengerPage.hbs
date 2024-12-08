@@ -1,0 +1,46 @@
+<main class='messenger-page'>
+  <section class='chat-list-container'>
+    <header class='chat-list-header'>
+      <div class='go-to-profile'>
+        <p>Профиль</p>
+        <img src='svg/simpleArrow.svg' alt='simple arrow'>
+      </div>
+
+      <div class='field-container'>
+        {{> input type='text' id='search-chat' class='search-chat' name='search-chat' placeholder='Поиск' }}
+      </div>
+    </header>
+
+    <section class='chat-list'>
+      {{#each chatList}}
+        {{> chatListItem name=this.name date=this.date lastMessage=this.lastMessage unreadMessageNumber=this.unreadMessageNumber }}
+      {{/each}}
+    </section>
+  </section>
+
+  <section class='messages-container'>
+    <header class='chat-header'>
+      <div class='avatar'></div>
+      <p class='name'>Вадим</p>
+      <div class='menu'>
+        <img src='svg/doteMenu.svg' alt='menu'>
+      </div>
+    </header>
+
+    <div class='chat-body'>
+      {{#each messageList}}
+        {{> messageItem class=this.class text=this.text time=this.time }}
+      {{/each}}
+    </div>
+
+    <footer class='chat-footer'>
+      <img class='file' src='svg/file.svg' alt='file'>
+      {{> input type='text' id='message' class='message' name='message' placeholder='Сообщение' }}
+      <div class='round-button back-button'>
+        <img src='svg/arrow.svg' alt='arrow image'>
+      </div>
+    </footer>
+  </section>
+
+  {{> pageNavigation class='pageNavigation' }}
+</main>
