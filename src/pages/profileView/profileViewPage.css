@@ -71,14 +71,14 @@
   border-bottom: 1px solid var(--secondary-grey-color);
   cursor: pointer;
 }
+.profile-page .profile-container .profile .edit-container p:last-child {
+  border: none;
+}
 .profile-page .profile-container .profile .edit-container .change-info, .profile-page .profile-container .profile .edit-container .change-password {
   color: var(--blue-color);
 }
 .profile-page .profile-container .profile .edit-container .exit {
   color: var(--red-color);
-}
-.profile-page .profile-container .profile .edit-container p:last-child {
-  border: none;
 }
 
 /*# sourceMappingURL=profileViewPage.css.map */

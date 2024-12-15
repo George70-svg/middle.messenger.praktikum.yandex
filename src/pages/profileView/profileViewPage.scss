@@ -60,14 +60,14 @@
           p {
             font-size: 13px;
             line-height: 18px;
-          }
 
-          p:first-child {
-            font-weight: bold;
-          }
+            &:first-child {
+              font-weight: bold;
+            }
 
-          p:last-child {
-            color: var(--secondary-text-color)
+            &:last-child {
+              color: var(--secondary-text-color)
+            }
           }
         }
 
@@ -83,6 +83,10 @@
           font-weight: bold;
           border-bottom: 1px solid var(--secondary-grey-color);
           cursor: pointer;
+
+          &:last-child {
+            border: none;
+          }
         }
 
         .change-info, .change-password {
@@ -91,10 +95,6 @@
 
         .exit {
           color: var(--red-color);
-        }
-
-        p:last-child {
-          border: none;
         }
       }
     }

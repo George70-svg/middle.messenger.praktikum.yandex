@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-standard-scss"
+  ],
+  "plugins": [
+    "stylelint-order"
+  ],
+  "rules": {
+    "no-descending-specificity": null,
+    "color-hex-length": "short"
+  },
+  "ignoreFiles": [
+    "build/*"
+  ]
+}

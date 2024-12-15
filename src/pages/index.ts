@@ -17,7 +17,7 @@ const Pages: { [key in PageType]: string } = {
   profileEditPage,
   profileEditPasswordPage,
   page404,
-  page500
+  page500,
 }
 
 export default Pages

@@ -11,7 +11,6 @@ export function isPageType(value: string | undefined): value is PageType {
       'profileEditPasswordPage',
       'page404',
       'page500'].includes(value)
-  } else {
-    return false
   }
+  return false
 }

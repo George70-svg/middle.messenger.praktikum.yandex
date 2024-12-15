@@ -1,0 +1,39 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": 2,
+    "quotes": ["warn", "single"],
+    "semi": ["warn", "never"],
+    "indent": ["warn", 2],
+    "prefer-const": "warn",
+    "max-len": "off",
+    "object-curly-spacing": ["warn", "always"],
+    "no-multi-spaces": "warn",
+    "space-in-parens": "error",
+    "no-multiple-empty-lines": "error",
+    "no-use-before-define": "error",
+    "no-useless-return": "off",
+    "no-param-reassign": "off",
+    "import/prefer-default-export": "off",
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": ["vite.config.js", "**/*.config.js", "**/*.config.*"]
+    }],
+    "import/no-unresolved": ["error", {
+      "ignore": ["\\?raw$"]
+    }]
+  }
+}
