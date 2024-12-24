@@ -112,7 +112,7 @@ export default class Block {
         stub.replaceWith(childrenElement.getContent())
       }
     })
-
+    
     Object.entries(this.lists || {}).forEach(([, listItem]) => {
       const listTemplate = this._createDocumentElement('template')
 
@@ -124,7 +124,7 @@ export default class Block {
         }
       })
 
-      const stub = fragment.querySelector(`[data-id='_list_${templateId}']`)
+      const stub = fragment.content.querySelector(`[data-id='_list_${templateId}']`)
 
       if (stub) {
         stub.replaceWith(listTemplate.content)
@@ -132,13 +132,13 @@ export default class Block {
     })
 
     const newElement = fragment.content.firstElementChild as HTMLDivElement
-    console.log('newElement', newElement)
+    //console.log('newElement', newElement)
     if (this._element && newElement) {
       this._element.replaceWith(newElement)
     }
 
     this._element = newElement
-    console.log('this._element', this._element)
+    //console.log('this._element', this._element)
     this._addEvents()
     this.addAttributes()
   }

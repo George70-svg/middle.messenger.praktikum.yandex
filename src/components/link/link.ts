@@ -8,7 +8,8 @@ export class Link extends Block {
       props: {
         ...blockProps.props,
         events: {
-          click: (): void => {
+          click: (event: Event): void => {
+            event.preventDefault()
             this.changePage()
           }
         }

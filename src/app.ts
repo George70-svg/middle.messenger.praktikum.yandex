@@ -1,28 +1,33 @@
-//import Handlebars from 'handlebars'
-import { Page404 } from './pages/404/page404.ts'
-import { Page500 } from './pages/500/page500.ts'
 import { LoginPage } from './pages/login/loginPage.ts'
 import { RegistrationPage } from './pages/registration/registrationPage.ts'
-import { isPageType, PageType } from './pages/types.ts'
-import { ChatListItem, chatListMock } from './mock/chatList.ts'
-import { MessageListItem, messageListMock } from './mock/messageList.ts'
-import { GlobalEventBus } from './framework/eventBus.ts'
 import { ProfilePage } from './pages/profile/ProfilePage.ts'
+import { MessengerPage } from './pages/messenger/messengerPage.ts'
+import { Page404 } from './pages/404/page404.ts'
+import { Page500 } from './pages/500/page500.ts'
+import { PageType } from './pages/types.ts'
+import { GlobalEventBus } from './framework/eventBus.ts'
+
+const PageConstructor = {
+  loginPage: () => new LoginPage(),
+  registrationPage: () => new RegistrationPage(),
+  profileViewPage: () => new ProfilePage({ props: { mode: 'view' } }),
+  profileEditPage: () => new ProfilePage({ props: { mode: 'edit' } }),
+  profileEditPasswordPage: () => new ProfilePage({ props: { mode: 'password' } }),
+  messengerPage: () => new MessengerPage(),
+  page404: () => new Page404(),
+  page500: () => new Page500()
+}
 
 export default class App {
   private appElement: HTMLElement | null
 
   private state: {
     currentPage: PageType,
-    chatList: ChatListItem[]
-    messageList: MessageListItem[]
   }
 
   constructor() {
     this.state = {
       currentPage: 'loginPage',
-      chatList: chatListMock,
-      messageList: messageListMock
     }
 
     this.appElement = document.getElementById('root')
@@ -32,45 +37,10 @@ export default class App {
   render() {
     if (this.state.currentPage && this.appElement) {
       const { currentPage } = this.state
-
-      if (currentPage === 'page404') {
-        const newPage = new Page404()
-        if (this.appElement) {
-          this.appElement.innerHTML = ''
-          this.appElement.appendChild(newPage.getContent())
-        }
-      } else if (currentPage === 'page500') {
-        const newPage = new Page500()
-        if (this.appElement) {
-          this.appElement.innerHTML = ''
-          this.appElement.appendChild(newPage.getContent())
-        }
-      } else if (currentPage === 'loginPage') {
-        const newPage = new LoginPage()
-        if (this.appElement) {
-          this.appElement.innerHTML = ''
-          this.appElement.appendChild(newPage.getContent())
-        }
-      } else if (currentPage === 'registrationPage') {
-        const newPage = new RegistrationPage()
-        if (this.appElement) {
-          this.appElement.innerHTML = ''
-          this.appElement.appendChild(newPage.getContent())
-        }
-      } else if (currentPage === 'profileViewPage') {
-        const newPage = new ProfilePage({ props: { mode: 'view' } })
-        if (this.appElement) {
-          this.appElement.innerHTML = ''
-          this.appElement.appendChild(newPage.getContent())
-        }
-      } else if (currentPage === 'profileEditPage') {
-        const newPage = new ProfilePage({ props: { mode: 'edit' } })
-        if (this.appElement) {
-          this.appElement.innerHTML = ''
-          this.appElement.appendChild(newPage.getContent())
-        }
-      } else if (currentPage === 'profileEditPasswordPage') {
-        const newPage = new ProfilePage({ props: { mode: 'password' } })
+      
+      if (currentPage) {
+        const newPage = PageConstructor[currentPage]()
+        
         if (this.appElement) {
           this.appElement.innerHTML = ''
           this.appElement.appendChild(newPage.getContent())
@@ -82,18 +52,6 @@ export default class App {
   }
 
   attachEventListeners() {
-    const footerLinks = document.querySelectorAll('.pageNavigation-link')
-    footerLinks.forEach((linkElement) => {
-      linkElement.addEventListener('click', (event) => {
-        event.preventDefault()
-        const { target } = event
-
-        if (target instanceof HTMLElement && isPageType(target.dataset.page)) {
-          this.changePage(target.dataset.page)
-        }
-      })
-    })
-
     // Сокращаю длинные сообщения до определённого количества символов
     if (this.state.currentPage === 'messengerPage') {
       const MESSAGE_LENGTH = 50

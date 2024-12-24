@@ -1,4 +1,4 @@
-export type PageType = 'loginPage' | 'registrationPage' | 'messengerPage' | 'profileViewPage' | 'profileEditPage' | 'profileEditPasswordPage' | 'page404' | 'page500'
+export type PageType = 'loginPage' | 'registrationPage' | 'profileViewPage' | 'profileEditPage' | 'profileEditPasswordPage' | 'messengerPage' | 'page404' | 'page500'
 
 export function isPageType(value: string | undefined): value is PageType {
   if (value) {

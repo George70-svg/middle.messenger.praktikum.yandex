@@ -10,8 +10,6 @@ export class Input extends Block {
 
   override render() {
     const isDisabled = this.props?.disabled
-    console.log('this.props', this.props)
-    console.log('isDisabled', isDisabled)
 
     return `
       <div class='field-container'>
