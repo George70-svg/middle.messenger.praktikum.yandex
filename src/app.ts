@@ -6,8 +6,9 @@ import { Page404 } from './pages/404/page404.ts'
 import { Page500 } from './pages/500/page500.ts'
 import { PageType } from './pages/types.ts'
 import { GlobalEventBus } from './framework/eventBus.ts'
+import Block from './framework/block.ts'
 
-const PageConstructor = {
+const pageConstructor: Record<PageType, () => Block> = {
   loginPage: () => new LoginPage(),
   registrationPage: () => new RegistrationPage(),
   profileViewPage: () => new ProfilePage({ props: { mode: 'view' } }),
@@ -27,7 +28,7 @@ export default class App {
 
   constructor() {
     this.state = {
-      currentPage: 'loginPage',
+      currentPage: 'loginPage'
     }
 
     this.appElement = document.getElementById('root')
@@ -37,10 +38,10 @@ export default class App {
   render() {
     if (this.state.currentPage && this.appElement) {
       const { currentPage } = this.state
-      
+
       if (currentPage) {
-        const newPage = PageConstructor[currentPage]()
-        
+        const newPage = pageConstructor[currentPage]()
+
         if (this.appElement) {
           this.appElement.innerHTML = ''
           this.appElement.appendChild(newPage.getContent())

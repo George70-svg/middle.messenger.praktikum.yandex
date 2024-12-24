@@ -112,7 +112,7 @@ export default class Block {
         stub.replaceWith(childrenElement.getContent())
       }
     })
-    
+
     Object.entries(this.lists || {}).forEach(([, listItem]) => {
       const listTemplate = this._createDocumentElement('template')
 
