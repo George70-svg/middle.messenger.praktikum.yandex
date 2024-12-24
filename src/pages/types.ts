@@ -5,10 +5,10 @@ export function isPageType(value: string | undefined): value is PageType {
     return [
       'loginPage',
       'registrationPage',
-      'messengerPage',
       'profileViewPage',
       'profileEditPage',
       'profileEditPasswordPage',
+      'messengerPage',
       'page404',
       'page500'].includes(value)
   }

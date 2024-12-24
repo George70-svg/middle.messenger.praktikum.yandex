@@ -44,25 +44,30 @@
   font-size: 16px;
   font-weight: 800;
 }
-.profile-page .profile-container .profile .info-container .info-field {
+.profile-page .profile-container .profile .info-container .field-container {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--secondary-grey-color);
 }
-.profile-page .profile-container .profile .info-container .info-field p {
+.profile-page .profile-container .profile .info-container .field-container label {
+  height: 18px;
+  flex-basis: fit-content;
   font-size: 13px;
+  font-weight: bold;
   line-height: 18px;
 }
-.profile-page .profile-container .profile .info-container .info-field p:first-child {
-  font-weight: bold;
-}
-.profile-page .profile-container .profile .info-container .info-field p:last-child {
+.profile-page .profile-container .profile .info-container .field-container input {
+  height: 18px;
+  flex-grow: 1;
+  font-size: 13px;
+  text-align: end;
   color: var(--secondary-text-color);
+  line-height: 18px;
 }
-.profile-page .profile-container .profile .info-container .info-field:last-child {
-  border: none;
+.profile-page .profile-container .profile .info-container .field-container input::placeholder {
+  color: var(--secondary-text-color);
 }
 .profile-page .profile-container .profile .edit-container p {
   padding: 0.5rem 0;
@@ -80,5 +85,9 @@
 .profile-page .profile-container .profile .edit-container .exit {
   color: var(--red-color);
 }
+.profile-page .profile-container .profile .save-container {
+  display: flex;
+  justify-content: center;
+}
 
-/*# sourceMappingURL=profileViewPage.css.map */
+/*# sourceMappingURL=profilePage.css.map */

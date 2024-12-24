@@ -22,6 +22,7 @@
     "lint:style:fix": "stylelint **/*.scss --fix"
   },
   "devDependencies": {
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.2.0",
@@ -38,6 +39,7 @@
     "vite-plugin-checker": "^0.8.0"
   },
   "dependencies": {
-    "handlebars": "^4.7.8"
+    "handlebars": "^4.7.8",
+    "uuid": "^11.0.3"
   }
 }

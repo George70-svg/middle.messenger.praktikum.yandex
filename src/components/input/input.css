@@ -1,19 +1,24 @@
-label {
+.field-container label {
   font-family: NunitoSans, sans-serif;
 }
-
-input {
+.field-container input {
   font-family: NunitoSans, sans-serif;
   outline: none;
   border: none;
 }
-
-.field {
+.field-container input:disabled {
+  background-color: transparent;
+}
+.field-container .field {
   font-size: 13px;
   padding: 0.25rem 0;
   outline: none;
   border: none;
   border-bottom: 2px solid var(--blue-color);
+}
+
+.no-label label {
+  display: none;
 }
 
 /*# sourceMappingURL=input.css.map */

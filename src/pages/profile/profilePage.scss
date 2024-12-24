@@ -50,29 +50,33 @@
       }
 
       .info-container {
-        .info-field {
+        .field-container {
           display: flex;
           justify-content: space-between;
           gap: 1rem;
           padding: 0.5rem 0;
           border-bottom: 1px solid var(--secondary-grey-color);
 
-          p {
+          label {
+            height: 18px;
+            flex-basis: fit-content;
             font-size: 13px;
+            font-weight: bold;
             line-height: 18px;
-
-            &:first-child {
-              font-weight: bold;
-            }
-
-            &:last-child {
-              color: var(--secondary-text-color)
-            }
           }
-        }
 
-        .info-field:last-child {
-          border: none;
+          input {
+            height: 18px;
+            flex-grow: 1;
+            font-size: 13px;
+            text-align: end;
+            color: var(--secondary-text-color);
+            line-height: 18px;
+          }
+
+          input::placeholder {
+            color: var(--secondary-text-color);
+          }
         }
       }
 
@@ -96,6 +100,11 @@
         .exit {
           color: var(--red-color);
         }
+      }
+
+      .save-container {
+        display: flex;
+        justify-content: center;
       }
     }
   }

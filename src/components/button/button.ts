@@ -1,3 +1,18 @@
 import './button.css'
+import Block, { BlockProps } from '../../framework/block.ts'
 
-export { default as button } from './button.hbs?raw'
+export class Button extends Block {
+  constructor(blockProps: BlockProps) {
+    super({
+      props: blockProps.props
+    })
+  }
+
+  override render(): string {
+    return `
+      <button class='{{class}}'>
+        {{text}}
+      </button>
+    `
+  }
+}

@@ -1,21 +1,13 @@
-import Handlebars from 'handlebars'
-import Pages from './pages/index.ts'
+//import Handlebars from 'handlebars'
+import { Page404 } from './pages/404/page404.ts'
+import { Page500 } from './pages/500/page500.ts'
+import { LoginPage } from './pages/login/loginPage.ts'
+import { RegistrationPage } from './pages/registration/registrationPage.ts'
 import { isPageType, PageType } from './pages/types.ts'
-import { button } from './components/button/button.ts'
-import { input } from './components/input/input.ts'
-import { link } from './components/link/link.ts'
-import { pageNavigation } from './components/pageNavigation/pageNavigation.ts'
-import { chatListItem } from './components/chatLstItem/chatListItem.ts'
-import { messageItem } from './components/messageItem/messageItem.ts'
 import { ChatListItem, chatListMock } from './mock/chatList.ts'
 import { MessageListItem, messageListMock } from './mock/messageList.ts'
-
-Handlebars.registerPartial('button', button)
-Handlebars.registerPartial('input', input)
-Handlebars.registerPartial('link', link)
-Handlebars.registerPartial('pageNavigation', pageNavigation)
-Handlebars.registerPartial('chatListItem', chatListItem)
-Handlebars.registerPartial('messageItem', messageItem)
+import { GlobalEventBus } from './framework/eventBus.ts'
+import { ProfilePage } from './pages/profile/ProfilePage.ts'
 
 export default class App {
   private appElement: HTMLElement | null
@@ -30,19 +22,60 @@ export default class App {
     this.state = {
       currentPage: 'loginPage',
       chatList: chatListMock,
-      messageList: messageListMock,
+      messageList: messageListMock
     }
+
     this.appElement = document.getElementById('root')
+    GlobalEventBus.on('changePage', this.changePage.bind(this))
   }
 
   render() {
     if (this.state.currentPage && this.appElement) {
       const { currentPage } = this.state
-      const template = Handlebars.compile(Pages[currentPage])
-      this.appElement.innerHTML = template({
-        chatList: this.state.chatList,
-        messageList: this.state.messageList,
-      })
+
+      if (currentPage === 'page404') {
+        const newPage = new Page404()
+        if (this.appElement) {
+          this.appElement.innerHTML = ''
+          this.appElement.appendChild(newPage.getContent())
+        }
+      } else if (currentPage === 'page500') {
+        const newPage = new Page500()
+        if (this.appElement) {
+          this.appElement.innerHTML = ''
+          this.appElement.appendChild(newPage.getContent())
+        }
+      } else if (currentPage === 'loginPage') {
+        const newPage = new LoginPage()
+        if (this.appElement) {
+          this.appElement.innerHTML = ''
+          this.appElement.appendChild(newPage.getContent())
+        }
+      } else if (currentPage === 'registrationPage') {
+        const newPage = new RegistrationPage()
+        if (this.appElement) {
+          this.appElement.innerHTML = ''
+          this.appElement.appendChild(newPage.getContent())
+        }
+      } else if (currentPage === 'profileViewPage') {
+        const newPage = new ProfilePage({ props: { mode: 'view' } })
+        if (this.appElement) {
+          this.appElement.innerHTML = ''
+          this.appElement.appendChild(newPage.getContent())
+        }
+      } else if (currentPage === 'profileEditPage') {
+        const newPage = new ProfilePage({ props: { mode: 'edit' } })
+        if (this.appElement) {
+          this.appElement.innerHTML = ''
+          this.appElement.appendChild(newPage.getContent())
+        }
+      } else if (currentPage === 'profileEditPasswordPage') {
+        const newPage = new ProfilePage({ props: { mode: 'password' } })
+        if (this.appElement) {
+          this.appElement.innerHTML = ''
+          this.appElement.appendChild(newPage.getContent())
+        }
+      }
     }
 
     this.attachEventListeners()
@@ -73,8 +106,13 @@ export default class App {
     }
   }
 
-  changePage(page: PageType | undefined) {
-    this.state.currentPage = page ?? 'page404'
+  changePage(page: PageType): void {
+    if (page) {
+      this.state.currentPage = page
+    } else {
+      this.state.currentPage = 'page404'
+    }
+
     this.render()
   }
 }
