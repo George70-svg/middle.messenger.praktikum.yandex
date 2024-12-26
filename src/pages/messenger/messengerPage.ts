@@ -6,6 +6,7 @@ import { chatListMock } from '../../mock/chatList.ts'
 import { ChatListItem } from '../../components/chatLstItem/chatListItem.ts'
 import { messageListMock } from '../../mock/messageList.ts'
 import { MessageItem } from '../../components/messageItem/messageItem.ts'
+import { shortenText } from '../../utils/common.ts'
 
 export class MessengerPage extends Block {
   constructor() {
@@ -40,29 +41,25 @@ export class MessengerPage extends Block {
         PageNavigation: new PageNavigation()
       },
       lists: {
-        ChatList: chatListMock.map(item => {
-          return new ChatListItem({
-            props: {
-              name: item.name,
-              date: item.date,
-              lastMessage: item.lastMessage,
-              unreadMessageNumber: item.unreadMessageNumber
-            }
-          })
-        }),
-        MessageList: messageListMock.map(item => {
-          return new MessageItem({
-            props: {
-              class: item.class,
-              text: item.text,
-              time: item.time
-            }
-          })
-        })
+        ChatList: chatListMock.map((item) => new ChatListItem({
+          props: {
+            name: item.name,
+            date: item.date,
+            lastMessage: shortenText(item.lastMessage, 50),
+            unreadMessageNumber: item.unreadMessageNumber
+          }
+        })),
+        MessageList: messageListMock.map((item) => new MessageItem({
+          props: {
+            class: item.class,
+            text: item.text,
+            time: item.time
+          }
+        }))
       }
     })
   }
-  
+
   override render(): string {
     return `
       <main class='messenger-page'>

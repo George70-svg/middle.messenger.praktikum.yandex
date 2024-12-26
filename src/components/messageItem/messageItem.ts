@@ -7,7 +7,7 @@ export class MessageItem extends Block {
       props: blockProps.props
     })
   }
-  
+
   override render(): string {
     return `
       <article class='{{class}} message-item-container'>

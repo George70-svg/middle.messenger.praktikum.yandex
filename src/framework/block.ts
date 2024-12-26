@@ -55,17 +55,6 @@ export default class Block {
     this.eventBus().emit(this.EVENTS.FLOW_CDM)
   }
 
-  componentDidMount(): void {
-    //TODO [19.12.2024 @asiuraev] Реализовать метод монтирования компонент
-    //console.log('componentDidMount', this)
-  }
-
-  isComponentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
-    //TODO [19.12.2024 @asiuraev] Реализовать метод глубокого сравнения props
-    console.log('isComponentDidUpdate', oldProps, newProps, this)
-    return true
-  }
-
   init(): void {
     //console.log('_init')
     this.eventBus().emit(this.EVENTS.FLOW_RENDER)
@@ -73,24 +62,17 @@ export default class Block {
 
   _componentDidMount(): void {
     //console.log('_componentDidMount')
-    this.componentDidMount()
     Object.values(this.children || {}).forEach((child) => {
       child.dispatchComponentDidMount()
     })
     this._render()
   }
 
-  _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): void {
-    //console.log('_componentDidUpdate')
-    const result = this.isComponentDidUpdate(oldProps, newProps)
-
-    if (result) {
-      this._render()
-    }
+  _componentDidUpdate(): void {
+    this._render()
   }
 
   _render(): void {
-    console.log('_render')
     const templateData = { ...this.props } //Данные из props, которые будем добавлять в отрендеренный template
     const templateId = makeUUID()
 
@@ -163,12 +145,28 @@ export default class Block {
 
   _addEvents():void {
     const { events = {} } = this.props || {} //Props будут содержать отдельный подобъект для events
-    //console.log('_addEvents', events)
+
     Object.keys(events).forEach((eventName) => {
-      if (this._element) {
+      if (this.shouldDelegateEvent()) {
+        const targetElement = this.getDelegatedElement()
+
+        if (targetElement) {
+          targetElement.addEventListener(eventName, events[eventName])
+        }
+      } else if (this._element) {
         this._element.addEventListener(eventName, events[eventName])
       }
     })
+  }
+
+  // Метод, который указывает, что не нужно вешать обработчик событий на базовый верхний элемент
+  shouldDelegateEvent(): boolean {
+    return false
+  }
+
+  // Получаем элемент, на который нужно повесить обработчик событий
+  getDelegatedElement(): HTMLElement | null {
+    return null
   }
 
   addAttributes() :void {
@@ -195,10 +193,13 @@ export default class Block {
     })
   }
 
-  setProps(props: PropsProps): void {
-    //console.log('setProps')
-    if (props) {
-      Object.assign(this.props || {}, props)
+  setProps(newProps: PropsProps): void {
+    console.log('setProps')
+    if (newProps) {
+      const oldProps = { ...this.props }
+      Object.assign(this.props || {}, newProps)
+
+      this.eventBus().emit(this.EVENTS.FLOW_CDU, oldProps, this.props)
     }
   }
 

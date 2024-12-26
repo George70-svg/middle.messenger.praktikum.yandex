@@ -74,7 +74,7 @@ export class ProfilePage extends Block {
             labelText: 'Старый пароль',
             type: 'password',
             id: 'old-password-profile-edit-password',
-            name: 'oldPassword',
+            name: 'password',
             placeholder: '•••••••••'
           }
         }),
@@ -83,7 +83,7 @@ export class ProfilePage extends Block {
             labelText: 'Новый пароль',
             type: 'password',
             id: 'new-password-profile-edit-password',
-            name: 'newPassword',
+            name: 'password',
             placeholder: '•••••••••••'
           }
         }),
@@ -92,13 +92,16 @@ export class ProfilePage extends Block {
             labelText: 'Повторите новый пароль',
             type: 'password',
             id: 'new-repeat-password-password-profile-edit-password',
-            name: 'newPassword',
+            name: 'password',
             placeholder: '•••••••••••'
           }
         }),
         SaveButton: new Button({
           props: {
             text: 'Сохранить',
+            events: {
+              click: () => this.handleSave()
+            },
             attr: {
               class: 'button'
             }
@@ -107,6 +110,24 @@ export class ProfilePage extends Block {
         PageNavigation: new PageNavigation()
       }
     })
+  }
+
+  handleSave() {
+    const mode = this.props?.mode
+
+    if (mode === 'edit') {
+      const email = (this.children?.InputEmail as Input).getValue()
+      const username = (this.children?.InputUsername as Input).getValue()
+      const firstName = (this.children?.InputFirstName as Input).getValue()
+      const secondName = (this.children?.InputSecondName as Input).getValue()
+      const displayName = (this.children?.InputDisplayName as Input).getValue()
+      const phone = (this.children?.InputPhone as Input).getValue()
+      console.log('Form Data:', { email, username, firstName, secondName, displayName, phone })
+    } else if (mode === 'password') {
+      const oldPassword = (this.children?.InputOldPassword as Input).getValue()
+      const newPassword = (this.children?.InputNewPassword as Input).getValue()
+      console.log('Form Data:', { oldPassword, newPassword })
+    }
   }
 
   override render(): string {

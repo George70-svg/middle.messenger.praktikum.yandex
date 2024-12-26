@@ -36,6 +36,7 @@
     "no-underscore-dangle": "off",
     "no-else-return": "off",
     "class-methods-use-this": "off",
+    "no-restricted-syntax": "off",
     "import/prefer-default-export": "off",
     "comma-dangle": ["error", "never"],
     "import/no-extraneous-dependencies": ["error", {

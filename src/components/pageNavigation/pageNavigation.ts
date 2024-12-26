@@ -1,6 +1,7 @@
 import './pageNavigation.css'
 import Block from '../../framework/block.ts'
 import { Link } from '../link/link.ts'
+import { GlobalEventBus } from '../../framework/eventBus.ts'
 
 export class PageNavigation extends Block {
   constructor() {
@@ -9,6 +10,9 @@ export class PageNavigation extends Block {
         LinkLogin: new Link({
           props: {
             text: 'Вход',
+            events: {
+              click: (event) => this.changePage(event)
+            },
             attr: {
               class: 'pageNavigation-link',
               href: '/loginPage',
@@ -19,6 +23,9 @@ export class PageNavigation extends Block {
         LinkRegistration: new Link({
           props: {
             text: 'Регистрация',
+            events: {
+              click: (event) => this.changePage(event)
+            },
             attr: {
               class: 'pageNavigation-link',
               href: '/registrationPage',
@@ -29,6 +36,9 @@ export class PageNavigation extends Block {
         LinkProfileView: new Link({
           props: {
             text: 'Профиль (просмотр)',
+            events: {
+              click: (event) => this.changePage(event)
+            },
             attr: {
               class: 'pageNavigation-link',
               href: '/profileViewPage',
@@ -39,6 +49,9 @@ export class PageNavigation extends Block {
         LinkProfileEdit: new Link({
           props: {
             text: 'Профиль (редактирование)',
+            events: {
+              click: (event) => this.changePage(event)
+            },
             attr: {
               class: 'pageNavigation-link',
               href: '/profileEditPage',
@@ -49,6 +62,9 @@ export class PageNavigation extends Block {
         LinkProfilePassword: new Link({
           props: {
             text: 'Профиль (смена пароля)',
+            events: {
+              click: (event) => this.changePage(event)
+            },
             attr: {
               class: 'pageNavigation-link',
               href: '/profileEditPasswordPage',
@@ -59,6 +75,9 @@ export class PageNavigation extends Block {
         LinkMessenger: new Link({
           props: {
             text: 'Мессенджер',
+            events: {
+              click: (event) => this.changePage(event)
+            },
             attr: {
               class: 'pageNavigation-link',
               href: '/messengerPage',
@@ -69,6 +88,9 @@ export class PageNavigation extends Block {
         Link404Page: new Link({
           props: {
             text: '404',
+            events: {
+              click: (event) => this.changePage(event)
+            },
             attr: {
               class: 'pageNavigation-link',
               href: '/page404',
@@ -79,6 +101,9 @@ export class PageNavigation extends Block {
         Link500Page: new Link({
           props: {
             text: '500',
+            events: {
+              click: (event) => this.changePage(event)
+            },
             attr: {
               class: 'pageNavigation-link',
               href: '/page500',
@@ -88,6 +113,16 @@ export class PageNavigation extends Block {
         })
       }
     })
+  }
+
+  changePage(event: Event) {
+    event.preventDefault()
+    const target = event.target as HTMLElement
+    const page = target.getAttribute('datapage')
+
+    if (page) {
+      GlobalEventBus.emit('changePage', page)
+    }
   }
 
   override render(): string {

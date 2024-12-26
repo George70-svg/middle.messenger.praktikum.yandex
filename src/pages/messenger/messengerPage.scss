@@ -105,14 +105,27 @@
         flex-grow: 1;
         width: 100%;
         height: 32px;
-        padding: 0 1rem;
-        background-color: var(--secondary-grey-color);
-        border-radius: var(--border-radius-s);
 
-        .message {
-          width: 100%;
-          height: 100%;
+        .input-container {
+          height: 32px;
+          padding: 0 1rem;
           background-color: var(--secondary-grey-color);
+          border-radius: var(--border-radius-s);
+          border: 1px solid transparent;
+
+          .message {
+            width: 100%;
+            height: 100%;
+            background-color: var(--secondary-grey-color);
+          }
+        }
+
+        .message-container {
+          display: none;
+        }
+
+        .error-input {
+          border: 1px solid var(--red-color);
         }
       }
 

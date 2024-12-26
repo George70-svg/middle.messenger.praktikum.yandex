@@ -48,21 +48,6 @@ export default class App {
         }
       }
     }
-
-    this.attachEventListeners()
-  }
-
-  attachEventListeners() {
-    // Сокращаю длинные сообщения до определённого количества символов
-    if (this.state.currentPage === 'messengerPage') {
-      const MESSAGE_LENGTH = 50
-      const chatLastText = document.querySelectorAll('#chat-message')
-      chatLastText.forEach((message) => {
-        if (message.innerHTML.length >= 50) {
-          message.textContent = `${message.textContent?.substring(0, MESSAGE_LENGTH)}...`
-        }
-      })
-    }
   }
 
   changePage(page: PageType): void {

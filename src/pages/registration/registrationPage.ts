@@ -4,6 +4,7 @@ import { Link } from '../../components/link/link.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { Button } from '../../components/button/button.ts'
 import { Input } from '../../components/input/input.ts'
+import { GlobalEventBus } from '../../framework/eventBus.ts'
 
 export class RegistrationPage extends Block {
   constructor(blockProps?: BlockProps) {
@@ -101,9 +102,12 @@ export class RegistrationPage extends Block {
             }
           }
         }),
-        Button: new Button({
+        SubmitButton: new Button({
           props: {
-            text: 'Войти',
+            text: 'Зарегистрироваться',
+            events: {
+              click: () => this.handleSubmit()
+            },
             attr: {
               class: 'button'
             }
@@ -112,16 +116,40 @@ export class RegistrationPage extends Block {
         ToLogin: new Link({
           props: {
             text: 'Войти',
+            events: {
+              click: (event) => this.changePage(event)
+            },
             attr: {
               class: 'link',
-              href: '/registrationPage',
-              dataPage: 'registrationPage'
+              href: '/loginPage',
+              dataPage: 'loginPage'
             }
           }
         }),
         PageNavigation: new PageNavigation()
       }
     })
+  }
+
+  handleSubmit() {
+    const email = (this.children?.InputEmail as Input).getValue()
+    const username = (this.children?.InputUsername as Input).getValue()
+    const firstName = (this.children?.InputFirstName as Input).getValue()
+    const secondName = (this.children?.InputSecondName as Input).getValue()
+    const phone = (this.children?.InputPhone as Input).getValue()
+    const password = (this.children?.InputPassword as Input).getValue()
+    const confirmPassword = (this.children?.InputConfirmPassword as Input).getValue()
+    console.log('Form Data:', { email, username, firstName, secondName, phone, password, confirmPassword })
+  }
+
+  changePage(event: Event) {
+    event.preventDefault()
+    const target = event.target as HTMLElement
+    const page = target.getAttribute('datapage')
+
+    if (page) {
+      GlobalEventBus.emit('changePage', page)
+    }
   }
 
   render() {
@@ -140,7 +168,7 @@ export class RegistrationPage extends Block {
               {{{ InputConfirmPassword }}}
           </form>
           
-          {{{ Button }}}
+          {{{ SubmitButton }}}
           {{{ ToLogin }}}
         </section>
       

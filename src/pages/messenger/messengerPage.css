@@ -92,14 +92,24 @@
   flex-grow: 1;
   width: 100%;
   height: 32px;
+}
+.messenger-page .messages-container .chat-footer .field-container .input-container {
+  height: 32px;
   padding: 0 1rem;
   background-color: var(--secondary-grey-color);
   border-radius: var(--border-radius-s);
+  border: 1px solid transparent;
 }
-.messenger-page .messages-container .chat-footer .field-container .message {
+.messenger-page .messages-container .chat-footer .field-container .input-container .message {
   width: 100%;
   height: 100%;
   background-color: var(--secondary-grey-color);
+}
+.messenger-page .messages-container .chat-footer .field-container .message-container {
+  display: none;
+}
+.messenger-page .messages-container .chat-footer .field-container .error-input {
+  border: 1px solid var(--red-color);
 }
 .messenger-page .messages-container .chat-footer .round-button img {
   transform: rotate(180deg);

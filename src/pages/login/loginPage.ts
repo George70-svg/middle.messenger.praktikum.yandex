@@ -4,6 +4,7 @@ import { Link } from '../../components/link/link.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { Button } from '../../components/button/button.ts'
 import { Input } from '../../components/input/input.ts'
+import { GlobalEventBus } from '../../framework/eventBus.ts'
 
 export class LoginPage extends Block {
   constructor(blockProps?: BlockProps) {
@@ -36,9 +37,12 @@ export class LoginPage extends Block {
             }
           }
         }),
-        Button: new Button({
+        SubmitButton: new Button({
           props: {
             text: 'Войти',
+            events: {
+              click: () => this.handleSubmit()
+            },
             attr: {
               class: 'button'
             }
@@ -47,6 +51,9 @@ export class LoginPage extends Block {
         NotAccount: new Link({
           props: {
             text: 'Нет аккаунта?',
+            events: {
+              click: (event) => this.changePage(event)
+            },
             attr: {
               class: 'link',
               href: '/registrationPage',
@@ -57,6 +64,22 @@ export class LoginPage extends Block {
         PageNavigation: new PageNavigation()
       }
     })
+  }
+
+  handleSubmit() {
+    const username = (this.children?.InputUsername as Input).getValue()
+    const password = (this.children?.InputPassword as Input).getValue()
+    console.log('Form Data:', { username, password })
+  }
+
+  changePage(event: Event) {
+    event.preventDefault()
+    const target = event.target as HTMLElement
+    const page = target.getAttribute('datapage')
+
+    if (page) {
+      GlobalEventBus.emit('changePage', page)
+    }
   }
 
   render() {
@@ -70,7 +93,7 @@ export class LoginPage extends Block {
             {{{ InputPassword  }}}
           </form>
       
-          {{{ Button }}}
+          {{{ SubmitButton }}}
           {{{ NotAccount }}}
         </section>
       
