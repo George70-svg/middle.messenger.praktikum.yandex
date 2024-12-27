@@ -1,0 +1,30 @@
+.message-item-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  max-width: 400px;
+  min-width: 150px;
+  width: fit-content;
+  padding: 0.5rem;
+  background-color: var(--message-background-color);
+  border-radius: var(--border-radius-xs);
+}
+.message-item-container .text {
+  font-size: 12px;
+}
+.message-item-container .time {
+  align-self: end;
+  color: var(--secondary-text-color);
+  font-size: 9px;
+}
+
+.me {
+  align-self: end;
+  background-color: var(--my-message-background-color);
+  border-bottom-right-radius: 0;
+}
+.me .time {
+  color: var(--blue-color);
+}
+
+/*# sourceMappingURL=messageItem.css.map */
