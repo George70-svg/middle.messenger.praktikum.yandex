@@ -15,7 +15,7 @@ export class MessengerPage extends Block {
       children: {
         LinkToProfile: new Link({
           props: {
-            content: `<p>Профиль</p><img src='svg/simpleArrow.svg' alt='simple arrow'>`,
+            content: '<p>Профиль</p><img src=\'svg/simpleArrow.svg\' alt=\'simple arrow\'>',
             events: {
               click: (event) => changePage(event)
             },
