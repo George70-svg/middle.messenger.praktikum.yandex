@@ -7,10 +7,22 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Node modules
 node_modules
-dist
-dist-ssr
+
+# Build output
+dist/
+dist-ssr/
+build/
+out/
+
+# Static files
 *.local
+
+# CSS and SCSS
+*.css
+*.css.map
+*.scssc
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +34,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Stylelint cache
+.stylelintcache
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# System files
+Thumbs.db
