@@ -7,7 +7,7 @@ export class ChatListItem extends Block {
       props: blockProps.props
     })
   }
-  
+
   override render(): string {
     return `
       <article class='chat-item'>

@@ -4,12 +4,27 @@ import { Input } from '../../components/input/input.ts'
 import { Button } from '../../components/button/button.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
+import { changePage } from '../../utils/common.ts'
+import { Link } from '../../components/link/link.ts'
 
 export class ProfilePage extends Block {
   constructor(blockProps: BlockProps) {
     super({
       props: blockProps.props,
       children: {
+        LinkToMessenger: new Link({
+          props: {
+            content: `<img src='svg/arrow.svg' alt='arrow'>`,
+            events: {
+              click: (event) => changePage(event)
+            },
+            attr: {
+              class: 'pageNavigation-link round-button back-button',
+              href: '/messengerPage',
+              dataPage: 'messengerPage'
+            }
+          }
+        }),
         InputEmail: new Input({
           props: {
             labelText: 'Почта',
@@ -66,7 +81,7 @@ export class ProfilePage extends Block {
             type: 'tel',
             id: 'phone-profile-edit',
             name: 'phone',
-            placeholder: '+7 (909) 967 30 30',
+            placeholder: '+79099673030',
             disabled: blockProps.props?.mode !== 'edit'
           }
         }),
@@ -142,9 +157,7 @@ export class ProfilePage extends Block {
     return `
       <main class='profile-page'>
         <aside class='nav-container'>
-          <div class='round-button back-button'>
-            <img src='svg/arrow.svg' alt='arrow'>
-          </div>
+          {{{ LinkToMessenger }}}
         </aside>
       
         <section class='profile-container'>

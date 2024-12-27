@@ -51,7 +51,7 @@ export class LoginPage extends Block {
         }),
         NotAccount: new Link({
           props: {
-            text: 'Нет аккаунта?',
+            content: 'Нет аккаунта?',
             events: {
               click: (event) => changePage(event)
             },

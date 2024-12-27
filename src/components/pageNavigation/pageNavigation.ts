@@ -9,7 +9,7 @@ export class PageNavigation extends Block {
       children: {
         LinkLogin: new Link({
           props: {
-            text: 'Вход',
+            content: 'Вход',
             events: {
               click: (event) => changePage(event)
             },
@@ -22,7 +22,7 @@ export class PageNavigation extends Block {
         }),
         LinkRegistration: new Link({
           props: {
-            text: 'Регистрация',
+            content: 'Регистрация',
             events: {
               click: (event) => changePage(event)
             },
@@ -35,7 +35,7 @@ export class PageNavigation extends Block {
         }),
         LinkProfileView: new Link({
           props: {
-            text: 'Профиль (просмотр)',
+            content: 'Профиль (просмотр)',
             events: {
               click: (event) => changePage(event)
             },
@@ -48,7 +48,7 @@ export class PageNavigation extends Block {
         }),
         LinkProfileEdit: new Link({
           props: {
-            text: 'Профиль (редактирование)',
+            content: 'Профиль (редактирование)',
             events: {
               click: (event) => changePage(event)
             },
@@ -61,7 +61,7 @@ export class PageNavigation extends Block {
         }),
         LinkProfilePassword: new Link({
           props: {
-            text: 'Профиль (смена пароля)',
+            content: 'Профиль (смена пароля)',
             events: {
               click: (event) => changePage(event)
             },
@@ -74,7 +74,7 @@ export class PageNavigation extends Block {
         }),
         LinkMessenger: new Link({
           props: {
-            text: 'Мессенджер',
+            content: 'Мессенджер',
             events: {
               click: (event) => changePage(event)
             },
@@ -87,7 +87,7 @@ export class PageNavigation extends Block {
         }),
         Link404Page: new Link({
           props: {
-            text: '404',
+            content: '404',
             events: {
               click: (event) => changePage(event)
             },
@@ -100,7 +100,7 @@ export class PageNavigation extends Block {
         }),
         Link500Page: new Link({
           props: {
-            text: '500',
+            content: '500',
             events: {
               click: (event) => changePage(event)
             },

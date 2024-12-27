@@ -11,7 +11,7 @@ export class Link extends Block {
   override render(): string {
     return `
       <a class='{{class}}' href='{{href}}' data-page='{{dataPage}}'>
-        {{text}}
+        {{{content}}}
       </a>
     `
   }

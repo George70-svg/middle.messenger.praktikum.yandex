@@ -56,12 +56,10 @@ export default class Block {
   }
 
   init(): void {
-    //console.log('_init')
     this.eventBus().emit(this.EVENTS.FLOW_RENDER)
   }
 
   _componentDidMount(): void {
-    //console.log('_componentDidMount')
     Object.values(this.children || {}).forEach((child) => {
       child.dispatchComponentDidMount()
     })
@@ -114,13 +112,11 @@ export default class Block {
     })
 
     const newElement = fragment.content.firstElementChild as HTMLDivElement
-    //console.log('newElement', newElement)
     if (this._element && newElement) {
       this._element.replaceWith(newElement)
     }
 
     this._element = newElement
-    //console.log('this._element', this._element)
     this._addEvents()
     this.addAttributes()
   }
@@ -131,7 +127,6 @@ export default class Block {
 
   //Метод render будет возвращать более точный шаблон в наследуемых классах
   render(): string {
-    console.log('render')
     return ''
   }
 
@@ -170,7 +165,6 @@ export default class Block {
   }
 
   addAttributes() :void {
-    //console.log('addAttributes')
     const { attr = {} } = this.props || {} //Props будут содержать отдельный подобъект для атрибутов
 
     Object.entries(attr).forEach(([key, value]) => {
@@ -183,7 +177,6 @@ export default class Block {
   }
 
   setAttributes(attr: unknown): void {
-    //console.log('setAttributes')
     Object.entries(attr || {}).forEach(([key, value]) => {
       if (this._element) {
         if (typeof value === 'string') {
@@ -194,7 +187,6 @@ export default class Block {
   }
 
   setProps(newProps: PropsProps): void {
-    console.log('setProps')
     if (newProps) {
       const oldProps = { ...this.props }
       Object.assign(this.props || {}, newProps)
@@ -204,7 +196,6 @@ export default class Block {
   }
 
   setLists(list: ListsProps): void {
-    //console.log('setLists')
     if (list) {
       Object.assign(this.lists || {}, list)
     }
@@ -215,7 +206,6 @@ export default class Block {
   }
 
   _makePropsProxy<T extends ProxyProps>(props: T): T {
-    //console.log('_makePropsProxy', props)
     const self = this
 
     const checkPrivateProp = (propName: string | symbol): boolean => {
@@ -232,7 +222,7 @@ export default class Block {
           throw new Error('Access denied')
         } else {
           const value = target[propName as keyof T]
-          //При вызове через Proxy функция может потерять свой контекст выполнения, поэтому передача через bind гарантирует его сохранение
+          // При вызове через Proxy функция может потерять свой контекст выполнения, поэтому передача через bind гарантирует его сохранение
           return (typeof value === 'function') ? value.bind(target) as unknown as T[keyof T] : value
         }
       },

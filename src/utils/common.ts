@@ -8,10 +8,11 @@ export const shortenText = (text :string, length: number) => {
   }
 }
 
-export const changePage = (event: Event) => {
+export const changePage = (event: Event, targetElement: string = 'a') => {
   event.preventDefault()
-  const target = event.target as HTMLElement
-  const page = target.getAttribute('datapage')
+  // Передаю ключевой элемент, который нужно обработать при клике, т.к. элемент может содержать в себе вложенные элементы
+  const target = (event.target as HTMLElement).closest(targetElement)
+  const page = target?.getAttribute('datapage')
 
   if (page) {
     GlobalEventBus.emit('changePage', page)

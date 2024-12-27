@@ -6,12 +6,26 @@ import { chatListMock } from '../../mock/chatList.ts'
 import { ChatListItem } from '../../components/chatLstItem/chatListItem.ts'
 import { messageListMock } from '../../mock/messageList.ts'
 import { MessageItem } from '../../components/messageItem/messageItem.ts'
-import { shortenText } from '../../utils/common.ts'
+import { changePage, shortenText } from '../../utils/common.ts'
+import { Link } from '../../components/link/link.ts'
 
 export class MessengerPage extends Block {
   constructor() {
     super({
       children: {
+        LinkToProfile: new Link({
+          props: {
+            content: `<p>Профиль</p><img src='svg/simpleArrow.svg' alt='simple arrow'>`,
+            events: {
+              click: (event) => changePage(event)
+            },
+            attr: {
+              class: 'pageNavigation-link go-to-profile',
+              href: '/profileViewPage',
+              dataPage: 'profileViewPage'
+            }
+          }
+        }),
         InputSearch: new Input({
           props: {
             labelText: 'Поиск',
@@ -65,11 +79,7 @@ export class MessengerPage extends Block {
       <main class='messenger-page'>
         <section class='chat-list-container'>
           <header class='chat-list-header'>
-            <div class='go-to-profile'>
-              <p>Профиль</p>
-              <img src='svg/simpleArrow.svg' alt='simple arrow'>
-            </div>
-            
+            {{{ LinkToProfile }}}
             {{{ InputSearch }}}
           </header>
       

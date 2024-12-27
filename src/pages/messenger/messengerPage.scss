@@ -21,6 +21,8 @@
       padding: 1rem 0.5rem;
 
       .go-to-profile {
+        position: relative;
+        z-index: 2;
         display: flex;
         justify-content: end;
         align-items: center;

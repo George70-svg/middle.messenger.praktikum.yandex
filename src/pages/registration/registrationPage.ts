@@ -116,7 +116,7 @@ export class RegistrationPage extends Block {
         }),
         ToLogin: new Link({
           props: {
-            text: 'Войти',
+            content: 'Войти',
             events: {
               click: (event) => changePage(event)
             },

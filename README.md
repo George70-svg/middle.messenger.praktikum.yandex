@@ -1,7 +1,8 @@
 # Start messenger
 
 **My Start Messenger**  
-A simple project to demonstrate messenger templates.
+Project for demonstration of messenger construction on class block from which components are inherited.
+Implementation of http request via xhr.
 
 ### Technologies used
 - **HTML**
@@ -18,20 +19,17 @@ https://www.figma.com/design/cJQjsbMsSzxSyKjykPVKWE/Yandex-messenger?node-id=0-1
 
 ### Setup Project Instructions
 
-#### Start and build project
-```bash
-npm run start
-```
+#### Main Commands:
+- Start and build project: `npm run start`
+- Start dev server: `npm run dev`
+- Preview build project: `npm run preview`
 
-#### Start dev server
-```bash
-npm run dev
-```
+#### Linting:
+- Run linter: `npm run lint`
+- Fix linter issues: `npm run lint:fix`
+- Run stylelint: `npm run lint:style`
+- Fix stylelint issues: `npm run lint:style:fix`
 
-#### Preview build project
-```bash
-npm run preview
-```
 ### Author
 **Anton Siuraev**
 
