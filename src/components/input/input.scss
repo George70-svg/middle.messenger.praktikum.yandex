@@ -1,17 +1,39 @@
-label {
-  font-family: NunitoSans, sans-serif;
+.field-container {
+  .input-container {
+    label {
+      font-family: NunitoSans, sans-serif;
+    }
+
+    input {
+      font-family: NunitoSans, sans-serif;
+      outline: none;
+      border: none;
+
+      &:disabled {
+        background-color: transparent;
+      }
+    }
+
+    .field {
+      font-size: 13px;
+      padding: 0.25rem 0;
+      outline: none;
+      border: none;
+      border-bottom: 2px solid var(--blue-color);
+    }
+  }
+
+  .message-container {
+    margin-top: 2px;
+    font-size: 10px;
+    color: var(--red-color);
+  }
 }
 
-input {
-  font-family: NunitoSans, sans-serif;
-  outline: none;
-  border: none;
-}
-
-.field {
-  font-size: 13px;
-  padding: 0.25rem 0;
-  outline: none;
-  border: none;
-  border-bottom: 2px solid var(--blue-color);
+.no-label {
+  .input-container {
+    label {
+      display: none;
+    }
+  }
 }

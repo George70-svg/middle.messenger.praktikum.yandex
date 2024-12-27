@@ -13,7 +13,7 @@
   gap: 1rem;
   width: 340px;
   height: 450px;
-  padding: 3rem 1.875rem 2rem 1.875rem;
+  padding: 3rem 1.875rem 2rem;
   background: var(--background-color);
   border-radius: var(--border-radius-m);
   box-shadow: var(--border-shadow);
@@ -36,6 +36,7 @@
   width: 100%;
 }
 .login-page .login-container .link {
+  font-size: 11px;
   font-weight: 600;
 }
 

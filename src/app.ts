@@ -1,79 +1,62 @@
-import Handlebars from 'handlebars'
-import Pages from './pages'
-import { isPageType, PageType } from './pages/types.ts'
-import { button } from './components/button/button.ts'
-import { input } from './components/input/input.ts'
-import { link } from './components/link/link.ts'
-import { pageNavigation } from './components/pageNavigation/pageNavigation.ts'
-import { chatListItem } from './components/chatLstItem/chatListItem.ts'
-import { messageItem } from './components/messageItem/messageItem.ts'
-import { ChatListItem, chatListMock } from './mock/chatList.ts'
-import { MessageListItem, messageListMock } from './mock/messageList.ts'
+import { LoginPage } from './pages/login/loginPage.ts'
+import { RegistrationPage } from './pages/registration/registrationPage.ts'
+import { ProfilePage } from './pages/profile/ProfilePage.ts'
+import { MessengerPage } from './pages/messenger/messengerPage.ts'
+import { Page404 } from './pages/404/page404.ts'
+import { Page500 } from './pages/500/page500.ts'
+import { PageType } from './pages/types.ts'
+import { GlobalEventBus } from './framework/eventBus.ts'
+import Block from './framework/block.ts'
 
-Handlebars.registerPartial('button', button)
-Handlebars.registerPartial('input', input)
-Handlebars.registerPartial('link', link)
-Handlebars.registerPartial('pageNavigation', pageNavigation)
-Handlebars.registerPartial('chatListItem', chatListItem)
-Handlebars.registerPartial('messageItem', messageItem)
+const pageConstructor: Record<PageType, () => Block> = {
+  loginPage: () => new LoginPage(),
+  registrationPage: () => new RegistrationPage(),
+  profileViewPage: () => new ProfilePage({ props: { mode: 'view' } }),
+  profileEditPage: () => new ProfilePage({ props: { mode: 'edit' } }),
+  profileEditPasswordPage: () => new ProfilePage({ props: { mode: 'password' } }),
+  messengerPage: () => new MessengerPage(),
+  page404: () => new Page404(),
+  page500: () => new Page500()
+}
 
 export default class App {
+  private appElement: HTMLElement | null
+
   private state: {
     currentPage: PageType,
-    chatList: ChatListItem[]
-    messageList: MessageListItem[]
   }
-  private readonly appElement: HTMLElement | null
-  
+
   constructor() {
     this.state = {
-      currentPage: 'loginPage',
-      chatList: chatListMock,
-      messageList: messageListMock,
+      currentPage: 'loginPage'
     }
+
     this.appElement = document.getElementById('root')
+    GlobalEventBus.on('changePage', this.changePage.bind(this))
   }
-  
+
   render() {
-    if(this.state.currentPage && this.appElement) {
-      const currentPage = this.state.currentPage
-      const template = Handlebars.compile(Pages[currentPage])
-      this.appElement.innerHTML = template({
-        chatList: this.state.chatList,
-        messageList: this.state.messageList
-      })
-    }
-    
-    this.attachEventListeners()
-  }
-  
-  attachEventListeners() {
-    const footerLinks = document.querySelectorAll('.pageNavigation-link')
-    footerLinks.forEach(link => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault()
-        const target = event.target
-        
-        if (target instanceof HTMLElement && isPageType(target.dataset.page)) {
-          this.changePage(target.dataset.page)
+    if (this.state.currentPage && this.appElement) {
+      const { currentPage } = this.state
+
+      if (currentPage) {
+        const newPage = pageConstructor[currentPage]()
+
+        if (this.appElement) {
+          this.appElement.innerHTML = ''
+          this.appElement.appendChild(newPage.getContent())
         }
-      })
-    })
-    
-    // Сокращаю длинные сообщения до определённого количества символов
-    if(this.state.currentPage === 'messengerPage') {
-      const MESSAGE_LENGTH = 50
-      const chatLastText = document.querySelectorAll('#chat-message')
-      chatLastText.forEach(message => {
-        if(message.innerHTML.length >= 50) {
-          message.textContent = message.textContent?.substring(0, MESSAGE_LENGTH) + '...'
-        }
-      })
+      }
     }
   }
-  
-  changePage(page: PageType | undefined) {
-    this.state.currentPage = page ?? 'page404'
+
+  changePage(page: PageType): void {
+    if (page) {
+      this.state.currentPage = page
+    } else {
+      this.state.currentPage = 'page404'
+    }
+
     this.render()
   }
 }
