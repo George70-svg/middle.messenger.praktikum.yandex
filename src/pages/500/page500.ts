@@ -1,4 +1,4 @@
-import './page500.css'
+import './page500.scss'
 import Block from '../../framework/block.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 

@@ -1,4 +1,4 @@
-import './registrationPage.css'
+import './registrationPage.scss'
 import Block, { BlockProps } from '../../framework/block.ts'
 import { Link } from '../../components/link/link.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'

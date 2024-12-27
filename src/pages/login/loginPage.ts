@@ -1,4 +1,4 @@
-import './loginPage.css'
+import './loginPage.scss'
 import Block, { BlockProps } from '../../framework/block.ts'
 import { Link } from '../../components/link/link.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'

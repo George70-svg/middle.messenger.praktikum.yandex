@@ -1,4 +1,4 @@
-import './chatListItem.css'
+import './chatListItem.scss'
 import Block, { BlockProps } from '../../framework/block.ts'
 
 export class ChatListItem extends Block {

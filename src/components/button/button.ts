@@ -1,4 +1,4 @@
-import './button.css'
+import './button.scss'
 import Block, { BlockProps } from '../../framework/block.ts'
 
 export class Button extends Block {

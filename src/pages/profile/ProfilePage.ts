@@ -1,4 +1,4 @@
-import './profilePage.css'
+import './profilePage.scss'
 import Block, { BlockProps } from '../../framework/block.ts'
 import { Input } from '../../components/input/input.ts'
 import { Button } from '../../components/button/button.ts'

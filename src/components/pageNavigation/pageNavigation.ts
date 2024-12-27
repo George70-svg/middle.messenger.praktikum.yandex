@@ -1,4 +1,4 @@
-import './pageNavigation.css'
+import './pageNavigation.scss'
 import Block from '../../framework/block.ts'
 import { Link } from '../link/link.ts'
 import { changePage } from '../../utils/common.ts'
