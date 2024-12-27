@@ -1,7 +1,7 @@
 import './pageNavigation.css'
 import Block from '../../framework/block.ts'
 import { Link } from '../link/link.ts'
-import { GlobalEventBus } from '../../framework/eventBus.ts'
+import { changePage } from '../../utils/common.ts'
 
 export class PageNavigation extends Block {
   constructor() {
@@ -11,7 +11,7 @@ export class PageNavigation extends Block {
           props: {
             text: 'Вход',
             events: {
-              click: (event) => this.changePage(event)
+              click: (event) => changePage(event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -24,7 +24,7 @@ export class PageNavigation extends Block {
           props: {
             text: 'Регистрация',
             events: {
-              click: (event) => this.changePage(event)
+              click: (event) => changePage(event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -37,7 +37,7 @@ export class PageNavigation extends Block {
           props: {
             text: 'Профиль (просмотр)',
             events: {
-              click: (event) => this.changePage(event)
+              click: (event) => changePage(event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -50,7 +50,7 @@ export class PageNavigation extends Block {
           props: {
             text: 'Профиль (редактирование)',
             events: {
-              click: (event) => this.changePage(event)
+              click: (event) => changePage(event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -63,7 +63,7 @@ export class PageNavigation extends Block {
           props: {
             text: 'Профиль (смена пароля)',
             events: {
-              click: (event) => this.changePage(event)
+              click: (event) => changePage(event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -76,7 +76,7 @@ export class PageNavigation extends Block {
           props: {
             text: 'Мессенджер',
             events: {
-              click: (event) => this.changePage(event)
+              click: (event) => changePage(event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -89,7 +89,7 @@ export class PageNavigation extends Block {
           props: {
             text: '404',
             events: {
-              click: (event) => this.changePage(event)
+              click: (event) => changePage(event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -102,7 +102,7 @@ export class PageNavigation extends Block {
           props: {
             text: '500',
             events: {
-              click: (event) => this.changePage(event)
+              click: (event) => changePage(event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -113,16 +113,6 @@ export class PageNavigation extends Block {
         })
       }
     })
-  }
-
-  changePage(event: Event) {
-    event.preventDefault()
-    const target = event.target as HTMLElement
-    const page = target.getAttribute('datapage')
-
-    if (page) {
-      GlobalEventBus.emit('changePage', page)
-    }
   }
 
   override render(): string {

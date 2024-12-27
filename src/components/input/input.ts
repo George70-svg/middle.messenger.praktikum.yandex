@@ -1,6 +1,7 @@
 import './input.css'
 import Block, { BlockProps } from '../../framework/block.ts'
 import { InputName, inputValidation, ValidationMessage } from '../../utils/validationService.ts'
+import { GlobalEventBus } from '../../framework/eventBus.ts'
 
 export class Input extends Block {
   validationMessage: ValidationMessage
@@ -19,6 +20,8 @@ export class Input extends Block {
       status: true,
       message: ''
     }
+
+    GlobalEventBus.on('formChange', (args: InputName[]) => this.checkValidation(args))
   }
 
   override shouldDelegateEvent(): boolean {
@@ -33,6 +36,14 @@ export class Input extends Block {
     const currentValue = this.getValue() || ''
     this.validationMessage = inputValidation(this.props?.name as InputName, currentValue)
     this.updateValidation()
+  }
+
+  checkValidation(args: InputName[]) {
+    if (args.includes(this.props?.name as InputName)) {
+      const currentValue = this.getValue() || ''
+      this.validationMessage = inputValidation(this.props?.name as InputName, currentValue)
+      this.updateValidation()
+    }
   }
 
   updateValidation() {

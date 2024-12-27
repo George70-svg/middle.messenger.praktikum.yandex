@@ -4,6 +4,7 @@ import { Link } from '../../components/link/link.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { Button } from '../../components/button/button.ts'
 import { Input } from '../../components/input/input.ts'
+import { changePage } from '../../utils/common.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
 
 export class LoginPage extends Block {
@@ -52,7 +53,7 @@ export class LoginPage extends Block {
           props: {
             text: 'Нет аккаунта?',
             events: {
-              click: (event) => this.changePage(event)
+              click: (event) => changePage(event)
             },
             attr: {
               class: 'link',
@@ -69,17 +70,9 @@ export class LoginPage extends Block {
   handleSubmit() {
     const username = (this.children?.InputUsername as Input).getValue()
     const password = (this.children?.InputPassword as Input).getValue()
+
+    GlobalEventBus.emit('formChange', ['login', 'password'])
     console.log('Form Data:', { username, password })
-  }
-
-  changePage(event: Event) {
-    event.preventDefault()
-    const target = event.target as HTMLElement
-    const page = target.getAttribute('datapage')
-
-    if (page) {
-      GlobalEventBus.emit('changePage', page)
-    }
   }
 
   render() {

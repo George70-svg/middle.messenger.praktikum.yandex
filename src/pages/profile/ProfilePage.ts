@@ -3,6 +3,7 @@ import Block, { BlockProps } from '../../framework/block.ts'
 import { Input } from '../../components/input/input.ts'
 import { Button } from '../../components/button/button.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
+import { GlobalEventBus } from '../../framework/eventBus.ts'
 
 export class ProfilePage extends Block {
   constructor(blockProps: BlockProps) {
@@ -122,10 +123,14 @@ export class ProfilePage extends Block {
       const secondName = (this.children?.InputSecondName as Input).getValue()
       const displayName = (this.children?.InputDisplayName as Input).getValue()
       const phone = (this.children?.InputPhone as Input).getValue()
+
+      GlobalEventBus.emit('formChange', ['email', 'first_name', 'phone', 'second_name', 'login'])
       console.log('Form Data:', { email, username, firstName, secondName, displayName, phone })
     } else if (mode === 'password') {
       const oldPassword = (this.children?.InputOldPassword as Input).getValue()
       const newPassword = (this.children?.InputNewPassword as Input).getValue()
+
+      GlobalEventBus.emit('formChange', ['password'])
       console.log('Form Data:', { oldPassword, newPassword })
     }
   }
@@ -155,7 +160,7 @@ export class ProfilePage extends Block {
                 <h3 class='name'>Иван</h3>
               </div>` : ''}
       
-            <div class='info-container'>
+            <form class='info-container'>
               ${!isPasswordMode ? `
                 {{{ InputEmail }}}
                 {{{ InputUsername }}}
@@ -168,7 +173,7 @@ export class ProfilePage extends Block {
                 {{{ InputOldPassword }}}
                 {{{ InputNewPassword }}}
                 {{{ InputRepeatNewPassword }}}` : ''}
-            </div>
+            </form>
             
             ${isViewMode ? `
               <div class='edit-container'>
