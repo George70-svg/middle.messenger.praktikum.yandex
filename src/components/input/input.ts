@@ -1,4 +1,4 @@
-import './input.css'
+import './input.scss'
 import Block, { BlockProps } from '../../framework/block.ts'
 import { InputName, inputValidation, ValidationMessage } from '../../utils/validationService.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'

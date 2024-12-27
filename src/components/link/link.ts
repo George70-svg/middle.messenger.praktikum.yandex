@@ -1,4 +1,4 @@
-import './link.css'
+import './link.scss'
 import Block, { BlockProps } from '../../framework/block.ts'
 
 export class Link extends Block {

@@ -1,4 +1,4 @@
-import './messengerPage.css'
+import './messengerPage.scss'
 import Block from '../../framework/block.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { Input } from '../../components/input/input.ts'

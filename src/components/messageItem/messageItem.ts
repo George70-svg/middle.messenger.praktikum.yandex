@@ -1,4 +1,4 @@
-import './messageItem.css'
+import './messageItem.scss'
 import Block, { BlockProps } from '../../framework/block.ts'
 
 export class MessageItem extends Block {
