@@ -71,6 +71,7 @@ export default class Block {
   }
 
   _render(): void {
+    this._removeEvents()
     const templateData = { ...this.props } //Данные из props, которые будем добавлять в отрендеренный template
     const templateId = makeUUID()
 
@@ -138,10 +139,15 @@ export default class Block {
     }
   }
 
-  _addEvents():void {
+  _addEvents(): void {
     const { events = {} } = this.props || {} //Props будут содержать отдельный подобъект для events
 
     Object.keys(events).forEach((eventName) => {
+      if (typeof events[eventName] !== 'function') {
+        console.warn(`Invalid event handler for event: ${eventName}`)
+        return
+      }
+
       if (this.shouldDelegateEvent()) {
         const targetElement = this.getDelegatedElement()
 
@@ -154,6 +160,27 @@ export default class Block {
     })
   }
 
+  _removeEvents(): void {
+    const { events = {} } = this.props || {} //Props будут содержать отдельный подобъект для events
+
+    Object.keys(events).forEach((eventName) => {
+      if (typeof events[eventName] !== 'function') {
+        console.warn(`Invalid event handler for event: ${eventName}`)
+        return
+      }
+
+      if (this.shouldDelegateEvent()) {
+        const targetElement = this.getDelegatedElement()
+
+        if (targetElement) {
+          targetElement.removeEventListener(eventName, events[eventName])
+        }
+      } else if (this._element) {
+        this._element.removeEventListener(eventName, events[eventName])
+      }
+    })
+  }
+
   // Метод, который указывает, что не нужно вешать обработчик событий на базовый верхний элемент
   shouldDelegateEvent(): boolean {
     return false
@@ -161,7 +188,7 @@ export default class Block {
 
   // Получаем элемент, на который нужно повесить обработчик событий
   getDelegatedElement(): HTMLElement | null {
-    return null
+    return this._element
   }
 
   addAttributes() :void {
