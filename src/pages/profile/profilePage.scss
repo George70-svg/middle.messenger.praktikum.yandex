@@ -50,29 +50,35 @@
       }
 
       .info-container {
-        .info-field {
-          display: flex;
-          justify-content: space-between;
-          gap: 1rem;
-          padding: 0.5rem 0;
-          border-bottom: 1px solid var(--secondary-grey-color);
+        .field-container {
+          .input-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--secondary-grey-color);
 
-          p {
-            font-size: 13px;
-            line-height: 18px;
+            label {
+              height: 18px;
+              flex-basis: fit-content;
+              font-size: 13px;
+              font-weight: bold;
+              line-height: 18px;
+            }
+
+            input {
+              height: 18px;
+              flex-grow: 1;
+              font-size: 13px;
+              text-align: end;
+              color: var(--secondary-text-color);
+              line-height: 18px;
+            }
+
+            input::placeholder {
+              color: var(--secondary-text-color);
+            }
           }
-
-          p:first-child {
-            font-weight: bold;
-          }
-
-          p:last-child {
-            color: var(--secondary-text-color)
-          }
-        }
-
-        .info-field:last-child {
-          border: none;
         }
       }
 
@@ -83,6 +89,10 @@
           font-weight: bold;
           border-bottom: 1px solid var(--secondary-grey-color);
           cursor: pointer;
+
+          &:last-child {
+            border: none;
+          }
         }
 
         .change-info, .change-password {
@@ -92,10 +102,11 @@
         .exit {
           color: var(--red-color);
         }
+      }
 
-        p:last-child {
-          border: none;
-        }
+      .save-container {
+        display: flex;
+        justify-content: center;
       }
     }
   }

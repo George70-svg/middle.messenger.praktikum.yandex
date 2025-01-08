@@ -1,36 +1,46 @@
 // Переменные SCSS
 :root {
   --text-color: #1E1E1E;
-  --secondary-text-color: #999999;
-  --text-light-color: #FFFFFF;
-  --background-color: #FFFFFF;
+  --secondary-text-color: #999;
+  --text-light-color: #fff;
+  --background-color: #FFF;
   --message-background-color: #F8F8F8;
   --my-message-background-color: #E4EDFD;
   --grey-color: #FBFBFB;
   --secondary-grey-color: #EFEFEF;
   --blue-color: #3369F3;
   --blue-hover-color: #225df3;
-  --red-color: #FF0000;
-
+  --red-color: #FF2F2F;
   --header-height: 3rem;
   --footer-height: 3rem;
-
   --border-radius-xxs: 0.25rem;
   --border-radius-xs: 0.5rem;
   --border-radius-s: 1rem;
   --border-radius-m: 1.5rem;
   --border-radius-l: 2rem;
-
-  --border-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14)
+  --border-shadow: 0 0 6px 0 rgb(0 0 0 / 14%)
 }
 
 @font-face {
-  font-family: 'NunitoSans';
-  src: local('NunitoSans'), url(/src/assets/fonts/NunitoSans.ttf) format('truetype');
+  font-family: NunitoSans;
+  src: local('NunitoSans'), url('/src/assets/fonts/NunitoSans.ttf') format('truetype');
 }
 
 * {
   box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+  }
 }
 
 body {
@@ -50,20 +60,5 @@ body {
 
 h1, h2, h3, p {
   margin: 0;
-}
-
-* {
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: #aaa;
-  }
 }
 
