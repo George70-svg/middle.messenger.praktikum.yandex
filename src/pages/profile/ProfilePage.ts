@@ -4,11 +4,12 @@ import { Input } from '../../components/input/input.ts'
 import { Button } from '../../components/button/button.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
-import { changePage } from '../../framework/common.ts'
+import { goToPath } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
 
 export class ProfilePage extends Block {
   constructor(blockProps: BlockProps = { props: { mode: 'view' } }) {
+    console.log('ProfilePage', blockProps)
     super({
       props: blockProps.props,
       children: {
@@ -16,11 +17,11 @@ export class ProfilePage extends Block {
           props: {
             content: '<img src=\'svg/arrow.svg\' alt=\'arrow\'>',
             events: {
-              click: (event) => changePage(event)
+              click: () => goToPath('/messenger')
             },
             attr: {
               class: 'pageNavigation-link round-button back-button',
-              href: '/messengerPage',
+              href: '/messenger',
               dataPage: 'messengerPage'
             }
           }

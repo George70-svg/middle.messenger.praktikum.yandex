@@ -1,5 +1,6 @@
 import { Route } from './route.ts'
-import Block from './block.ts'
+import { BlockClass } from './types.ts'
+import { BlockProps } from './block.ts'
 
 export class Router {
   static __instance: Router
@@ -25,7 +26,7 @@ export class Router {
     Router.__instance = this
   }
 
-  use(pathname: string, block: Block) {
+  use(pathname: string, block: BlockClass) {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery })
     this.routes.push(route)
     return this
@@ -38,12 +39,19 @@ export class Router {
     }
     this._onRoute(window.location.pathname)
   }
+  
+  go(pathname: string, props?: BlockProps) {
+    this.history?.pushState({}, '', pathname)
+    this._onRoute(pathname, props)
+  }
 
-  _onRoute(pathname: string) {
-    console.log('_onRoute')
+  _onRoute(pathname: string, props?: BlockProps) {
     const route = this.getRoute(pathname)
-    console.log('route', route)
     if (!route) {
+      if(this.getRoute('/404')) {
+        this._onRoute('/404')
+      }
+      
       return
     }
 
@@ -51,13 +59,7 @@ export class Router {
       this._currentRoute.leave()
     }
 
-    route.render()
-  }
-
-  go(pathname: string) {
-    this.history?.pushState({ pathname }, pathname, pathname)
-    this._onRoute(pathname)
-    console.log('history', this.history)
+    route.render(props)
   }
 
   getRoute(pathname: string) {

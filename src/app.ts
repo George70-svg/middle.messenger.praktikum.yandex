@@ -10,12 +10,12 @@ export default class App {
   constructor() {
     const router = new Router('root')
     router
-      .use('/', new LoginPage())
-      .use('/sign-up', new RegistrationPage())
-      .use('/settings', new ProfilePage())
-      .use('/messenger', new MessengerPage())
-      .use('/404', new Page404())
-      .use('/500', new Page500())
+      .use('/', LoginPage)
+      .use('/sign-up', RegistrationPage)
+      .use('/settings', ProfilePage)
+      .use('/messenger', MessengerPage)
+      .use('/404', Page404)
+      .use('/500', Page500)
       .start()
 
     console.log('router', router)

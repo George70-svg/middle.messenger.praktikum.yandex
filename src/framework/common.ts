@@ -1,28 +1,12 @@
-import { GlobalEventBus } from './eventBus.ts'
-import Block from './block.ts'
+import Block, { BlockProps } from './block.ts'
 import { Router } from './router.ts'
 
-export function changePage(event: Event, targetElement: string = 'a'): void {
-  event.preventDefault()
-  // Передаю ключевой элемент, который нужно обработать при клике, т.к. элемент может содержать в себе вложенные элементы
-  const target = (event.target as HTMLElement).closest(targetElement)
-  const page = target?.getAttribute('datapage')
-
-  if (page) {
-    GlobalEventBus.emit('changePage', page)
-  }
-}
-
-export function goToPath(event: Event) {
-  event.preventDefault()
-  const { pathname } = (event.target as HTMLAnchorElement)
+export function goToPath(pathname: string, props?: BlockProps) {
   const router = new Router('root')
-  console.log(pathname)
-  router.go(pathname)
+  router.go(pathname, props)
 }
 
 export function render(query: string, block: Block) {
-  console.log('render', block)
   const root = document.getElementById(query)
 
   if (root) {

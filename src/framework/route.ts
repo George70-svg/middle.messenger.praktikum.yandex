@@ -1,17 +1,18 @@
-import Block, { PropsProps } from './block.ts'
+import Block, { BlockProps } from './block.ts'
 import { render } from './common.ts'
 import { isEqual } from '../utils/common.ts'
+import { BlockClass } from './types.ts'
 
 export class Route {
   _pathname: string | null = null
 
-  _blockClass: Block
+  _blockClass: BlockClass
 
   _block: Block | null = null
 
-  _props: PropsProps & { rootQuery: string }
+  _props: BlockProps & { rootQuery: string }
 
-  constructor(pathname: string, view: Block, props: PropsProps & { rootQuery: string }) {
+  constructor(pathname: string, view: BlockClass, props: BlockProps & { rootQuery: string }) {
     this._pathname = pathname
     this._blockClass = view
     this._block = null
@@ -28,11 +29,9 @@ export class Route {
     return isEqual(pathname, this._pathname)
   }
 
-  render() {
+  render(props?: BlockProps) {
     if (!this._block) {
-      console.log(this._blockClass)
-      this._block = this._blockClass
-
+      this._block = new this._blockClass(props ?? {})
       if (this._block) {
         render(this._props.rootQuery, this._block)
       }
@@ -41,6 +40,6 @@ export class Route {
     }
 
     this._block.show()
-    render(this._props.rootQuery, this._block)
+    render(this._props.rootQuery, new this._blockClass(props ?? {}))
   }
 }

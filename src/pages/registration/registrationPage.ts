@@ -4,11 +4,11 @@ import { Link } from '../../components/link/link.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { Button } from '../../components/button/button.ts'
 import { Input } from '../../components/input/input.ts'
-import { changePage } from '../../framework/common.ts'
+import { goToPath } from '../../framework/common.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
 
 export class RegistrationPage extends Block {
-  constructor(blockProps?: BlockProps) {
+  constructor(blockProps: BlockProps) {
     super({
       props: blockProps,
       children: {
@@ -118,11 +118,11 @@ export class RegistrationPage extends Block {
           props: {
             content: 'Войти',
             events: {
-              click: (event) => changePage(event)
+              click: () => goToPath('/')
             },
             attr: {
               class: 'link',
-              href: '/loginPage',
+              href: '/',
               dataPage: 'loginPage'
             }
           }

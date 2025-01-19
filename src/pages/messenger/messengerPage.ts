@@ -7,7 +7,7 @@ import { ChatListItem } from '../../components/chatLstItem/chatListItem.ts'
 import { messageListMock } from '../../mock/messageList.ts'
 import { MessageItem } from '../../components/messageItem/messageItem.ts'
 import { shortenText } from '../../utils/common.ts'
-import { changePage } from '../../framework/common.ts'
+import { goToPath } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
 
 export class MessengerPage extends Block {
@@ -18,11 +18,11 @@ export class MessengerPage extends Block {
           props: {
             content: '<p>Профиль</p><img src=\'svg/simpleArrow.svg\' alt=\'simple arrow\'>',
             events: {
-              click: (event) => changePage(event)
+              click: () => goToPath('/settings')
             },
             attr: {
               class: 'pageNavigation-link go-to-profile',
-              href: '/profileViewPage',
+              href: '/settings',
               dataPage: 'profileViewPage'
             }
           }
