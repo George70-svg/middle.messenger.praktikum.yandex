@@ -2,7 +2,7 @@ import { v4 as makeUUID } from 'uuid'
 import Handlebars from 'handlebars'
 import { EventBus, EventCallback } from './eventBus.ts'
 
-type PropsProps = { events?: Record<string, EventListenerOrEventListenerObject>, attr?: Record<string, string> } & Record<string, unknown>
+export type PropsProps = { events?: Record<string, EventListenerOrEventListenerObject>, attr?: Record<string, string> } & Record<string, unknown>
 type ChildrenProps = Record<string, Block>
 type ListsProps = Record<string, unknown[]>
 
@@ -26,7 +26,7 @@ export default class Block {
 
   _id: string = makeUUID()
 
-  props?: PropsProps
+  props?: PropsProps = { mode: 'view' }
 
   children?: ChildrenProps
 
@@ -226,6 +226,18 @@ export default class Block {
     if (list) {
       Object.assign(this.lists || {}, list)
     }
+  }
+
+  show() {
+    console.log('Block show')
+    /* const content = this.getContent()
+    content.style.display = 'block' */
+  }
+
+  hide() {
+    console.log('Block hide')
+    /* const content = this.getContent()
+    content.style.display = 'none' */
   }
 
   get element(): HTMLElement | null {

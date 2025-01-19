@@ -4,11 +4,11 @@ import { Input } from '../../components/input/input.ts'
 import { Button } from '../../components/button/button.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
-import { changePage } from '../../utils/common.ts'
+import { changePage } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
 
 export class ProfilePage extends Block {
-  constructor(blockProps: BlockProps) {
+  constructor(blockProps: BlockProps = { props: { mode: 'view' } }) {
     super({
       props: blockProps.props,
       children: {

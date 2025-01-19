@@ -1,7 +1,7 @@
 import './pageNavigation.scss'
 import Block from '../../framework/block.ts'
 import { Link } from '../link/link.ts'
-import { changePage } from '../../utils/common.ts'
+import { goToPath } from '../../framework/common.ts'
 
 export class PageNavigation extends Block {
   constructor() {
@@ -11,11 +11,11 @@ export class PageNavigation extends Block {
           props: {
             content: 'Вход',
             events: {
-              click: (event) => changePage(event)
+              click: (event) => goToPath(event)
             },
             attr: {
               class: 'pageNavigation-link',
-              href: '/loginPage',
+              href: '/',
               dataPage: 'loginPage'
             }
           }
@@ -24,11 +24,11 @@ export class PageNavigation extends Block {
           props: {
             content: 'Регистрация',
             events: {
-              click: (event) => changePage(event)
+              click: (event) => goToPath(event)
             },
             attr: {
               class: 'pageNavigation-link',
-              href: '/registrationPage',
+              href: '/sign-up',
               dataPage: 'registrationPage'
             }
           }
@@ -37,11 +37,11 @@ export class PageNavigation extends Block {
           props: {
             content: 'Профиль (просмотр)',
             events: {
-              click: (event) => changePage(event)
+              click: (event) => goToPath(event)
             },
             attr: {
               class: 'pageNavigation-link',
-              href: '/profileViewPage',
+              href: '/settings',
               dataPage: 'profileViewPage'
             }
           }
@@ -50,11 +50,11 @@ export class PageNavigation extends Block {
           props: {
             content: 'Профиль (редактирование)',
             events: {
-              click: (event) => changePage(event)
+              click: (event) => goToPath(event)
             },
             attr: {
               class: 'pageNavigation-link',
-              href: '/profileEditPage',
+              href: '/settings',
               dataPage: 'profileEditPage'
             }
           }
@@ -63,11 +63,11 @@ export class PageNavigation extends Block {
           props: {
             content: 'Профиль (смена пароля)',
             events: {
-              click: (event) => changePage(event)
+              click: (event) => goToPath(event)
             },
             attr: {
               class: 'pageNavigation-link',
-              href: '/profileEditPasswordPage',
+              href: '/settings',
               dataPage: 'profileEditPasswordPage'
             }
           }
@@ -76,11 +76,11 @@ export class PageNavigation extends Block {
           props: {
             content: 'Мессенджер',
             events: {
-              click: (event) => changePage(event)
+              click: (event) => goToPath(event)
             },
             attr: {
               class: 'pageNavigation-link',
-              href: '/messengerPage',
+              href: '/messenger',
               dataPage: 'messengerPage'
             }
           }
@@ -89,11 +89,11 @@ export class PageNavigation extends Block {
           props: {
             content: '404',
             events: {
-              click: (event) => changePage(event)
+              click: (event) => goToPath(event)
             },
             attr: {
               class: 'pageNavigation-link',
-              href: '/page404',
+              href: '/404',
               dataPage: 'page404'
             }
           }
@@ -102,11 +102,11 @@ export class PageNavigation extends Block {
           props: {
             content: '500',
             events: {
-              click: (event) => changePage(event)
+              click: (event) => goToPath(event)
             },
             attr: {
               class: 'pageNavigation-link',
-              href: '/page500',
+              href: '/500',
               dataPage: 'page500'
             }
           }

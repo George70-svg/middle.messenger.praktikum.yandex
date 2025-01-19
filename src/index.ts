@@ -1,11 +1,10 @@
 import App from './app.ts'
-import { HTTPTransport, METHOD } from './api/apiService.ts'
+// import { HTTPTransport, METHOD } from './api/apiService.ts'
 
-document.addEventListener('DOMContentLoaded', () => {
-  const app = new App()
-  app.render()
+document.addEventListener('DOMContentLoaded', /* async */ () => {
+  new App()
 
-  const requestTesting = async () => {
+  /* const requestTesting = async () => {
     //GET Test
     const xhrGet = await new HTTPTransport().get('https://jsonplaceholder.typicode.com/todos/1')
     console.log(xhrGet.response)
@@ -42,11 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //DELETE Test
     const xhrDelete = await new HTTPTransport().delete('https://jsonplaceholder.typicode.com/posts/1')
     console.log(xhrDelete.response)
-  }
+  } */
 
-  // eslint-disable-next-line no-void
-  void requestTesting()
-    .then((r) => {
-      console.log(r)
-    })
+  // await requestTesting()
 })

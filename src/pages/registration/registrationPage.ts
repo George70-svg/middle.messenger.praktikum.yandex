@@ -4,7 +4,7 @@ import { Link } from '../../components/link/link.ts'
 import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { Button } from '../../components/button/button.ts'
 import { Input } from '../../components/input/input.ts'
-import { changePage } from '../../utils/common.ts'
+import { changePage } from '../../framework/common.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
 
 export class RegistrationPage extends Block {

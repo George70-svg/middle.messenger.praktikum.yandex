@@ -6,7 +6,8 @@ import { chatListMock } from '../../mock/chatList.ts'
 import { ChatListItem } from '../../components/chatLstItem/chatListItem.ts'
 import { messageListMock } from '../../mock/messageList.ts'
 import { MessageItem } from '../../components/messageItem/messageItem.ts'
-import { changePage, shortenText } from '../../utils/common.ts'
+import { shortenText } from '../../utils/common.ts'
+import { changePage } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
 
 export class MessengerPage extends Block {
