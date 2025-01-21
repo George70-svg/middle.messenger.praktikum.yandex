@@ -11,7 +11,7 @@ export class PageNavigation extends Block {
           props: {
             content: 'Вход',
             events: {
-              click: () => goToPath('/')
+              click: (event) => goToPath('/', event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -24,7 +24,7 @@ export class PageNavigation extends Block {
           props: {
             content: 'Регистрация',
             events: {
-              click: () => goToPath('/sign-up')
+              click: (event) => goToPath('/sign-up', event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -37,7 +37,7 @@ export class PageNavigation extends Block {
           props: {
             content: 'Профиль (просмотр)',
             events: {
-              click: () => goToPath('/settings', { props: { mode: 'view' } })
+              click: (event) => goToPath('/settings', event, { props: { mode: 'view' } })
             },
             attr: {
               class: 'pageNavigation-link',
@@ -50,7 +50,7 @@ export class PageNavigation extends Block {
           props: {
             content: 'Профиль (редактирование)',
             events: {
-              click: () => goToPath('/settings', { props: { mode: 'edit' } })
+              click: (event) => goToPath('/settings', event, { props: { mode: 'edit' } })
             },
             attr: {
               class: 'pageNavigation-link',
@@ -63,7 +63,7 @@ export class PageNavigation extends Block {
           props: {
             content: 'Профиль (смена пароля)',
             events: {
-              click: () => goToPath('/settings', { props: { mode: 'password' } })
+              click: (event) => goToPath('/settings', event, { props: { mode: 'password' } })
             },
             attr: {
               class: 'pageNavigation-link',
@@ -76,7 +76,7 @@ export class PageNavigation extends Block {
           props: {
             content: 'Мессенджер',
             events: {
-              click: () => goToPath('/messenger')
+              click: (event) => goToPath('/messenger', event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -89,7 +89,7 @@ export class PageNavigation extends Block {
           props: {
             content: '404',
             events: {
-              click: () => goToPath('/404')
+              click: (event) => goToPath('/404', event)
             },
             attr: {
               class: 'pageNavigation-link',
@@ -102,7 +102,7 @@ export class PageNavigation extends Block {
           props: {
             content: '500',
             events: {
-              click: () => goToPath('/500')
+              click: (event) => goToPath('/500', event)
             },
             attr: {
               class: 'pageNavigation-link',

@@ -1,7 +1,8 @@
 import Block, { BlockProps } from './block.ts'
 import { Router } from './router.ts'
 
-export function goToPath(pathname: string, props?: BlockProps) {
+export function goToPath(pathname: string, event?: Event, props?: BlockProps) {
+  event?.preventDefault() // Отключаю дефолтные перезагрузки, если передали ссылку
   const router = new Router('root')
   router.go(pathname, props)
 }

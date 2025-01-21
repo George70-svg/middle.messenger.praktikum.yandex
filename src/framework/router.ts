@@ -39,7 +39,7 @@ export class Router {
     }
     this._onRoute(window.location.pathname)
   }
-  
+
   go(pathname: string, props?: BlockProps) {
     this.history?.pushState({}, '', pathname)
     this._onRoute(pathname, props)
@@ -48,10 +48,10 @@ export class Router {
   _onRoute(pathname: string, props?: BlockProps) {
     const route = this.getRoute(pathname)
     if (!route) {
-      if(this.getRoute('/404')) {
+      if (this.getRoute('/404')) {
         this._onRoute('/404')
       }
-      
+
       return
     }
 

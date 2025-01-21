@@ -8,7 +8,7 @@ import { goToPath } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
 
 export class ProfilePage extends Block {
-  constructor(blockProps: BlockProps = { props: { mode: 'view' } }) {
+  constructor(blockProps: BlockProps) {
     console.log('ProfilePage', blockProps)
     super({
       props: blockProps.props,
@@ -17,12 +17,38 @@ export class ProfilePage extends Block {
           props: {
             content: '<img src=\'svg/arrow.svg\' alt=\'arrow\'>',
             events: {
-              click: () => goToPath('/messenger')
+              click: (event) => goToPath('/messenger', event)
             },
             attr: {
               class: 'pageNavigation-link round-button back-button',
               href: '/messenger',
               dataPage: 'messengerPage'
+            }
+          }
+        }),
+        LinkToEditMode: new Link({
+          props: {
+            content: 'Изменить данные',
+            events: {
+              click: (event) => goToPath('/settings', event, { props: { mode: 'edit' } })
+            },
+            attr: {
+              class: 'change-info',
+              href: '/settings',
+              dataPage: 'profileEditPage'
+            }
+          }
+        }),
+        LinkToEditPasswordMode: new Link({
+          props: {
+            content: 'Изменить пароль',
+            events: {
+              click: (event) => goToPath('/settings', event, { props: { mode: 'password' } })
+            },
+            attr: {
+              class: 'change-password',
+              href: '/settings',
+              dataPage: 'profileEditPasswordPage'
             }
           }
         }),
@@ -152,8 +178,10 @@ export class ProfilePage extends Block {
   }
 
   override render(): string {
-    const isViewMode = this.props?.mode === 'view'
+    console.log('render', this.props)
+    const isEditMode = this.props?.mode === 'edit'
     const isPasswordMode = this.props?.mode === 'password'
+    const isViewMode = this.props?.mode === 'view' || (!isEditMode && !isPasswordMode) // Режим просмотра если не выбраны другие
 
     return `
       <main class='profile-page'>
@@ -191,8 +219,8 @@ export class ProfilePage extends Block {
             
             ${isViewMode ? `
               <div class='edit-container'>
-                <p class='change-info'>Изменить данные</p>
-                <p class='change-password'>Изменить пароль</p>
+                {{{ LinkToEditMode }}}
+                {{{ LinkToEditPasswordMode }}}
                 <p class='exit'>Выйти</p>
               </div>` : ''}
       

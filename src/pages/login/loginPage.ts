@@ -53,7 +53,7 @@ export class LoginPage extends Block {
           props: {
             content: 'Нет аккаунта?',
             events: {
-              click: () => goToPath('/sign-up')
+              click: (event) => goToPath('/sign-up', event)
             },
             attr: {
               class: 'link',

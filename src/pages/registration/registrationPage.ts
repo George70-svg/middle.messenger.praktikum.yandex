@@ -118,7 +118,7 @@ export class RegistrationPage extends Block {
           props: {
             content: 'Войти',
             events: {
-              click: () => goToPath('/')
+              click: (event) => goToPath('/', event)
             },
             attr: {
               class: 'link',

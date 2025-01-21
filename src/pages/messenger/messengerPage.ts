@@ -18,7 +18,7 @@ export class MessengerPage extends Block {
           props: {
             content: '<p>Профиль</p><img src=\'svg/simpleArrow.svg\' alt=\'simple arrow\'>',
             events: {
-              click: () => goToPath('/settings')
+              click: (event) => goToPath('/settings', event, { props: { mode: 'view' } })
             },
             attr: {
               class: 'pageNavigation-link go-to-profile',

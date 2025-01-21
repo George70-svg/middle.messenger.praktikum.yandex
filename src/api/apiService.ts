@@ -9,6 +9,8 @@ type Options = {
   method: METHOD
   data?: Record<string, unknown>
   headers?: Record<string, string>
+  withCredentials?: boolean,
+  responseType?: 'json' | 'text'
 }
 
 function queryStringify(data: Record<string, unknown>): string {
@@ -30,7 +32,7 @@ export class HTTPTransport {
   delete = (url: string, options: Options = { method: METHOD.DELETE }) => this.request(url, { ...options })
 
   request = (url: string, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
-    const { headers = {}, method, data } = options
+    const { headers = {}, method, data, withCredentials = true, responseType = 'json' } = options
 
     return new Promise((resolve, reject) => {
       if (!method) {
@@ -53,18 +55,42 @@ export class HTTPTransport {
         xhr.setRequestHeader(key, headers[key])
       })
 
-      xhr.onload = () => resolve(xhr)
+      xhr.onload = () => {
+        const status = xhr.status || 0
+        if (status >= 200 && status < 300) {
+          resolve(xhr.response)
+        } else {
+          const message = {
+            0: 'abort',
+            100: 'Information',
+            200: 'Ok',
+            300: 'Redirect failed',
+            400: 'Access error',
+            500: 'Internal server error'
+          }[Math.floor((status / 100) * 100)]
+
+          reject({
+            status,
+            reason: xhr.response.reason || message
+          })
+        }
+      }
+
+      xhr.withCredentials = withCredentials
+      xhr.responseType = responseType
+
       xhr.timeout = timeout
       xhr.onabort = reject
       xhr.onerror = reject
       xhr.ontimeout = reject
 
-      if (isGet) {
+      if (isGet || !data) {
         xhr.send()
-      } else if (data) {
-        xhr.send(JSON.stringify(data))
+      } else if (data instanceof FormData) {
+        xhr.send(data)
       } else {
-        xhr.send()
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.send(JSON.stringify(data))
       }
     })
   }
