@@ -101,7 +101,11 @@
         }
 
         .exit {
+          background-color: transparent;
           color: var(--red-color);
+          font-weight: bold;
+          text-transform: capitalize;
+          padding: 0;
         }
       }
 

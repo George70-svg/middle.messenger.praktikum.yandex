@@ -6,6 +6,7 @@ import { PageNavigation } from '../../components/pageNavigation/pageNavigation.t
 import { GlobalEventBus } from '../../framework/eventBus.ts'
 import { goToPath } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
+import { auth } from '../../api/auth/auth.ts'
 
 export class ProfilePage extends Block {
   constructor(blockProps: BlockProps) {
@@ -139,6 +140,17 @@ export class ProfilePage extends Block {
             placeholder: '•••••••••••'
           }
         }),
+        LogoutButton: new Button({
+          props: {
+            text: 'выйти',
+            events: {
+              click: () => this.handleLogout()
+            },
+            attr: {
+              class: 'exit'
+            }
+          }
+        }),
         SaveButton: new Button({
           props: {
             text: 'Сохранить',
@@ -153,6 +165,15 @@ export class ProfilePage extends Block {
         PageNavigation: new PageNavigation()
       }
     })
+  }
+
+  async handleLogout() {
+    try {
+      await auth.logout()
+      goToPath('/')
+    } catch (error) {
+      console.error('Logout error', error)
+    }
   }
 
   handleSave() {
@@ -221,7 +242,7 @@ export class ProfilePage extends Block {
               <div class='edit-container'>
                 {{{ LinkToEditMode }}}
                 {{{ LinkToEditPasswordMode }}}
-                <p class='exit'>Выйти</p>
+                {{{ LogoutButton }}}
               </div>` : ''}
       
             ${!isViewMode ? `

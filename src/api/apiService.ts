@@ -6,7 +6,7 @@ export enum METHOD {
 }
 
 type Options = {
-  method: METHOD
+  method?: METHOD
   data?: Record<string, unknown>
   headers?: Record<string, string>
   withCredentials?: boolean,
@@ -23,16 +23,16 @@ function queryStringify(data: Record<string, unknown>): string {
 }
 
 export class HTTPTransport {
-  get = (url: string, options: Options = { method: METHOD.GET }) => this.request(url, { ...options })
+  get = (url: string, options?: Options) => this.request(url, METHOD.GET, { ...options })
 
-  post = (url: string, options: Options = { method: METHOD.POST }) => this.request(url, { ...options })
+  post = (url: string, options?: Options) => this.request(url, METHOD.POST, { ...options })
 
-  put = (url: string, options: Options = { method: METHOD.PUT }) => this.request(url, { ...options })
+  put = (url: string, options?: Options) => this.request(url, METHOD.PUT, { ...options })
 
-  delete = (url: string, options: Options = { method: METHOD.DELETE }) => this.request(url, { ...options })
+  delete = (url: string, options?: Options) => this.request(url, METHOD.DELETE, { ...options })
 
-  request = (url: string, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
-    const { headers = {}, method, data, withCredentials = true, responseType = 'json' } = options
+  request = (url: string, method: METHOD, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
+    const { headers = {}, data, withCredentials = true, responseType = 'json' } = options
 
     return new Promise((resolve, reject) => {
       if (!method) {

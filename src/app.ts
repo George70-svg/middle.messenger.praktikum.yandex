@@ -17,7 +17,5 @@ export default class App {
       .use('/404', Page404)
       .use('/500', Page500)
       .start()
-
-    console.log('router', router)
   }
 }

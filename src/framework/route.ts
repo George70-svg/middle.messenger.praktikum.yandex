@@ -30,7 +30,6 @@ export class Route {
   }
 
   render(props?: BlockProps) {
-    console.log(props)
     if (!this._block) {
       this._block = new this._blockClass(props ?? {})
       if (this._block) {

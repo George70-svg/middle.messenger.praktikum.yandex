@@ -6,6 +6,7 @@ import { Button } from '../../components/button/button.ts'
 import { Input } from '../../components/input/input.ts'
 import { goToPath } from '../../framework/common.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
+import { auth } from '../../api/auth/auth.ts'
 
 export class LoginPage extends Block {
   constructor(blockProps?: BlockProps) {
@@ -67,12 +68,37 @@ export class LoginPage extends Block {
     })
   }
 
-  handleSubmit() {
-    const username = (this.children?.InputUsername as Input).getValue()
-    const password = (this.children?.InputPassword as Input).getValue()
+  isLoginLoading: boolean = false
 
+  async handleSubmit() {
+    // Отправляем событие на проверку всех типов, чтобы каждый причастный input прослушал его и мог вывести сообщение об ошибке
     GlobalEventBus.emit('formChange', ['login', 'password'])
-    console.log('Form Data:', { username, password })
+
+    const inputData = {
+      login: this.children?.InputUsername as Input,
+      password: this.children?.InputPassword as Input
+    }
+
+    const inputValidationNames: (keyof Omit<typeof inputData, 'confirmPassword'>)[] = ['login', 'password']
+
+    const isValidForm = inputValidationNames.every((field) => inputData[field].isValid(field))
+
+    if (isValidForm) {
+      const data = {
+        login: inputData.login.getValue() as string,
+        password: inputData.password.getValue() as string
+      }
+
+      try {
+        this.isLoginLoading = true
+        await auth.signIn(data)
+        goToPath('/messenger')
+      } catch (error) {
+        console.error('Registration error', error)
+      } finally {
+        this.isLoginLoading = false
+      }
+    }
   }
 
   render() {

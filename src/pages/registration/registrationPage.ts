@@ -6,6 +6,7 @@ import { Button } from '../../components/button/button.ts'
 import { Input } from '../../components/input/input.ts'
 import { goToPath } from '../../framework/common.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
+import { auth } from '../../api/auth/auth.ts'
 
 export class RegistrationPage extends Block {
   constructor(blockProps: BlockProps) {
@@ -132,17 +133,45 @@ export class RegistrationPage extends Block {
     })
   }
 
-  handleSubmit() {
-    const email = (this.children?.InputEmail as Input).getValue()
-    const username = (this.children?.InputUsername as Input).getValue()
-    const firstName = (this.children?.InputFirstName as Input).getValue()
-    const secondName = (this.children?.InputSecondName as Input).getValue()
-    const phone = (this.children?.InputPhone as Input).getValue()
-    const password = (this.children?.InputPassword as Input).getValue()
-    const confirmPassword = (this.children?.InputConfirmPassword as Input).getValue()
+  isRegistrationLoading: boolean = false
 
+  async handleSubmit() {
+    // Отправляем событие на проверку всех типов, чтобы каждый причастный input прослушал его и мог вывести сообщение об ошибке
     GlobalEventBus.emit('formChange', ['email', 'first_name', 'phone', 'second_name', 'login', 'password'])
-    console.log('Form Data:', { email, username, firstName, secondName, phone, password, confirmPassword })
+
+    const inputData = {
+      email: this.children?.InputEmail as Input,
+      login: this.children?.InputUsername as Input,
+      first_name: this.children?.InputFirstName as Input,
+      second_name: this.children?.InputSecondName as Input,
+      phone: this.children?.InputPhone as Input,
+      password: this.children?.InputPassword as Input,
+      confirmPassword: this.children?.InputConfirmPassword as Input
+    }
+
+    const inputValidationNames: (keyof Omit<typeof inputData, 'confirmPassword'>)[] = ['email', 'login', 'first_name', 'phone', 'second_name', 'password']
+
+    const isValidForm = inputValidationNames.every((field) => inputData[field].isValid(field))
+    if (isValidForm) {
+      const data = {
+        email: inputData.email.getValue() as string,
+        login: inputData.login.getValue() as string,
+        first_name: inputData.first_name.getValue() as string,
+        second_name: inputData.second_name.getValue() as string,
+        phone: inputData.phone.getValue() as string,
+        password: inputData.password.getValue() as string
+      }
+
+      try {
+        this.isRegistrationLoading = true
+        await auth.signUp(data)
+        goToPath('/messenger')
+      } catch (error) {
+        console.error('Registration error', error)
+      } finally {
+        this.isRegistrationLoading = false
+      }
+    }
   }
 
   render() {
