@@ -2,7 +2,6 @@ import './profilePage.scss'
 import Block, { BlockProps } from '../../framework/block.ts'
 import { Input } from '../../components/input/input.ts'
 import { Button } from '../../components/button/button.ts'
-import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
 import { goToPath } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
@@ -10,7 +9,6 @@ import { auth } from '../../api/auth/auth.ts'
 
 export class ProfilePage extends Block {
   constructor(blockProps: BlockProps) {
-    console.log('ProfilePage', blockProps)
     super({
       props: blockProps.props,
       children: {
@@ -161,8 +159,7 @@ export class ProfilePage extends Block {
               class: 'button'
             }
           }
-        }),
-        PageNavigation: new PageNavigation()
+        })
       }
     })
   }
@@ -170,9 +167,10 @@ export class ProfilePage extends Block {
   async handleLogout() {
     try {
       await auth.logout()
-      goToPath('/')
     } catch (error) {
       console.error('Logout error', error)
+    } finally {
+      goToPath('/')
     }
   }
 
@@ -199,7 +197,6 @@ export class ProfilePage extends Block {
   }
 
   override render(): string {
-    console.log('render', this.props)
     const isEditMode = this.props?.mode === 'edit'
     const isPasswordMode = this.props?.mode === 'password'
     const isViewMode = this.props?.mode === 'view' || (!isEditMode && !isPasswordMode) // Режим просмотра если не выбраны другие
@@ -251,8 +248,6 @@ export class ProfilePage extends Block {
               </div>` : ''}
           </div>
         </section>
-      
-        {{{ PageNavigation }}}
       </main>
     `
   }

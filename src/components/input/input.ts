@@ -48,7 +48,6 @@ export class Input extends Block {
 
   isValid(name: InputName) {
     const currentValue = this.getValue() || ''
-    console.log(name, currentValue)
     return !inputValidation(name, currentValue).status
   }
 

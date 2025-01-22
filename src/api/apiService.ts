@@ -23,6 +23,8 @@ function queryStringify(data: Record<string, unknown>): string {
 }
 
 export class HTTPTransport {
+  baseURL: string = 'https://ya-praktikum.tech/api/v2'
+
   get = (url: string, options?: Options) => this.request(url, METHOD.GET, { ...options })
 
   post = (url: string, options?: Options) => this.request(url, METHOD.POST, { ...options })

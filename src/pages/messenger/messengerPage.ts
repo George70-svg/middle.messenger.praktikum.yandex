@@ -1,6 +1,5 @@
 import './messengerPage.scss'
 import Block from '../../framework/block.ts'
-import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { Input } from '../../components/input/input.ts'
 import { chatListMock } from '../../mock/chatList.ts'
 import { ChatListItem } from '../../components/chatLstItem/chatListItem.ts'
@@ -52,8 +51,7 @@ export class MessengerPage extends Block {
               class: 'field-container no-label'
             }
           }
-        }),
-        PageNavigation: new PageNavigation()
+        })
       },
       lists: {
         ChatList: chatListMock.map((item) => new ChatListItem({
@@ -110,8 +108,6 @@ export class MessengerPage extends Block {
             </div>
           </footer>
         </section>
-      
-        {{{ PageNavigation }}}
       </main>
     `
   }

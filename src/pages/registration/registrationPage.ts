@@ -1,7 +1,6 @@
 import './registrationPage.scss'
 import Block, { BlockProps } from '../../framework/block.ts'
 import { Link } from '../../components/link/link.ts'
-import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { Button } from '../../components/button/button.ts'
 import { Input } from '../../components/input/input.ts'
 import { goToPath } from '../../framework/common.ts'
@@ -127,8 +126,7 @@ export class RegistrationPage extends Block {
               dataPage: 'loginPage'
             }
           }
-        }),
-        PageNavigation: new PageNavigation()
+        })
       }
     })
   }
@@ -193,8 +191,6 @@ export class RegistrationPage extends Block {
           {{{ SubmitButton }}}
           {{{ ToLogin }}}
         </section>
-      
-        {{{ PageNavigation }}}
       </main>
     `
   }

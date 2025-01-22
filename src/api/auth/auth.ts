@@ -1,19 +1,25 @@
 import { SignInRequest, SignUpRequest } from './type.ts'
 import { HTTPTransport } from '../apiService.ts'
 
-const path = 'https://ya-praktikum.tech/api/v2/auth'
+class Auth extends HTTPTransport {
+  pathName: string = '/auth'
 
-export const auth = {
+  path: string = this.baseURL + this.pathName
+
   signUp(data: SignUpRequest) {
-    return new HTTPTransport().post(`${path}/signup`, { data })
-  },
+    return this.post(`${this.path}/signup`, { data })
+  }
+
   signIn(data: SignInRequest) {
-    return new HTTPTransport().post(`${path}/signin`, { data })
-  },
+    return this.post(`${this.path}/signin`, { data })
+  }
+
   logout() {
-    return new HTTPTransport().post(`${path}/logout`)
+    return this.post(`${this.path}/logout`)
   }
 }
+
+export const auth = new Auth()
 
 /*
 AntonTest@mail.com
