@@ -140,7 +140,7 @@ export default class Block {
   }
 
   _addEvents(): void {
-    const { events = {} } = this.props || {} //Props будут содержать отдельный подобъект для events
+    const { events = {} } = this.props || {} // Props будут содержать отдельный подобъект для events
 
     Object.keys(events).forEach((eventName) => {
       if (typeof events[eventName] !== 'function') {

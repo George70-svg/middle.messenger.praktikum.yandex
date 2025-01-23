@@ -8,6 +8,8 @@ import { MessageItem } from '../../components/messageItem/messageItem.ts'
 import { shortenText } from '../../utils/common.ts'
 import { goToPath } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
+import { UserMenu } from './components/userMenu/userMenu.ts'
+import { FileMenu } from './components/fileMenu/fileMenu.ts'
 
 export class MessengerPage extends Block {
   constructor() {
@@ -15,7 +17,7 @@ export class MessengerPage extends Block {
       children: {
         LinkToProfile: new Link({
           props: {
-            content: '<p>Профиль</p><img src=\'svg/simpleArrow.svg\' alt=\'simple arrow\'>',
+            content: '<p data-tooltip="Взяли текст из data-tooltip">Профиль</p><img src=\'svg/simpleArrow.svg\' alt=\'simple arrow\'>',
             events: {
               click: (event) => goToPath('/settings', event, { props: { mode: 'view' } })
             },
@@ -51,7 +53,9 @@ export class MessengerPage extends Block {
               class: 'field-container no-label'
             }
           }
-        })
+        }),
+        UserMenu: new UserMenu(),
+        FileMenu: new FileMenu()
       },
       lists: {
         ChatList: chatListMock.map((item) => new ChatListItem({
@@ -91,9 +95,7 @@ export class MessengerPage extends Block {
           <header class='chat-header'>
             <div class='avatar'></div>
             <p class='name'>Вадим</p>
-            <div class='menu'>
-              <img src='svg/doteMenu.svg' alt='menu'>
-            </div>
+            {{{ UserMenu }}}
           </header>
       
           <div class='chat-body'>
@@ -101,7 +103,7 @@ export class MessengerPage extends Block {
           </div>
       
           <footer class='chat-footer'>
-            <img class='file' src='svg/file.svg' alt='file'>
+            {{{ FileMenu }}}
             {{{ InputMessage }}}
             <div class='round-button back-button'>
               <img src='svg/arrow.svg' alt='arrow image'>
