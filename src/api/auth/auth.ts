@@ -1,21 +1,19 @@
 import { SignInRequest, SignUpRequest } from './type.ts'
 import { HTTPTransport } from '../apiService.ts'
 
-class Auth extends HTTPTransport {
-  pathName: string = '/auth'
+const authAPIInstance = new HTTPTransport('/api/v2/auth')
 
-  path: string = this.baseURL + this.pathName
-
+class Auth {
   signUp(data: SignUpRequest) {
-    return this.post(`${this.path}/signup`, { data })
+    return authAPIInstance.post('/signup', { data })
   }
 
   signIn(data: SignInRequest) {
-    return this.post(`${this.path}/signin`, { data })
+    return authAPIInstance.post('/signin', { data })
   }
 
   logout() {
-    return this.post(`${this.path}/logout`)
+    return authAPIInstance.post('/logout')
   }
 }
 

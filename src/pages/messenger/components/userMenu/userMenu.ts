@@ -1,6 +1,7 @@
 import './userMenu.scss'
 import { Button } from '../../../../components/button/button.ts'
 import Block from '../../../../framework/block.ts'
+import { GlobalEventBus } from '../../../../framework/eventBus.ts'
 
 export class UserMenu extends Block {
   isShowContent: boolean = false
@@ -41,7 +42,6 @@ export class UserMenu extends Block {
 
   dropdownToggle() {
     this.isShowContent = !this.isShowContent
-    console.log('dropdownToggle', this.isShowContent)
     this.setProps({})
   }
 
@@ -50,11 +50,11 @@ export class UserMenu extends Block {
   }
 
   handleAddUser() {
-    console.log('Add')
+    GlobalEventBus.emit('openAddUserModal')
   }
 
   handleRemoveUser() {
-    console.log('Remove')
+    GlobalEventBus.emit('openRemoveUserModal')
   }
 
   override render(): string {

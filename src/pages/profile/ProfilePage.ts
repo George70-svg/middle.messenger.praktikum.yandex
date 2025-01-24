@@ -159,6 +159,17 @@ export class ProfilePage extends Block {
               class: 'button'
             }
           }
+        }),
+        ChangeAvatarButton: new Button({
+          props: {
+            text: '<img src=\'svg/image.svg\' alt=\'default\'>',
+            events: {
+              click: () => this.handleChangeAvatar()
+            },
+            attr: {
+              class: 'avatar'
+            }
+          }
         })
       }
     })
@@ -196,6 +207,10 @@ export class ProfilePage extends Block {
     }
   }
 
+  handleChangeAvatar() {
+    GlobalEventBus.emit('openChangeAvatarModal')
+  }
+
   override render(): string {
     const isEditMode = this.props?.mode === 'edit'
     const isPasswordMode = this.props?.mode === 'password'
@@ -210,9 +225,7 @@ export class ProfilePage extends Block {
         <section class='profile-container'>
           <div class='profile'>
             <div class='avatar-container'>
-              <div class='avatar'>
-                <img src='svg/image.svg' alt='default'>
-              </div>
+              {{{ ChangeAvatarButton }}}
             </div>
 
             ${isViewMode ? `

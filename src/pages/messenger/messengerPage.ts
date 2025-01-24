@@ -36,6 +36,7 @@ export class MessengerPage extends Block {
             class: 'search-chat',
             name: 'search-chat',
             placeholder: 'Поиск',
+            hideHint: true,
             attr: {
               class: 'field-container no-label'
             }
@@ -49,6 +50,7 @@ export class MessengerPage extends Block {
             class: 'message',
             name: 'message',
             placeholder: 'Сообщение',
+            hideHint: true,
             attr: {
               class: 'field-container no-label'
             }

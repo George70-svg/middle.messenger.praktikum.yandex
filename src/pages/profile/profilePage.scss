@@ -36,6 +36,28 @@
           height: 130px;
           background-color: var(--secondary-grey-color);
           border-radius: 50%;
+          cursor: pointer;
+
+          &::after {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 130px;
+            height: 130px;
+            content: 'Поменять аватар';
+            position: absolute;
+            color: white;
+            font-size: 13px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s;
+          }
+
+          &:hover::after {
+            opacity: 1;
+            transition: opacity 0.3s;
+          }
         }
       }
 

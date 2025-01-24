@@ -23,7 +23,11 @@ function queryStringify(data: Record<string, unknown>): string {
 }
 
 export class HTTPTransport {
-  baseURL: string = 'https://ya-praktikum.tech/api/v2'
+  baseURL: string = 'https://ya-praktikum.tech'
+
+  constructor(path: string) {
+    this.baseURL = `${this.baseURL}${path}`
+  }
 
   get = (url: string, options?: Options) => this.request(url, METHOD.GET, { ...options })
 
@@ -46,7 +50,7 @@ export class HTTPTransport {
 
       const xhr = new XMLHttpRequest()
 
-      let requestUrl = url
+      let requestUrl = this.baseURL + url
       if (isGet && data) {
         requestUrl += queryStringify(data)
       }

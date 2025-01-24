@@ -11,7 +11,9 @@ export class Input extends Block {
       props: {
         ...blockProps.props,
         events: {
-          blur: () => this.handleBlur()
+          focus: () => this.handleFocus(),
+          blur: () => this.handleBlur(),
+          input: () => this.handleInput()
         }
       }
     })
@@ -36,6 +38,45 @@ export class Input extends Block {
     const currentValue = this.getValue() || ''
     this.validationMessage = inputValidation(this.props?.name as InputName, currentValue)
     this.updateValidation()
+    this.showHintIfNeeded()
+  }
+
+  handleFocus() {
+    this.showHintIfNeeded()
+  }
+
+  handleInput() {
+    this.showHintIfNeeded()
+  }
+
+  showHintIfNeeded() {
+    if (this.props?.hideHint) {
+      return
+    }
+
+    const hintContainer = this.element?.querySelector('.hint-container') as HTMLElement
+    const value = this.getValue()?.trim()
+    if (!hintContainer) return
+
+    if (value) {
+      this.addHint()
+    } else {
+      this.removeHint()
+    }
+  }
+
+  addHint() {
+    const hintContainer = this.element?.querySelector('.hint-container') as HTMLElement
+    if (hintContainer) {
+      hintContainer.style.display = 'block'
+    }
+  }
+
+  removeHint() {
+    const hintContainer = this.element?.querySelector('.hint-container') as HTMLElement
+    if (hintContainer) {
+      hintContainer.style.display = 'none'
+    }
   }
 
   checkValidation(args: InputName[]) {
@@ -78,10 +119,12 @@ export class Input extends Block {
   }
 
   override render() {
+    console.log('render')
     const isDisabled = this.props?.disabled
 
     return `
       <div class='field-container'>
+        <div class='hint-container'>{{placeholder}}</div>
         <div class='input-container'>
           <label for='{{id}}'>{{labelText}}</label>
           <input
