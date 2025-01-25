@@ -1,18 +1,20 @@
 import './messengerPage.scss'
-import Block from '../../framework/block.ts'
+import Block, { BlockProps } from '../../framework/block.ts'
 import { Input } from '../../components/input/input.ts'
-import { chatListMock } from '../../mock/chatList.ts'
-import { ChatListItem } from '../../components/chatLstItem/chatListItem.ts'
 import { messageListMock } from '../../mock/messageList.ts'
 import { MessageItem } from '../../components/messageItem/messageItem.ts'
-import { shortenText } from '../../utils/common.ts'
 import { goToPath } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
 import { UserMenu } from './components/userMenu/userMenu.ts'
 import { FileMenu } from './components/fileMenu/fileMenu.ts'
+import { Button } from '../../components/button/button.ts'
+import { GlobalEventBus } from '../../framework/eventBus.ts'
+import { chatsController } from '../../api/chats/chatsController.ts'
+import { withChats } from '../../store/utils.ts'
+import { createChatList } from './utils.ts'
 
-export class MessengerPage extends Block {
-  constructor() {
+class MessengerPage extends Block {
+  constructor(blockProps: BlockProps) {
     super({
       children: {
         LinkToProfile: new Link({
@@ -26,6 +28,13 @@ export class MessengerPage extends Block {
               href: '/settings',
               dataPage: 'profileViewPage'
             }
+          }
+        }),
+        AddChatButton: new Button({
+          props: {
+            text: 'Создать чат',
+            events: { click: () => this.handleAddChat() },
+            class: 'add-chat-button'
           }
         }),
         InputSearch: new Input({
@@ -60,14 +69,7 @@ export class MessengerPage extends Block {
         FileMenu: new FileMenu()
       },
       lists: {
-        ChatList: chatListMock.map((item) => new ChatListItem({
-          props: {
-            name: item.name,
-            date: item.date,
-            lastMessage: shortenText(item.lastMessage, 50),
-            unreadMessageNumber: item.unreadMessageNumber
-          }
-        })),
+        ChatList: createChatList(blockProps.props?.chats ?? []),
         MessageList: messageListMock.map((item) => new MessageItem({
           props: {
             class: item.class,
@@ -77,6 +79,24 @@ export class MessengerPage extends Block {
         }))
       }
     })
+
+    // Получаю список всех чатов
+    chatsController.getChats({})
+
+    /* store.on(StoreEvents.Update, () => {
+      // Получаем актуальные чаты
+      const newChats = store.getState().chats ?? []
+
+      // Пересоздаём массив компонентов для списка и передаём в Block
+      this.setLists({
+        ChatList: createChatList(newChats)
+      })
+    }) */
+    console.log('RERENDER MessengerPage')
+  }
+
+  handleAddChat() {
+    GlobalEventBus.emit('openAddChatModal')
   }
 
   override render(): string {
@@ -84,7 +104,10 @@ export class MessengerPage extends Block {
       <main class='messenger-page'>
         <section class='chat-list-container'>
           <header class='chat-list-header'>
-            {{{ LinkToProfile }}}
+            <div class="actions-container">
+              {{{ AddChatButton }}}
+              {{{ LinkToProfile }}}
+            </div>
             {{{ InputSearch }}}
           </header>
       
@@ -116,3 +139,5 @@ export class MessengerPage extends Block {
     `
   }
 }
+
+export default withChats(MessengerPage)

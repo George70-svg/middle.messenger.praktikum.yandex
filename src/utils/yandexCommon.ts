@@ -1,4 +1,4 @@
-import { PlainObject, StringIndexed } from './types.ts'
+import { PlainObject, StringIndexed } from './types/types.ts'
 
 export function trimYandex(string: string, chars: string) {
   const str = ` ${string} `

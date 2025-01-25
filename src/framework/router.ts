@@ -1,5 +1,5 @@
 import { Route } from './route.ts'
-import { BlockClass } from './types.ts'
+import { BlockClass } from './types/types.ts'
 import { BlockProps } from './block.ts'
 
 export class Router {
@@ -53,10 +53,6 @@ export class Router {
       }
 
       return
-    }
-
-    if (this._currentRoute) {
-      this._currentRoute.leave()
     }
 
     route.render(props)

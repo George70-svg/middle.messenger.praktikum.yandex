@@ -5,7 +5,7 @@ import { Button } from '../../components/button/button.ts'
 import { Input } from '../../components/input/input.ts'
 import { goToPath } from '../../framework/common.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
-import { auth } from '../../api/auth/auth.ts'
+import { authController } from '../../api/auth/authController.ts'
 
 export class RegistrationPage extends Block {
   constructor(blockProps: BlockProps) {
@@ -162,7 +162,7 @@ export class RegistrationPage extends Block {
 
       try {
         this.isRegistrationLoading = true
-        await auth.signUp(data)
+        await authController.signUp(data)
         goToPath('/messenger')
       } catch (error) {
         console.error('Registration error', error)

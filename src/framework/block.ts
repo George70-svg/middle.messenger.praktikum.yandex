@@ -67,6 +67,7 @@ export default class Block {
   }
 
   _componentDidUpdate(): void {
+    console.log('_componentDidUpdate')
     this._render()
   }
 
@@ -214,10 +215,12 @@ export default class Block {
   }
 
   setProps(newProps: PropsProps): void {
+    console.log('setProps', newProps)
     if (newProps) {
       const oldProps = { ...this.props }
+      console.log('oldProps', this.props)
       Object.assign(this.props || {}, newProps)
-
+      console.log('newProps', this.props)
       this.eventBus().emit(this.EVENTS.FLOW_CDU, oldProps, this.props)
     }
   }
@@ -225,19 +228,8 @@ export default class Block {
   setLists(list: ListsProps): void {
     if (list) {
       Object.assign(this.lists || {}, list)
+      this.eventBus().emit(this.EVENTS.FLOW_CDU)
     }
-  }
-
-  show() {
-    console.log('Block show')
-    /* const content = this.getContent()
-    content.style.display = 'block' */
-  }
-
-  hide() {
-    console.log('Block hide')
-    /* const content = this.getContent()
-    content.style.display = 'none' */
   }
 
   get element(): HTMLElement | null {

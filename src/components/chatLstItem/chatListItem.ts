@@ -17,13 +17,13 @@ export class ChatListItem extends Block {
       
         <div class='chat-container'>
           <div class='chat-info'>
-            <div class='name'>{{name}}</div>
+            <div class='title'>{{title}}</div>
             <div class='date'>{{date}}</div>
           </div>
       
           <div class='chat-text'>
-            <div class='chat-message' id='chat-message'>{{lastMessage}}</div>
-            <div class='unread-message'>{{unreadMessageNumber}}</div>
+            <div class='chat-message' id='chat-message'>{{last_message}}</div>
+            <div class='unread-message'>{{unread_count}}</div>
           </div>
         </div>
       </article>

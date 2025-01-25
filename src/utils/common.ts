@@ -1,4 +1,4 @@
-import { PlainObject, StringIndexed, StringOrSymbolIndexed } from './types.ts'
+import { PlainObject, StringIndexed, StringOrSymbolIndexed } from './types/types.ts'
 
 // Метод сокращает текс до определённого количества символов
 export const shortenText = (text: string, length: number) => {
@@ -78,26 +78,16 @@ export function trim(value: string, chars = ' ') {
 
 // Метод объединяет два объекта с сохранением их уникальных ключей
 export function merge(lhs: StringIndexed, rhs: StringIndexed): StringIndexed {
-  if (!isObject(rhs) && !isObject(lhs)) {
-    throw new Error('Is not an objects')
-  } else if (isObject(rhs) && !isObject(lhs)) {
-    return rhs
-  } else if (!isObject(rhs) && isObject(lhs)) {
-    return lhs
+  if (!isObject(lhs) || !isObject(rhs)) {
+    throw new Error('Both arguments must be objects')
   }
 
-  const target: Record<string, unknown> = {}
-
-  for (const key in lhs) {
-    if (Object.prototype.hasOwnProperty.call(rhs, key)) {
-      target[key] = merge(lhs[key] as StringIndexed, rhs[key] as StringIndexed)
-    } else {
-      target[key] = lhs[key]
-    }
-  }
+  const target: Record<string, unknown> = { ...lhs }
 
   for (const key in rhs) {
-    if (!Object.prototype.hasOwnProperty.call(lhs, key)) {
+    if (isObject(lhs[key]) && isObject(rhs[key])) {
+      target[key] = merge(lhs[key] as StringIndexed, rhs[key] as StringIndexed)
+    } else {
       target[key] = rhs[key]
     }
   }

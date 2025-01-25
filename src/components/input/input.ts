@@ -119,7 +119,6 @@ export class Input extends Block {
   }
 
   override render() {
-    console.log('render')
     const isDisabled = this.props?.disabled
 
     return `

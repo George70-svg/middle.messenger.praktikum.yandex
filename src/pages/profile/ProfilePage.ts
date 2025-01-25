@@ -5,7 +5,7 @@ import { Button } from '../../components/button/button.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
 import { goToPath } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
-import { auth } from '../../api/auth/auth.ts'
+import { authController } from '../../api/auth/authController.ts'
 
 export class ProfilePage extends Block {
   constructor(blockProps: BlockProps) {
@@ -177,7 +177,7 @@ export class ProfilePage extends Block {
 
   async handleLogout() {
     try {
-      await auth.logout()
+      await authController.logout()
     } catch (error) {
       console.error('Logout error', error)
     } finally {

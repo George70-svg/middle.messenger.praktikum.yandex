@@ -5,9 +5,10 @@ import { Button } from '../../components/button/button.ts'
 import { Input } from '../../components/input/input.ts'
 import { goToPath } from '../../framework/common.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
-import { auth } from '../../api/auth/auth.ts'
+import { authController } from '../../api/auth/authController.ts'
+import { withUser } from '../../store/utils.ts'
 
-export class LoginPage extends Block {
+class LoginPage extends Block {
   constructor(blockProps?: BlockProps) {
     super({
       props: blockProps,
@@ -89,7 +90,7 @@ export class LoginPage extends Block {
 
       try {
         this.isLoginLoading = true
-        await auth.signIn(data)
+        await authController.signIn(data)
         goToPath('/messenger')
       } catch (error) {
         console.error('Registration error', error)
@@ -117,3 +118,5 @@ export class LoginPage extends Block {
     `
   }
 }
+
+export default withUser(LoginPage)

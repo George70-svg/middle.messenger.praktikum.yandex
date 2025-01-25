@@ -46,7 +46,7 @@ export class FileMenu extends Block {
     return `
       <div class='file-dropdown'>
         <div class='element'>
-          <img class='file' src='svg/doteMenu.svg' alt='file'>
+          <img class='file' src='svg/file.svg' alt='file'>
         </div>
         
         ${this.isShowContent ? `<div class='content'>

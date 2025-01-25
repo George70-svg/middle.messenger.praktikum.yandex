@@ -1,7 +1,7 @@
 import Block, { BlockProps } from './block.ts'
 import { render } from './common.ts'
 import { isEqual } from '../utils/common.ts'
-import { BlockClass } from './types.ts'
+import { BlockClass } from './types/types.ts'
 
 export class Route {
   _pathname: string | null = null
@@ -19,12 +19,6 @@ export class Route {
     this._props = props
   }
 
-  leave() {
-    if (this._block) {
-      this._block.hide()
-    }
-  }
-
   match(pathname: string): boolean {
     return isEqual(pathname, this._pathname)
   }
@@ -39,7 +33,6 @@ export class Route {
       return
     }
 
-    this._block.show()
     render(this._props.rootQuery, new this._blockClass(props ?? {}))
   }
 }
