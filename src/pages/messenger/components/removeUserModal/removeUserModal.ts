@@ -2,8 +2,15 @@ import { GlobalEventBus } from '../../../../framework/eventBus.ts'
 import Block, { BlockProps } from '../../../../framework/block.ts'
 import { Input } from '../../../../components/input/input.ts'
 import { Button } from '../../../../components/button/button.ts'
+import { withSelectedChats } from '../../../../store/utils.ts'
+import { userController } from '../../../../api/user/userController.ts'
+import { SearchUserResponse } from '../../../../api/user/type.ts'
+import { ChatResponse } from '../../../../api/chats/types.ts'
+import { chatsController } from '../../../../api/chats/chatsController.ts'
 
 class RemoveUserModal extends Block {
+  foundUsers: SearchUserResponse[] = []
+
   constructor(props?: BlockProps) {
     super({
       ...props,
@@ -23,9 +30,8 @@ class RemoveUserModal extends Block {
             class: 'username field',
             name: 'find-username',
             placeholder: 'Логин',
-            attr: {
-              class: 'field-container no-label'
-            }
+            events: { input: (event) => this.handleSearchLogin(event) },
+            attr: { class: 'field-container no-label' }
           }
         }),
         RemoveUserButton: new Button({
@@ -54,8 +60,30 @@ class RemoveUserModal extends Block {
     this.getContent().remove()
   }
 
+  handleSearchLogin(event: Event): void {
+    (this.children?.InputUsername as Input).showHintIfNeeded()
+
+    const target = event.target as HTMLInputElement
+    const value = target?.value || ''
+
+    userController.searchUser({ login: value })
+      .then((users) => {
+        this.foundUsers = users
+      })
+  }
+
   handleRemove() {
-    console.log('handleRemove')
+    const data = {
+      users: [this.foundUsers.map((user) => user.id)[0]], // Просто беру первого найденного пользователя
+      chatId: (this.props?.selectedChat as ChatResponse).id
+    }
+
+    if (data && data.users[0] && data.chatId) {
+      chatsController.deleteUserFromChat(data)
+        .then(() => {
+          this.close()
+        })
+    }
   }
 
   override shouldDelegateEvent(): boolean {
@@ -89,5 +117,6 @@ class RemoveUserModal extends Block {
   }
 }
 
-export const removeUserModal = new RemoveUserModal()
+const RemoveUserModalPage = withSelectedChats(RemoveUserModal)
+export const removeUserModal = new RemoveUserModalPage({})
 removeUserModal.dispatchComponentDidMount()

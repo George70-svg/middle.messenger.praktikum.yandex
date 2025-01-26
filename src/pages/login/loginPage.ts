@@ -67,9 +67,7 @@ class LoginPage extends Block {
     })
   }
 
-  isLoginLoading: boolean = false
-
-  async handleSubmit() {
+  handleSubmit() {
     // Отправляем событие на проверку всех типов, чтобы каждый причастный input прослушал его и мог вывести сообщение об ошибке
     GlobalEventBus.emit('formChange', ['login', 'password'])
 
@@ -88,15 +86,10 @@ class LoginPage extends Block {
         password: inputData.password.getValue() as string
       }
 
-      try {
-        this.isLoginLoading = true
-        await authController.signIn(data)
-        goToPath('/messenger')
-      } catch (error) {
-        console.error('Registration error', error)
-      } finally {
-        this.isLoginLoading = false
-      }
+      authController.signIn(data)
+        .then(() => {
+          goToPath('/messenger')
+        })
     }
   }
 

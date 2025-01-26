@@ -1,20 +1,20 @@
 import './messengerPage.scss'
-import Block, { BlockProps } from '../../framework/block.ts'
+import Block, { PropsProps } from '../../framework/block.ts'
 import { Input } from '../../components/input/input.ts'
-import { messageListMock } from '../../mock/messageList.ts'
-import { MessageItem } from '../../components/messageItem/messageItem.ts'
 import { goToPath } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
-import { UserMenu } from './components/userMenu/userMenu.ts'
+import UserMenu from './components/userMenu/userMenu.ts'
 import { FileMenu } from './components/fileMenu/fileMenu.ts'
 import { Button } from '../../components/button/button.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
 import { chatsController } from '../../api/chats/chatsController.ts'
 import { withChats } from '../../store/utils.ts'
 import { createChatList } from './utils.ts'
+import { isEqual } from '../../utils/common.ts'
+import { ChatResponse, ChatResponseList } from '../../api/chats/types.ts'
 
 class MessengerPage extends Block {
-  constructor(blockProps: BlockProps) {
+  constructor() {
     super({
       children: {
         LinkToProfile: new Link({
@@ -65,34 +65,34 @@ class MessengerPage extends Block {
             }
           }
         }),
-        UserMenu: new UserMenu(),
+        UserMenu: new UserMenu({}),
         FileMenu: new FileMenu()
       },
       lists: {
-        ChatList: createChatList(blockProps.props?.chats ?? []),
-        MessageList: messageListMock.map((item) => new MessageItem({
+        ChatList: [],
+        MessageList: []
+        /* MessageList: messageListMock.map((item) => new MessageItem({
           props: {
             class: item.class,
             text: item.text,
             time: item.time
           }
-        }))
+        })) */
       }
     })
 
     // Получаю список всех чатов
     chatsController.getChats({})
+  }
 
-    /* store.on(StoreEvents.Update, () => {
-      // Получаем актуальные чаты
-      const newChats = store.getState().chats ?? []
-
-      // Пересоздаём массив компонентов для списка и передаём в Block
+  _componentDidUpdate(oldProps?: PropsProps, newProps?: PropsProps): void {
+    if (!isEqual(oldProps?.chats, newProps?.chats)) {
       this.setLists({
-        ChatList: createChatList(newChats)
+        ChatList: createChatList(newProps?.chats as ChatResponseList ?? [])
       })
-    }) */
-    console.log('RERENDER MessengerPage')
+    }
+
+    super._componentDidUpdate?.(oldProps ?? {}, newProps ?? {})
   }
 
   handleAddChat() {
@@ -100,6 +100,8 @@ class MessengerPage extends Block {
   }
 
   override render(): string {
+    const selectedChat = this.props?.selectedChat as ChatResponse
+
     return `
       <main class='messenger-page'>
         <section class='chat-list-container'>
@@ -118,9 +120,9 @@ class MessengerPage extends Block {
       
         <section class='messages-container'>
           <header class='chat-header'>
-            <div class='avatar'></div>
-            <p class='name'>Вадим</p>
-            {{{ UserMenu }}}
+            ${selectedChat?.title ? `<div class='avatar'></div>
+            <p class='name'>${selectedChat?.title}</p>
+            {{{ UserMenu }}}` : ''}
           </header>
       
           <div class='chat-body'>

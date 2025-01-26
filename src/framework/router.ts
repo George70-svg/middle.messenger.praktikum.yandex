@@ -1,6 +1,7 @@
 import { Route } from './route.ts'
 import { BlockClass } from './types/types.ts'
 import { BlockProps } from './block.ts'
+import { SearchUserResponse } from '../api/user/type.ts'
 
 export class Router {
   static __instance: Router
@@ -37,7 +38,18 @@ export class Router {
       const target = event.target as Window
       this._onRoute(target.location.pathname)
     }
-    this._onRoute(window.location.pathname)
+
+    console.log(localStorage.getItem('user'))
+    const user: SearchUserResponse | null = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') ?? '') : null
+
+    if (user && user.id && window.location.pathname === '/') {
+      console.log('IF')
+      this.go('/messenger')
+    } else if (!user || !user.id) {
+      this.go('/')
+    } else {
+      this._onRoute(window.location.pathname)
+    }
   }
 
   go(pathname: string, props?: BlockProps) {

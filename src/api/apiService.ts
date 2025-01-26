@@ -37,7 +37,7 @@ export class HTTPTransport {
 
   delete = (url: string, options?: Options) => this.request(url, METHOD.DELETE, { ...options })
 
-  request = (url: string, method: METHOD, options: Options, timeout = 5000): Promise<XMLHttpRequest> => {
+  request = (url: string, method: METHOD, options: Options, timeout = 50000): Promise<unknown> => {
     const { headers = {}, data, withCredentials = true, responseType = 'json' } = options
 
     return new Promise((resolve, reject) => {

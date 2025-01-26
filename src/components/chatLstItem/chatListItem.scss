@@ -4,6 +4,8 @@
   width: 100%;
   padding: 0.5rem;
   border-top: 1px solid var(--secondary-grey-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
 
   .avatar-container {
     .avatar {
@@ -60,5 +62,18 @@
         border-radius: 50%;
       }
     }
+  }
+
+  &:hover {
+    background-color: var(--blue-light-hover-color);
+    transition: background-color 0.3s;
+  }
+}
+
+.active {
+  background-color: var(--blue-light-color);
+
+  &:hover {
+    background-color: var(--blue-light-color);
   }
 }

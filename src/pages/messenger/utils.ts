@@ -1,14 +1,13 @@
 import { ChatResponseList } from '../../api/chats/types.ts'
-import { ChatListItem } from '../../components/chatLstItem/chatListItem.ts'
+import ChatListItem from '../../components/chatLstItem/chatListItem.ts'
 
-export const createChatList = (chats: ChatResponseList) => {
-  console.log('createChatList', chats)
-  return chats.map((item) => new ChatListItem({
-    props: {
-      title: item.title,
-      date: 0,
-      last_message: item.last_message,
-      unread_count: item.unread_count
-    }
-  }))
-}
+export const createChatList = (chats: ChatResponseList) => chats.map((item) => new ChatListItem({
+  props: {
+    avatar: item.avatar,
+    created_by: item.created_by,
+    title: item.title,
+    id: item.id,
+    last_message: item.last_message,
+    unread_count: item.unread_count
+  }
+}))

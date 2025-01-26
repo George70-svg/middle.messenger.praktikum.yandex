@@ -1,6 +1,6 @@
 import { v4 as makeUUID } from 'uuid'
 import Handlebars from 'handlebars'
-import { EventBus, EventCallback } from './eventBus.ts'
+import { EventBus } from './eventBus.ts'
 
 export type PropsProps = { events?: Record<string, EventListenerOrEventListenerObject>, attr?: Record<string, string> } & Record<string, unknown>
 type ChildrenProps = Record<string, Block>
@@ -47,7 +47,7 @@ export default class Block {
   _registerEvents(eventBus: EventBus): void {
     eventBus.on(this.EVENTS.INIT, this.init.bind(this))
     eventBus.on(this.EVENTS.FLOW_CDM, this._componentDidMount.bind(this))
-    eventBus.on(this.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this) as EventCallback)
+    eventBus.on(this.EVENTS.FLOW_CDU, (oldProps: PropsProps, newProps: PropsProps) => this._componentDidUpdate(oldProps, newProps))
     eventBus.on(this.EVENTS.FLOW_RENDER, this._render.bind(this))
   }
 
@@ -66,8 +66,8 @@ export default class Block {
     this._render()
   }
 
-  _componentDidUpdate(): void {
-    console.log('_componentDidUpdate')
+  _componentDidUpdate(oldProps: PropsProps, newProps: PropsProps): void {
+    console.info(oldProps, newProps)
     this._render()
   }
 
@@ -215,12 +215,9 @@ export default class Block {
   }
 
   setProps(newProps: PropsProps): void {
-    console.log('setProps', newProps)
     if (newProps) {
       const oldProps = { ...this.props }
-      console.log('oldProps', this.props)
       Object.assign(this.props || {}, newProps)
-      console.log('newProps', this.props)
       this.eventBus().emit(this.EVENTS.FLOW_CDU, oldProps, this.props)
     }
   }

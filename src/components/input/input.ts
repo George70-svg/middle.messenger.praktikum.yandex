@@ -13,7 +13,8 @@ export class Input extends Block {
         events: {
           focus: () => this.handleFocus(),
           blur: () => this.handleBlur(),
-          input: () => this.handleInput()
+          input: () => this.handleInput(),
+          ...blockProps.props?.events
         }
       }
     })

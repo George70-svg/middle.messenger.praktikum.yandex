@@ -1,20 +1,24 @@
 import './userMenu.scss'
 import { Button } from '../../../../components/button/button.ts'
-import Block from '../../../../framework/block.ts'
+import Block, { BlockProps } from '../../../../framework/block.ts'
 import { GlobalEventBus } from '../../../../framework/eventBus.ts'
+import { chatsController } from '../../../../api/chats/chatsController.ts'
+import { withSelectedChats } from '../../../../store/utils.ts'
+import { ChatResponse } from '../../../../api/chats/types.ts'
 
-export class UserMenu extends Block {
+class UserMenu extends Block {
   isShowContent: boolean = false
 
-  constructor() {
+  constructor(blockProps: BlockProps) {
     super({
       props: {
+        ...blockProps.props,
         events: {
           click: () => this.dropdownToggle()
         }
       },
       children: {
-        AddButton: new Button({
+        AddUserButton: new Button({
           props: {
             text: '<img src=\'svg/add.svg\' alt=\'add\'><p>Добавить пользователя</p>',
             events: {
@@ -25,7 +29,7 @@ export class UserMenu extends Block {
             }
           }
         }),
-        RemoveButton: new Button({
+        RemoveUserButton: new Button({
           props: {
             text: '<img src=\'svg/delete.svg\' alt=\'delete\'><p>Удалить пользователя</p>',
             events: {
@@ -33,6 +37,17 @@ export class UserMenu extends Block {
             },
             attr: {
               class: 'remove-user'
+            }
+          }
+        }),
+        RemoveChatButton: new Button({
+          props: {
+            text: '<img src=\'svg/basket.svg\' alt=\'delete\'><p>Удалить чат</p>',
+            events: {
+              click: () => this.handleRemoveChat()
+            },
+            attr: {
+              class: 'remove-chat'
             }
           }
         })
@@ -57,6 +72,15 @@ export class UserMenu extends Block {
     GlobalEventBus.emit('openRemoveUserModal')
   }
 
+  handleRemoveChat() {
+    console.log('delete chat', this.props)
+
+    if (this.props?.selectedChat) {
+      const data = { chatId: (this.props.selectedChat as ChatResponse).id }
+      chatsController.deleteChat(data)
+    }
+  }
+
   override render(): string {
     return `
       <div class='user-dropdown'>
@@ -65,10 +89,13 @@ export class UserMenu extends Block {
         </div>
         
         ${this.isShowContent ? `<div class='content'>
-          {{{ AddButton }}}
-          {{{ RemoveButton }}}
+          {{{ AddUserButton }}}
+          {{{ RemoveUserButton }}}
+          {{{ RemoveChatButton }}}
         </div>` : ''}
       </div>
     `
   }
 }
+
+export default withSelectedChats(UserMenu)

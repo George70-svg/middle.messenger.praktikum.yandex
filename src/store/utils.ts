@@ -8,14 +8,12 @@ function connect(mapStateToProps: (state: Indexed<unknown>) => Indexed<unknown>)
     return class extends Component {
       constructor(blockProps: BlockProps) {
         let state = mapStateToProps(store.getState())
-
-        super({ ...blockProps, ...state })
+        super({ props: { ...blockProps?.props, ...state } })
 
         store.on(StoreEvents.Update, () => {
           const newState = mapStateToProps(store.getState())
           if (!isEqual(state, newState)) {
             this.setProps({ ...mapStateToProps(store.getState()) })
-            console.log('StoreEvents.Update', this)
           }
 
           state = newState
@@ -26,4 +24,5 @@ function connect(mapStateToProps: (state: Indexed<unknown>) => Indexed<unknown>)
 }
 
 export const withUser = connect((state: Indexed<unknown>) => ({ user: state.user }))
-export const withChats = connect((state: Indexed<unknown>) => ({ chats: state.chats }))
+export const withChats = connect((state: Indexed<unknown>) => ({ chats: state.chats, selectedChat: state.selectedChat }))
+export const withSelectedChats = connect((state: Indexed<unknown>) => ({ selectedChat: state.selectedChat }))

@@ -131,9 +131,7 @@ export class RegistrationPage extends Block {
     })
   }
 
-  isRegistrationLoading: boolean = false
-
-  async handleSubmit() {
+  handleSubmit() {
     // Отправляем событие на проверку всех типов, чтобы каждый причастный input прослушал его и мог вывести сообщение об ошибке
     GlobalEventBus.emit('formChange', ['email', 'first_name', 'phone', 'second_name', 'login', 'password'])
 
@@ -160,15 +158,10 @@ export class RegistrationPage extends Block {
         password: inputData.password.getValue() as string
       }
 
-      try {
-        this.isRegistrationLoading = true
-        await authController.signUp(data)
-        goToPath('/messenger')
-      } catch (error) {
-        console.error('Registration error', error)
-      } finally {
-        this.isRegistrationLoading = false
-      }
+      authController.signUp(data)
+        .then(() => {
+          goToPath('/messenger')
+        })
     }
   }
 
