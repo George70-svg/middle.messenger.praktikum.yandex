@@ -15,7 +15,6 @@
     "node": true
   },
   "rules": {
-    "@typescript-eslint/no-unused-vars": 2,
     "@typescript-eslint/no-this-alias": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
@@ -30,6 +29,7 @@
     "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/no-unsafe-call": "off",
     "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "quotes": ["warn", "single"],
     "semi": ["warn", "never"],
     "indent": ["warn", 2],
