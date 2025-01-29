@@ -1,8 +1,14 @@
 # Start messenger
 
 **My Start Messenger**  
-Project for demonstration of messenger construction on class block from which components are inherited.
-Implementation of http request via xhr.
+Project to demonstrate the creation of a messenger as a SPA application without using frameworks and libraries
+
+### Functionality developed::
+- **Block class: for rendering templates with specified parameters**
+- **Store: storing data and updating the state of components when changing data**
+- **Routing: Router and Route**
+- **HTTP-requests on xhr**
+- **Websocket connection for messages**
 
 ### Technologies used
 - **HTML**

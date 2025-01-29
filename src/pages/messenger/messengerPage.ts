@@ -1,29 +1,48 @@
 import './messengerPage.scss'
-import Block from '../../framework/block.ts'
-import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
+import Block, { BlockProps, PropsProps } from '../../framework/block.ts'
 import { Input } from '../../components/input/input.ts'
-import { chatListMock } from '../../mock/chatList.ts'
-import { ChatListItem } from '../../components/chatLstItem/chatListItem.ts'
-import { messageListMock } from '../../mock/messageList.ts'
-import { MessageItem } from '../../components/messageItem/messageItem.ts'
-import { changePage, shortenText } from '../../utils/common.ts'
+import { goToPath } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
+import UserMenu from './components/userMenu/userMenu.ts'
+import { FileMenu } from './components/fileMenu/fileMenu.ts'
+import { Button } from '../../components/button/button.ts'
+import { GlobalEventBus } from '../../framework/eventBus.ts'
+import { chatsController } from '../../api/chats/chatsController.ts'
+import { withChatsAndUser } from '../../store/utils.ts'
+import { createChatList, createMessageList } from './utils.ts'
+import { isEqual } from '../../utils/common.ts'
+import { ChatResponse, ChatResponseList, MessageResponse } from '../../api/chats/types.ts'
+import { messageSocketList } from '../../api/wsService.ts'
 
-export class MessengerPage extends Block {
-  constructor() {
+class MessengerPage extends Block {
+  constructor(blockProps: BlockProps) {
     super({
       children: {
         LinkToProfile: new Link({
           props: {
-            content: '<p>Профиль</p><img src=\'svg/simpleArrow.svg\' alt=\'simple arrow\'>',
+            content: '<p data-tooltip="Взяли текст из data-tooltip">Профиль</p><img src=\'svg/simpleArrow.svg\' alt=\'simple arrow\'>',
             events: {
-              click: (event) => changePage(event)
+              click: (event) => goToPath('/settings', event, { props: { mode: 'view' } })
             },
             attr: {
               class: 'pageNavigation-link go-to-profile',
-              href: '/profileViewPage',
+              href: '/settings',
               dataPage: 'profileViewPage'
             }
+          }
+        }),
+        AddChatButton: new Button({
+          props: {
+            text: 'Создать чат',
+            events: { click: () => this.handleAddChat() },
+            class: 'add-chat-button'
+          }
+        }),
+        SendMessageButton: new Button({
+          props: {
+            text: '<div class=\'round-button back-button\'><img src=\'svg/arrow.svg\' alt=\'arrow image\'></div>',
+            events: { click: () => this.handleSendMessage() },
+            class: 'send-message-button'
           }
         }),
         InputSearch: new Input({
@@ -34,6 +53,7 @@ export class MessengerPage extends Block {
             class: 'search-chat',
             name: 'search-chat',
             placeholder: 'Поиск',
+            hideHint: true,
             attr: {
               class: 'field-container no-label'
             }
@@ -47,39 +67,67 @@ export class MessengerPage extends Block {
             class: 'message',
             name: 'message',
             placeholder: 'Сообщение',
+            hideHint: true,
             attr: {
               class: 'field-container no-label'
             }
           }
         }),
-        PageNavigation: new PageNavigation()
+        UserMenu: new UserMenu({}),
+        FileMenu: new FileMenu()
       },
       lists: {
-        ChatList: chatListMock.map((item) => new ChatListItem({
-          props: {
-            name: item.name,
-            date: item.date,
-            lastMessage: shortenText(item.lastMessage, 50),
-            unreadMessageNumber: item.unreadMessageNumber
-          }
-        })),
-        MessageList: messageListMock.map((item) => new MessageItem({
-          props: {
-            class: item.class,
-            text: item.text,
-            time: item.time
-          }
-        }))
+        ChatList: createChatList(blockProps.props?.chats as ChatResponseList ?? []),
+        MessageList: createMessageList(blockProps.props?.selectedChatMessages as MessageResponse[] ?? [])
       }
     })
+
+    // Получаю список всех чатов
+    chatsController.getChats({})
+  }
+
+  _componentDidUpdate(oldProps?: PropsProps, newProps?: PropsProps): void {
+    if (!isEqual(oldProps?.chats, newProps?.chats)) {
+      this.setLists({
+        ChatList: createChatList(newProps?.chats as ChatResponseList ?? [])
+      })
+    }
+
+    if (!isEqual(oldProps?.selectedChatMessages, newProps?.selectedChatMessages)) {
+      this.setLists({
+        MessageList: createMessageList(newProps?.selectedChatMessages as MessageResponse[] ?? [])
+      })
+    }
+
+    super._componentDidUpdate?.(oldProps ?? {}, newProps ?? {})
+  }
+
+  handleAddChat() {
+    GlobalEventBus.emit('openAddChatModal')
+  }
+
+  handleSendMessage() {
+    const chatId = (this.props?.selectedChat as ChatResponse)?.id
+    const socket = messageSocketList[chatId]
+    const text = (this.children?.InputMessage as Input).getValue()
+
+    if (text) {
+      const message = { content: text, type: 'message' }
+      socket.send(message)
+    }
   }
 
   override render(): string {
+    const selectedChat = this.props?.selectedChat as ChatResponse
+
     return `
       <main class='messenger-page'>
         <section class='chat-list-container'>
           <header class='chat-list-header'>
-            {{{ LinkToProfile }}}
+            <div class="actions-container">
+              {{{ AddChatButton }}}
+              {{{ LinkToProfile }}}
+            </div>
             {{{ InputSearch }}}
           </header>
       
@@ -90,11 +138,9 @@ export class MessengerPage extends Block {
       
         <section class='messages-container'>
           <header class='chat-header'>
-            <div class='avatar'></div>
-            <p class='name'>Вадим</p>
-            <div class='menu'>
-              <img src='svg/doteMenu.svg' alt='menu'>
-            </div>
+            ${selectedChat?.title ? `<div class='avatar'></div>
+            <p class='name'>${selectedChat?.title}</p>
+            {{{ UserMenu }}}` : ''}
           </header>
       
           <div class='chat-body'>
@@ -102,16 +148,15 @@ export class MessengerPage extends Block {
           </div>
       
           <footer class='chat-footer'>
-            <img class='file' src='svg/file.svg' alt='file'>
+          ${selectedChat?.title ? `
+             {{{ FileMenu }}}
             {{{ InputMessage }}}
-            <div class='round-button back-button'>
-              <img src='svg/arrow.svg' alt='arrow image'>
-            </div>
+            {{{ SendMessageButton }}}` : ''}
           </footer>
         </section>
-      
-        {{{ PageNavigation }}}
       </main>
     `
   }
 }
+
+export default withChatsAndUser(MessengerPage)

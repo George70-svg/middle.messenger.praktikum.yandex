@@ -36,6 +36,34 @@
           height: 130px;
           background-color: var(--secondary-grey-color);
           border-radius: 50%;
+          cursor: pointer;
+
+          .image {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+          }
+
+          &::after {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 130px;
+            height: 130px;
+            content: 'Поменять аватар';
+            position: absolute;
+            color: white;
+            font-size: 13px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s;
+          }
+
+          &:hover::after {
+            opacity: 1;
+            transition: opacity 0.3s;
+          }
         }
       }
 
@@ -83,7 +111,8 @@
       }
 
       .edit-container {
-        p {
+        p, a {
+          display: block;
           padding: 0.5rem 0;
           font-size: 13px;
           font-weight: bold;
@@ -100,7 +129,11 @@
         }
 
         .exit {
+          background-color: transparent;
           color: var(--red-color);
+          font-weight: bold;
+          text-transform: capitalize;
+          padding: 0;
         }
       }
 

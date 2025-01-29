@@ -1,13 +1,10 @@
 import './page500.scss'
 import Block from '../../framework/block.ts'
-import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 
 export class Page500 extends Block {
   constructor() {
     super({
-      children: {
-        PageNavigation: new PageNavigation()
-      }
+      children: {}
     })
   }
 
@@ -17,7 +14,6 @@ export class Page500 extends Block {
         <h1>500</h1>
         <h2>Мы уже фиксим</h2>
         <img src='images/corgi.png' class='image' alt='not found image :('>
-        {{{ PageNavigation }}}
       </main>
     `
   }

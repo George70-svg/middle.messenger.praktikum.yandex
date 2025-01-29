@@ -1,4 +1,10 @@
 .field-container {
+  .hint-container {
+    display: none;
+    font-size: 9px;
+    color: var(--secondary-text-color);
+  }
+
   .input-container {
     label {
       font-family: NunitoSans, sans-serif;
