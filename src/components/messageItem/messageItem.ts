@@ -8,7 +8,7 @@ class MessageItem extends Block {
   constructor(blockProps: BlockProps) {
     const messageTime = blockProps.props?.time as string
     const formattedTime = messageTime ? formatTime(messageTime) : ''
-    
+
     super({
       props: {
         ...blockProps.props,
