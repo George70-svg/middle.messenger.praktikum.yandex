@@ -20,9 +20,9 @@ out/
 *.local
 
 # CSS and SCSS
-# *.css
-# *.css.map
-# *.scssc
+*.css
+*.css.map
+*.scssc
 
 # Editor directories and files
 .vscode/*
