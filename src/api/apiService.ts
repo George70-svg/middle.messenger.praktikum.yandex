@@ -7,13 +7,13 @@ export enum METHOD {
 
 type Options = {
   method?: METHOD
-  data?: Record<string, unknown>
+  data?: Record<string, unknown> | FormData
   headers?: Record<string, string>
   withCredentials?: boolean,
   responseType?: 'json' | 'text'
 }
 
-function queryStringify(data: Record<string, unknown>): string {
+function queryStringify(data: Record<string, unknown> | FormData): string {
   if (typeof data !== 'object') {
     throw new Error('Data must be object')
   }

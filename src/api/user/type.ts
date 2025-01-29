@@ -19,3 +19,8 @@ export type SearchUserResponse = {
   login: string
   second_name: string
 }
+
+export type ChangePasswordResponse = {
+  oldPassword: string,
+  newPassword: string
+}

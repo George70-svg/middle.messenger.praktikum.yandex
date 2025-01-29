@@ -17,6 +17,8 @@ export type AddUserToChatRequestData = {
   chatId: number
 }
 
+export type ChatTokenResponse = { token: string }
+
 export type ChatResponse = {
   avatar: string
   created_by: number
@@ -24,6 +26,17 @@ export type ChatResponse = {
   last_message: string
   title: string
   unread_count: number
+}
+
+export type MessageResponse = {
+  chat_id: number
+  content: string
+  file: File
+  id: number
+  is_read: boolean
+  time: Date
+  type: 'message'
+  user_id: number
 }
 
 export type ChatResponseList = ChatResponse[]

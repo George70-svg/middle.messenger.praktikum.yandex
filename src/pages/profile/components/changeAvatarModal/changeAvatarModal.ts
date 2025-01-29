@@ -1,6 +1,9 @@
+import '../../../../styles/modal.scss'
 import { GlobalEventBus } from '../../../../framework/eventBus.ts'
 import Block, { BlockProps } from '../../../../framework/block.ts'
 import { Button } from '../../../../components/button/button.ts'
+import { Input } from '../../../../components/input/input.ts'
+import { userController } from '../../../../api/user/userController.ts'
 
 class ChangeAvatarModal extends Block {
   constructor(props?: BlockProps) {
@@ -14,9 +17,21 @@ class ChangeAvatarModal extends Block {
         }
       },
       children: {
+        InputAvatarFile: new Input({
+          props: {
+            labelText: 'Выбрать файл на компьютере',
+            value: '',
+            type: 'file',
+            id: 'avatar-profile-edit',
+            name: 'avatar',
+            placeholder: '',
+            hideHint: true,
+            disabled: false
+          }
+        }),
         ChangeAvatarButton: new Button({
           props: {
-            text: 'Добавить',
+            text: 'Поменять',
             events: {
               click: () => this.handleAdd()
             },
@@ -41,7 +56,14 @@ class ChangeAvatarModal extends Block {
   }
 
   handleAdd() {
-    console.log('handleAdd')
+    const file = (this.children?.InputAvatarFile as Input).getFile()
+    console.log('file', file)
+
+    if (file) {
+      const formData = new FormData()
+      formData.append('avatar', file)
+      userController.changeAvatar(formData)
+    }
   }
 
   override shouldDelegateEvent(): boolean {
@@ -67,7 +89,7 @@ class ChangeAvatarModal extends Block {
       <div class="modal-backdrop">
         <div class="modal-change-avatar-content">
           <h2>Загрузите файл</h2>
-          <p>Выбрать файл на компьютере</p>
+          {{{ InputAvatarFile }}}
           {{{ ChangeAvatarButton }}}
         </div>
       </div>

@@ -66,8 +66,10 @@ export default class Block {
     this._render()
   }
 
+  //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-expect-error
   _componentDidUpdate(oldProps: PropsProps, newProps: PropsProps): void {
-    console.info(oldProps, newProps)
+    // console.log('_componentDidUpdate', newProps)
     this._render()
   }
 

@@ -39,7 +39,7 @@ export class Input extends Block {
     const currentValue = this.getValue() || ''
     this.validationMessage = inputValidation(this.props?.name as InputName, currentValue)
     this.updateValidation()
-    this.showHintIfNeeded()
+    this.removeHint()
   }
 
   handleFocus() {
@@ -48,6 +48,10 @@ export class Input extends Block {
 
   handleInput() {
     this.showHintIfNeeded()
+  }
+
+  handleChange() {
+    console.log('handleChange')
   }
 
   showHintIfNeeded() {
@@ -119,16 +123,27 @@ export class Input extends Block {
     }
   }
 
+  getFile() {
+    const inputElement = this.element?.querySelector('input')
+
+    if (inputElement && inputElement.files) {
+      return inputElement.files[0]
+    } else {
+      return null
+    }
+  }
+
   override render() {
     const isDisabled = this.props?.disabled
 
     return `
       <div class='field-container'>
-        <div class='hint-container'>{{placeholder}}</div>
+        <div class='hint-container'>{{labelText}}</div>
         <div class='input-container'>
           <label for='{{id}}'>{{labelText}}</label>
           <input
             type='{{type}}'
+            value='{{value}}'
             id='{{id}}'
             class='{{class}}'
             name='{{name}}'

@@ -1,5 +1,5 @@
 import './messengerPage.scss'
-import Block, { PropsProps } from '../../framework/block.ts'
+import Block, { BlockProps, PropsProps } from '../../framework/block.ts'
 import { Input } from '../../components/input/input.ts'
 import { goToPath } from '../../framework/common.ts'
 import { Link } from '../../components/link/link.ts'
@@ -8,13 +8,14 @@ import { FileMenu } from './components/fileMenu/fileMenu.ts'
 import { Button } from '../../components/button/button.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
 import { chatsController } from '../../api/chats/chatsController.ts'
-import { withChats } from '../../store/utils.ts'
-import { createChatList } from './utils.ts'
+import { withChatsAndUser } from '../../store/utils.ts'
+import { createChatList, createMessageList } from './utils.ts'
 import { isEqual } from '../../utils/common.ts'
-import { ChatResponse, ChatResponseList } from '../../api/chats/types.ts'
+import { ChatResponse, ChatResponseList, MessageResponse } from '../../api/chats/types.ts'
+import { messageSocketList } from '../../api/wsService.ts'
 
 class MessengerPage extends Block {
-  constructor() {
+  constructor(blockProps: BlockProps) {
     super({
       children: {
         LinkToProfile: new Link({
@@ -35,6 +36,13 @@ class MessengerPage extends Block {
             text: 'Создать чат',
             events: { click: () => this.handleAddChat() },
             class: 'add-chat-button'
+          }
+        }),
+        SendMessageButton: new Button({
+          props: {
+            text: '<div class=\'round-button back-button\'><img src=\'svg/arrow.svg\' alt=\'arrow image\'></div>',
+            events: { click: () => this.handleSendMessage() },
+            class: 'send-message-button'
           }
         }),
         InputSearch: new Input({
@@ -69,15 +77,8 @@ class MessengerPage extends Block {
         FileMenu: new FileMenu()
       },
       lists: {
-        ChatList: [],
-        MessageList: []
-        /* MessageList: messageListMock.map((item) => new MessageItem({
-          props: {
-            class: item.class,
-            text: item.text,
-            time: item.time
-          }
-        })) */
+        ChatList: createChatList(blockProps.props?.chats as ChatResponseList ?? []),
+        MessageList: createMessageList(blockProps.props?.selectedChatMessages as MessageResponse[] ?? [])
       }
     })
 
@@ -92,11 +93,28 @@ class MessengerPage extends Block {
       })
     }
 
+    if (!isEqual(oldProps?.selectedChatMessages, newProps?.selectedChatMessages)) {
+      this.setLists({
+        MessageList: createMessageList(newProps?.selectedChatMessages as MessageResponse[] ?? [])
+      })
+    }
+
     super._componentDidUpdate?.(oldProps ?? {}, newProps ?? {})
   }
 
   handleAddChat() {
     GlobalEventBus.emit('openAddChatModal')
+  }
+
+  handleSendMessage() {
+    const chatId = (this.props?.selectedChat as ChatResponse)?.id
+    const socket = messageSocketList[chatId]
+    const text = (this.children?.InputMessage as Input).getValue()
+
+    if (text) {
+      const message = { content: text, type: 'message' }
+      socket.send(message)
+    }
   }
 
   override render(): string {
@@ -130,11 +148,10 @@ class MessengerPage extends Block {
           </div>
       
           <footer class='chat-footer'>
-            {{{ FileMenu }}}
+          ${selectedChat?.title ? `
+             {{{ FileMenu }}}
             {{{ InputMessage }}}
-            <div class='round-button back-button'>
-              <img src='svg/arrow.svg' alt='arrow image'>
-            </div>
+            {{{ SendMessageButton }}}` : ''}
           </footer>
         </section>
       </main>
@@ -142,4 +159,4 @@ class MessengerPage extends Block {
   }
 }
 
-export default withChats(MessengerPage)
+export default withChatsAndUser(MessengerPage)

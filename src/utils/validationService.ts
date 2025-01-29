@@ -1,4 +1,4 @@
-export type InputName = 'first_name' | 'second_name' | 'login' | 'email' | 'password' | 'phone' | 'message'
+export type InputName = 'first_name' | 'second_name' | 'login' | 'email' | 'password' | 'phone' | 'message' | 'newPassword'
 
 export type ValidationMessage = {
   status: boolean,
@@ -47,6 +47,11 @@ const validationRules: ValidationRules = {
     { regex: '(?=.*[A-Z])', message: 'Пароль должен содержать хотя бы одну заглавную латинскую букву' },
     { regex: '(?=.*\\d)', message: 'Пароль должен содержать хотя бы одну цифру' }
   ],
+  newPassword: [
+    { regex: '^.{8,40}$', message: 'Длина должна быть от 8 до 40 символов' },
+    { regex: '(?=.*[A-Z])', message: 'Пароль должен содержать хотя бы одну заглавную латинскую букву' },
+    { regex: '(?=.*\\d)', message: 'Пароль должен содержать хотя бы одну цифру' }
+  ]
 }
 
 export function inputValidation(inputName: InputName, inputValue: string): ValidationMessage {

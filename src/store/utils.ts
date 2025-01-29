@@ -24,5 +24,12 @@ function connect(mapStateToProps: (state: Indexed<unknown>) => Indexed<unknown>)
 }
 
 export const withUser = connect((state: Indexed<unknown>) => ({ user: state.user }))
-export const withChats = connect((state: Indexed<unknown>) => ({ chats: state.chats, selectedChat: state.selectedChat }))
+
+export const withChatsAndUser = connect((state: Indexed<unknown>) => ({
+  chats: state.chats,
+  selectedChat: state.selectedChat,
+  user: state.user,
+  selectedChatMessages: state.selectedChatMessages
+}))
+
 export const withSelectedChats = connect((state: Indexed<unknown>) => ({ selectedChat: state.selectedChat }))

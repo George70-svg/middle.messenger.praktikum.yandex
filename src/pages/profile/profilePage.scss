@@ -38,6 +38,12 @@
           border-radius: 50%;
           cursor: pointer;
 
+          .image {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+          }
+
           &::after {
             display: flex;
             justify-content: center;

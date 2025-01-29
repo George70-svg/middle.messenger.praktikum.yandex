@@ -39,6 +39,7 @@
     "object-curly-spacing": ["warn", "always"],
     "space-in-parens": "error",
     "func-names": "off",
+    "camelcase": "off",
     "no-multiple-empty-lines": "error",
     "class-methods-use-this": "off",
     "prefer-promise-reject-errors": "off",

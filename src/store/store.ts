@@ -18,9 +18,16 @@ class Store extends EventBus {
       phone: null,
       second_name: null
     },
-    selectedChat: {},
+    selectedChat: {
+      avatar: null,
+      created_by: null,
+      id: null,
+      last_message: null,
+      title: null,
+      unread_count: null
+    },
     chats: [],
-    messages: [{ id: 1 }, { id: 2 }]
+    selectedChatMessages: []
   }
 
   getState() {

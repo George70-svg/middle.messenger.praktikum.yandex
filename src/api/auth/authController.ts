@@ -51,6 +51,13 @@ class AuthController {
         console.log('localStorage', localStorage.getItem('user'))
       })
   }
+
+  getUser() {
+    return auth.getUser()
+      .then((user) => {
+        store.set('user', user)
+      })
+  }
 }
 
 export const authController = new AuthController()

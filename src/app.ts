@@ -1,6 +1,6 @@
 import LoginPage from './pages/login/loginPage.ts'
 import { RegistrationPage } from './pages/registration/registrationPage.ts'
-import { ProfilePage } from './pages/profile/ProfilePage.ts'
+import ProfilePage from './pages/profile/ProfilePage.ts'
 import MessengerPage from './pages/messenger/messengerPage.ts'
 import { Page404 } from './pages/404/page404.ts'
 import { Page500 } from './pages/500/page500.ts'

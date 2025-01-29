@@ -28,6 +28,10 @@ class Chats {
   deleteUserFromChat(data: AddUserToChatRequestData) {
     return chatsAPIInstance.delete('/users', { data })
   }
+
+  getChatToken(chatId: number) {
+    return chatsAPIInstance.post(`/token/${chatId}`)
+  }
 }
 
 export const chats = new Chats()

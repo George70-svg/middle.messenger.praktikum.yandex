@@ -3,7 +3,7 @@ import {
   ChatDeleteRequestData,
   ChatResponse,
   ChatsCreateRequestData,
-  ChatsGetRequestData
+  ChatsGetRequestData, ChatTokenResponse, MessageResponse
 } from './types.ts'
 import { chats } from './chats.ts'
 import store from '../../store/store.ts'
@@ -66,6 +66,23 @@ class ChatsController {
         console.log('Ошибка удаления пользователя из чата', error)
         throw error
       })
+  }
+
+  getChatToken(chatId: number) {
+    return chats.getChatToken(chatId)
+      .then((token) => token as ChatTokenResponse)
+      .catch((error) => {
+        console.log('Ошибка удаления пользователя из чата', error)
+        throw error
+      })
+  }
+
+  addChatMessages(messages: MessageResponse[]) {
+    store.set('selectedChatMessages', messages)
+  }
+
+  getChatMessages() {
+    return store.getState().selectedChatMessages as MessageResponse[]
   }
 }
 
