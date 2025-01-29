@@ -16,7 +16,6 @@ class ChatsController {
       })
       .catch((error) => {
         console.error('Ошибка загрузки списка чатов', error)
-        throw error
       })
   }
 
@@ -27,7 +26,6 @@ class ChatsController {
       })
       .catch((error) => {
         console.error('Ошибка создания чата', error)
-        throw error
       })
   }
 
@@ -38,7 +36,6 @@ class ChatsController {
       })
       .catch((error) => {
         console.error('Ошибка удаления чата', error)
-        throw error
       })
   }
 
@@ -50,7 +47,6 @@ class ChatsController {
     return chats.addUserToChat(data)
       .catch((error) => {
         console.error('Ошибка добавления пользователя в чат', error)
-        throw error
       })
   }
 
@@ -58,7 +54,6 @@ class ChatsController {
     return chats.deleteUserFromChat(data)
       .catch((error) => {
         console.error('Ошибка удаления пользователя из чата', error)
-        throw error
       })
   }
 
@@ -67,7 +62,6 @@ class ChatsController {
       .then((token) => token as ChatTokenResponse)
       .catch((error) => {
         console.error('Ошибка удаления пользователя из чата', error)
-        throw error
       })
   }
 

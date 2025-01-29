@@ -8,7 +8,7 @@ class UserController {
       .then((users) => users as SearchUserResponse[])
       .catch((error) => {
         console.error('Ошибка поиска пользователя', error)
-        throw error
+        return []
       })
   }
 
@@ -16,7 +16,6 @@ class UserController {
     return user.changeUser(data)
       .catch((error) => {
         console.error('Ошибка редактирования профиля', error)
-        throw error
       })
   }
 
@@ -28,7 +27,6 @@ class UserController {
       })
       .catch((error) => {
         console.error('Ошибка изменения аватара', error)
-        throw error
       })
   }
 
@@ -36,7 +34,6 @@ class UserController {
     return user.changePassword(data)
       .catch((error) => {
         console.error('Ошибка изменения пароля', error)
-        throw error
       })
   }
 }

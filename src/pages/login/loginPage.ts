@@ -87,9 +87,6 @@ class LoginPage extends Block {
       }
 
       authController.signIn(data)
-        .then(() => {
-          goToPath('/messenger')
-        })
     }
   }
 
