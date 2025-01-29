@@ -12,7 +12,7 @@ class ChatListItem extends Block {
   constructor(blockProps: BlockProps) {
     const lastMessageTime = (blockProps.props?.last_message as LastMessage)?.time
     const formattedTime = lastMessageTime ? formatTime(lastMessageTime) : ''
-    
+
     super({
       props: {
         ...blockProps.props,
@@ -93,7 +93,7 @@ class ChatListItem extends Block {
       
           <div class='chat-text'>
             <div class='chat-message' id='chat-message'>{{last_message.content}}</div>
-            ${hasUnreadCount ? `<div class='unread-message'>{{unread_count}}</div>` : ''}
+            ${hasUnreadCount ? '<div class=\'unread-message\'>{{unread_count}}</div>' : ''}
           </div>
         </div>
       </article>

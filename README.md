@@ -6,7 +6,7 @@ Project to demonstrate the creation of a messenger as a SPA application without 
 ### Functionality developed::
 - **Block class: for rendering templates with specified parameters**
 - **Store: storing data and updating the state of components when changing data**
-- **Routing: Router and Route**
+- **Routing: Router and Route for navigate and render current page**
 - **HTTP-requests on xhr**
 - **Websocket connection for messages**
 
