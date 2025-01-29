@@ -1,6 +1,7 @@
 import { SignInRequest, SignUpRequest } from './type.ts'
 import { auth } from './auth.ts'
 import store from '../../store/store.ts'
+import { goToPath } from '../../framework/common.ts'
 
 class AuthController {
   signUp(data: SignUpRequest) {
@@ -13,25 +14,20 @@ class AuthController {
       })
       .catch((error) => {
         console.error('Ошибка регистрации пользователя', error)
-        throw error
       })
   }
 
   signIn(data: SignInRequest) {
     return auth.signIn(data)
-      .then(() => {
-        auth.getUser().then((user) => {
-          store.set('user', user)
-          localStorage.setItem('user', JSON.stringify(user))
-        })
-      })
+      .then(() => { auth.getUser() })
+      .then(() => { goToPath('/messenger') })
       .catch((error) => {
         if (error.reason === 'User already in system') {
-          auth.logout().then(() => console.log('Hard logout'))
+          this.getUser()
+            .then(() => { goToPath('/messenger') })
         }
 
         console.error('Ошибка входа пользователя', error)
-        throw error
       })
   }
 
@@ -44,7 +40,6 @@ class AuthController {
       })
       .catch((error) => {
         console.error('Ошибка выхода пользователя', error)
-        throw error
       })
       .finally(() => {
         localStorage.removeItem('user')
@@ -55,6 +50,7 @@ class AuthController {
     return auth.getUser()
       .then((user) => {
         store.set('user', user)
+        localStorage.setItem('user', JSON.stringify(user))
       })
   }
 }
