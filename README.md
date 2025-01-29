@@ -17,7 +17,6 @@ Project to demonstrate the creation of a messenger as a SPA application without 
 - **Handlebars**
 
 ### Project URL
-To navigate through pages, links have been implemented at the bottom of the page.
 #### Netlify: https://start-messenger.netlify.app/
 
 ### Figma template
@@ -25,7 +24,7 @@ https://www.figma.com/design/cJQjsbMsSzxSyKjykPVKWE/Yandex-messenger?node-id=0-1
 
 ### Setup Project Instructions
 
-#### Main Commands:
+#### Dev Commands:
 - Start and build project: `npm run start`
 - Start dev server: `npm run dev`
 - Preview build project: `npm run preview`

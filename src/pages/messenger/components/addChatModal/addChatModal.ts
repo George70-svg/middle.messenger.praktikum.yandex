@@ -60,6 +60,9 @@ class AddChatModal extends Block {
 
     if (chatName) {
       chatsController.createChat({ title: chatName })
+        .then(() => {
+          this.close()
+        })
     }
   }
 
