@@ -22,3 +22,10 @@ export type UserResponse = {
   phone: string
   second_name: string
 }
+
+export type LastMessage = {
+  content: string
+  id: number
+  time: string
+  user: UserResponse
+}

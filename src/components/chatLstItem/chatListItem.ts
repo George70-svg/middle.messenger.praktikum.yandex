@@ -4,15 +4,19 @@ import { chatsController } from '../../api/chats/chatsController.ts'
 import { ChatResponse, MessageResponse } from '../../api/chats/types.ts'
 import { withChatsAndUser } from '../../store/utils.ts'
 import { messageSocketList, WSTransport, WSTransportEvents } from '../../api/wsService.ts'
-import { UserResponse } from '../../api/auth/type.ts'
+import { LastMessage, UserResponse } from '../../api/auth/type.ts'
 import { isArray } from '../../utils/common.ts'
-import { sortMessagesByTime } from '../../pages/messenger/utils.ts'
+import { formatTime, sortMessagesByTime } from '../../pages/messenger/utils.ts'
 
 class ChatListItem extends Block {
   constructor(blockProps: BlockProps) {
+    const lastMessageTime = (blockProps.props?.last_message as LastMessage)?.time
+    const formattedTime = lastMessageTime ? formatTime(lastMessageTime) : ''
+    
     super({
       props: {
         ...blockProps.props,
+        formattedTime,
         events: {
           click: () => this.selectChat()
         }
@@ -84,7 +88,7 @@ class ChatListItem extends Block {
         <div class='chat-container'>
           <div class='chat-info'>
             <div class='title'>{{title}}</div>
-            <div class='date'>{{last_message.time}}</div>
+            <div class='date'>{{formattedTime}}</div>
           </div>
       
           <div class='chat-text'>
