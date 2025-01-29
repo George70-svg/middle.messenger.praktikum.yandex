@@ -1,8 +1,8 @@
 import { v4 as makeUUID } from 'uuid'
 import Handlebars from 'handlebars'
-import { EventBus, EventCallback } from './eventBus.ts'
+import { EventBus } from './eventBus.ts'
 
-type PropsProps = { events?: Record<string, EventListenerOrEventListenerObject>, attr?: Record<string, string> } & Record<string, unknown>
+export type PropsProps = { events?: Record<string, EventListenerOrEventListenerObject>, attr?: Record<string, string> } & Record<string, unknown>
 type ChildrenProps = Record<string, Block>
 type ListsProps = Record<string, unknown[]>
 
@@ -26,7 +26,7 @@ export default class Block {
 
   _id: string = makeUUID()
 
-  props?: PropsProps
+  props?: PropsProps = { mode: 'view' }
 
   children?: ChildrenProps
 
@@ -47,7 +47,7 @@ export default class Block {
   _registerEvents(eventBus: EventBus): void {
     eventBus.on(this.EVENTS.INIT, this.init.bind(this))
     eventBus.on(this.EVENTS.FLOW_CDM, this._componentDidMount.bind(this))
-    eventBus.on(this.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this) as EventCallback)
+    eventBus.on(this.EVENTS.FLOW_CDU, (oldProps: PropsProps, newProps: PropsProps) => this._componentDidUpdate(oldProps, newProps))
     eventBus.on(this.EVENTS.FLOW_RENDER, this._render.bind(this))
   }
 
@@ -66,7 +66,9 @@ export default class Block {
     this._render()
   }
 
-  _componentDidUpdate(): void {
+  //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //@ts-expect-error
+  _componentDidUpdate(oldProps: PropsProps, newProps: PropsProps): void {
     this._render()
   }
 
@@ -140,7 +142,7 @@ export default class Block {
   }
 
   _addEvents(): void {
-    const { events = {} } = this.props || {} //Props будут содержать отдельный подобъект для events
+    const { events = {} } = this.props || {} // Props будут содержать отдельный подобъект для events
 
     Object.keys(events).forEach((eventName) => {
       if (typeof events[eventName] !== 'function') {
@@ -217,7 +219,6 @@ export default class Block {
     if (newProps) {
       const oldProps = { ...this.props }
       Object.assign(this.props || {}, newProps)
-
       this.eventBus().emit(this.EVENTS.FLOW_CDU, oldProps, this.props)
     }
   }
@@ -225,6 +226,7 @@ export default class Block {
   setLists(list: ListsProps): void {
     if (list) {
       Object.assign(this.lists || {}, list)
+      this.eventBus().emit(this.EVENTS.FLOW_CDU)
     }
   }
 

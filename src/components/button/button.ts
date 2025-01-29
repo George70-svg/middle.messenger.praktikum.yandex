@@ -11,7 +11,7 @@ export class Button extends Block {
   override render(): string {
     return `
       <button class='{{class}}'>
-        {{text}}
+        {{{ text }}}
       </button>
     `
   }

@@ -1,13 +1,14 @@
 import './loginPage.scss'
 import Block, { BlockProps } from '../../framework/block.ts'
 import { Link } from '../../components/link/link.ts'
-import { PageNavigation } from '../../components/pageNavigation/pageNavigation.ts'
 import { Button } from '../../components/button/button.ts'
 import { Input } from '../../components/input/input.ts'
-import { changePage } from '../../utils/common.ts'
+import { goToPath } from '../../framework/common.ts'
 import { GlobalEventBus } from '../../framework/eventBus.ts'
+import { authController } from '../../api/auth/authController.ts'
+import { withUser } from '../../store/utils.ts'
 
-export class LoginPage extends Block {
+class LoginPage extends Block {
   constructor(blockProps?: BlockProps) {
     super({
       props: blockProps,
@@ -53,26 +54,40 @@ export class LoginPage extends Block {
           props: {
             content: 'Нет аккаунта?',
             events: {
-              click: (event) => changePage(event)
+              click: (event) => goToPath('/sign-up', event)
             },
             attr: {
               class: 'link',
-              href: '/registrationPage',
+              href: '/sign-up',
               dataPage: 'registrationPage'
             }
           }
-        }),
-        PageNavigation: new PageNavigation()
+        })
       }
     })
   }
 
   handleSubmit() {
-    const username = (this.children?.InputUsername as Input).getValue()
-    const password = (this.children?.InputPassword as Input).getValue()
-
+    // Отправляем событие на проверку всех типов, чтобы каждый причастный input прослушал его и мог вывести сообщение об ошибке
     GlobalEventBus.emit('formChange', ['login', 'password'])
-    console.log('Form Data:', { username, password })
+
+    const inputData = {
+      login: this.children?.InputUsername as Input,
+      password: this.children?.InputPassword as Input
+    }
+
+    const inputValidationNames: (keyof Omit<typeof inputData, 'confirmPassword'>)[] = ['login', 'password']
+
+    const isValidForm = inputValidationNames.every((field) => inputData[field].isValid(field))
+
+    if (isValidForm) {
+      const data = {
+        login: inputData.login.getValue() as string,
+        password: inputData.password.getValue() as string
+      }
+
+      authController.signIn(data)
+    }
   }
 
   render() {
@@ -89,9 +104,9 @@ export class LoginPage extends Block {
           {{{ SubmitButton }}}
           {{{ NotAccount }}}
         </section>
-      
-        {{{ PageNavigation }}}
       </main>
     `
   }
 }
+
+export default withUser(LoginPage)
