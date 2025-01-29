@@ -48,7 +48,6 @@ class AuthController {
       })
       .finally(() => {
         localStorage.removeItem('user')
-        console.log('localStorage', localStorage.getItem('user'))
       })
   }
 

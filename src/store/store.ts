@@ -37,7 +37,6 @@ class Store extends EventBus {
   set(path: string, value: unknown) {
     this.state = set(this.state, path, value) as Indexed<unknown>
     this.emit(StoreEvents.Update)
-    console.log('state', this.state)
   }
 }
 

@@ -50,10 +50,6 @@ export class Input extends Block {
     this.showHintIfNeeded()
   }
 
-  handleChange() {
-    console.log('handleChange')
-  }
-
   showHintIfNeeded() {
     if (this.props?.hideHint) {
       return

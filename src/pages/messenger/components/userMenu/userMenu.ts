@@ -73,8 +73,6 @@ class UserMenu extends Block {
   }
 
   handleRemoveChat() {
-    console.log('delete chat', this.props)
-
     if (this.props?.selectedChat) {
       const data = { chatId: (this.props.selectedChat as ChatResponse).id }
       chatsController.deleteChat(data)

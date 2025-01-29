@@ -63,7 +63,6 @@ class ChatListItem extends Block {
   }
 
   setMessage(messages: MessageResponse | MessageResponse[]) {
-    console.log('setMessage11111')
     if (isArray(messages)) {
       chatsController.addChatMessages(sortMessagesByTime(messages))
     } else {

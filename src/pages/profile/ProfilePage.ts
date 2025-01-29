@@ -260,7 +260,6 @@ class ProfilePage extends Block {
   }
 
   _componentDidUpdate(oldProps: PropsProps, newProps: PropsProps): void {
-    console.log('newProps', newProps)
     if (oldProps.user !== newProps.user && newProps.user) {
       (this.children?.InputEmail as Block).setProps({ value: (newProps.user as UserResponse).email || '' });
       (this.children?.InputUsername as Block).setProps({ value: (newProps.user as UserResponse).login || '' });

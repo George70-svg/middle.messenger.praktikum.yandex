@@ -57,7 +57,6 @@ class ChangeAvatarModal extends Block {
 
   handleAdd() {
     const file = (this.children?.InputAvatarFile as Input).getFile()
-    console.log('file', file)
 
     if (file) {
       const formData = new FormData()

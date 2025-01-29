@@ -56,7 +56,6 @@ class AddChatModal extends Block {
   }
 
   handleAdd() {
-    console.log('handleAdd')
     const chatName = (this.children?.InputChatName as Input).getValue()
 
     if (chatName) {

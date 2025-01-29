@@ -16,9 +16,7 @@ export class FileMenu extends Block {
         AddButton: new Button({
           props: {
             text: '<img src=\'svg/foto.svg\' alt=\'add\'><p>Фото</p>',
-            events: {
-              click: () => this.handleImage()
-            },
+            events: {},
             attr: {
               class: 'add-user'
             }
@@ -30,16 +28,11 @@ export class FileMenu extends Block {
 
   dropdownToggle() {
     this.isShowContent = !this.isShowContent
-    console.log('dropdownToggle', this.isShowContent)
     this.setProps({})
   }
 
   override shouldDelegateEvent(): boolean {
     return true
-  }
-
-  handleImage() {
-    console.log('Image')
   }
 
   override render(): string {
