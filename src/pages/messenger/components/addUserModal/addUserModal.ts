@@ -74,7 +74,7 @@ class AddUserModal extends Block {
       chatId: (this.props?.selectedChat as ChatResponse).id
     }
 
-    if (data && data.users[0] && data.chatId) {
+    if (data && data?.users[0] && data?.chatId) {
       chatsController.addUserToChat(data)
         .then(() => {
           this.close()

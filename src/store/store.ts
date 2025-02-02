@@ -1,13 +1,13 @@
 import { EventBus } from '../framework/eventBus.ts'
 import { set } from '../utils/common.ts'
-import { Indexed } from './types/types.ts'
+import { State } from './types.ts'
 
 export enum StoreEvents {
   Update = 'update'
 }
 
 class Store extends EventBus {
-  private state: Indexed<unknown> = {
+  private state: State = {
     user: {
       avatar: null,
       display_name: null,
@@ -35,7 +35,7 @@ class Store extends EventBus {
   }
 
   set(path: string, value: unknown) {
-    this.state = set(this.state, path, value) as Indexed<unknown>
+    this.state = set(this.state, path, value) as State
     this.emit(StoreEvents.Update)
   }
 }
