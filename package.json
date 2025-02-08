@@ -3,11 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run precommit"
-    }
-  },
   "engines": {
     "node": ">=16"
   },
@@ -22,12 +17,12 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "precommit": "npm run lint && npm test",
+    "precommit": "npm run lint && vitest --run",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "lint:style": "stylelint **/*.scss",
     "lint:style:fix": "stylelint **/*.scss --fix",
-    "prepare": "husky"
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@types/uuid": "^10.0.0",
