@@ -9,7 +9,7 @@ Project to demonstrate the creation of a messenger as a SPA application without 
 - **Routing: Router and Route for navigate and render current page**
 - **HTTP-requests on xhr**
 - **Websocket connection for messages**
-- **Api, router, utils, component tests on Vitest**
+- **Api, router, utils, component tests on vitest**
 - **Husky for precommit**
 
 ### Technologies used
