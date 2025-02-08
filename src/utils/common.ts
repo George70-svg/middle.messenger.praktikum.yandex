@@ -225,5 +225,17 @@ export function queryStringify(data: PlainObject) {
     throw new Error('input must be an object')
   }
 
-  return getParams(data).map((arr) => arr.join('=')).join('&')
+  let result = '?'
+  const params = getParams(data)
+
+  params.forEach(([key, value], index) => {
+    // Если параметр не последний, то в конце добавляем &
+    if (index + 1 < params.length) {
+      result += `${key}=${value}&`
+    } else {
+      result += `${key}=${value}`
+    }
+  })
+
+  return result
 }

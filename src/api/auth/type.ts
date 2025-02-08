@@ -13,14 +13,14 @@ export type SignInRequest = {
 }
 
 export type UserResponse = {
-  avatar: string
-  display_name: null
-  email: string
-  first_name: string
-  id: number
-  login: string
-  phone: string
-  second_name: string
+  avatar: string | null
+  display_name: string | null
+  email: string | null
+  first_name: string | null
+  id: number | null
+  login: string | null
+  phone: string | null
+  second_name: string | null
 }
 
 export type LastMessage = {

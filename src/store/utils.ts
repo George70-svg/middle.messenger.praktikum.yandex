@@ -1,6 +1,6 @@
 import Block, { BlockProps } from '../framework/block.ts'
 import store, { StoreEvents } from './store.ts'
-import { Indexed } from './types/types.ts'
+import { Indexed } from './types.ts'
 import { isEqual } from '../utils/common.ts'
 
 function connect(mapStateToProps: (state: Indexed<unknown>) => Indexed<unknown>) {
