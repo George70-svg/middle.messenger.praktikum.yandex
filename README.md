@@ -24,10 +24,13 @@ https://www.figma.com/design/cJQjsbMsSzxSyKjykPVKWE/Yandex-messenger?node-id=0-1
 
 ### Setup Project Instructions
 
-#### Dev Commands:
+#### Dev commands:
 - Start and build project: `npm run start`
 - Start dev server: `npm run dev`
 - Preview build project: `npm run preview`
+
+#### Test commands:
+- Start test : `npm run test`
 
 #### Linting:
 - Run linter: `npm run lint`
