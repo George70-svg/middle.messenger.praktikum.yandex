@@ -9,23 +9,23 @@ export type ChatsCreateRequestData = {
 }
 
 export type ChatDeleteRequestData = {
-  chatId: number
+  chatId: number | null
 }
 
 export type AddUserToChatRequestData = {
-  users: number[],
-  chatId: number
+  users: number[] | null,
+  chatId: number | null
 }
 
 export type ChatTokenResponse = { token: string }
 
 export type ChatResponse = {
-  avatar: string
-  created_by: number
-  id: number
-  last_message: string
-  title: string
-  unread_count: number
+  avatar: string | null
+  created_by: number | null
+  id: number | null
+  last_message: string | null
+  title: string | null
+  unread_count: number | null
 }
 
 export type MessageResponse = {

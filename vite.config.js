@@ -17,6 +17,9 @@ export default defineConfig({
       typescript: true,
     }),
   ],
+  test: {
+    environment: 'jsdom',
+  },
   css: {
     preprocessorOptions: {
       scss: {

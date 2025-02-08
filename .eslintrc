@@ -40,7 +40,7 @@
     "space-in-parens": "error",
     "func-names": "off",
     "camelcase": "off",
-    "no-multiple-empty-lines": "error",
+    "max-classes-per-file": "off",
     "class-methods-use-this": "off",
     "prefer-promise-reject-errors": "off",
     "prefer-destructuring": "off",
@@ -61,8 +61,9 @@
     "no-restricted-syntax": "off",
     "no-constructor-return": "off",
     "no-new": "off",
+    "no-multiple-empty-lines": "error",
     "import/no-extraneous-dependencies": ["error", {
-      "devDependencies": ["vite.config.js", "**/*.config.js", "**/*.config.*"]
+      "devDependencies": ["vite.config.js", "**/*.config.js", "**/*.config.*", "**/*.spec.ts"]
     }],
     "import/no-unresolved": ["error", {
       "ignore": ["\\?raw$"]

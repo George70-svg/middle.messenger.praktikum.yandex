@@ -108,12 +108,15 @@ class MessengerPage extends Block {
 
   handleSendMessage() {
     const chatId = (this.props?.selectedChat as ChatResponse)?.id
-    const socket = messageSocketList[chatId]
-    const text = (this.children?.InputMessage as Input).getValue()
 
-    if (text) {
-      const message = { content: text, type: 'message' }
-      socket.send(message)
+    if (chatId) {
+      const socket = messageSocketList[chatId]
+      const text = (this.children?.InputMessage as Input).getValue()
+
+      if (text) {
+        const message = { content: text, type: 'message' }
+        socket.send(message)
+      }
     }
   }
 

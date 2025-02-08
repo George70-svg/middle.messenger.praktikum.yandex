@@ -44,10 +44,14 @@ class ChatsController {
   }
 
   addUserToChat(data: AddUserToChatRequestData) {
-    return chats.addUserToChat(data)
-      .catch((error) => {
-        console.error('Ошибка добавления пользователя в чат', error)
-      })
+    if (data.chatId && data?.users) {
+      return chats.addUserToChat(data)
+        .catch((error) => {
+          console.error('Ошибка добавления пользователя в чат', error)
+        })
+    } else {
+      throw new Error('Invalid chatId or user data')
+    }
   }
 
   deleteUserFromChat(data: AddUserToChatRequestData) {
@@ -57,12 +61,16 @@ class ChatsController {
       })
   }
 
-  getChatToken(chatId: number) {
-    return chats.getChatToken(chatId)
-      .then((token) => token as ChatTokenResponse)
-      .catch((error) => {
-        console.error('Ошибка удаления пользователя из чата', error)
-      })
+  getChatToken(chatId: number | null) {
+    if (chatId) {
+      return chats.getChatToken(chatId)
+        .then((token) => token as ChatTokenResponse)
+        .catch((error) => {
+          console.error('Ошибка удаления пользователя из чата', error)
+        })
+    } else {
+      throw new Error('Invalid chat id')
+    }
   }
 
   addChatMessages(messages: MessageResponse[]) {
