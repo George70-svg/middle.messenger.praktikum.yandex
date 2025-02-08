@@ -9,12 +9,17 @@ Project to demonstrate the creation of a messenger as a SPA application without 
 - **Routing: Router and Route for navigate and render current page**
 - **HTTP-requests on xhr**
 - **Websocket connection for messages**
+- **Api, router, utils, component tests on Vitest**
+- **Husky for precommit**
 
 ### Technologies used
 - **HTML**
 - **JavaScript/TypeScript**
 - **CSS/SCSS**
 - **Handlebars**
+- **Vite**
+- **Vitest**
+- **Husky**
 
 ### Project URL
 #### Netlify: https://start-messenger.netlify.app/
@@ -30,7 +35,8 @@ https://www.figma.com/design/cJQjsbMsSzxSyKjykPVKWE/Yandex-messenger?node-id=0-1
 - Preview build project: `npm run preview`
 
 #### Test commands:
-- Start test : `npm run test`
+- Start tests: `npm run test`
+- Start tests once : `npm run test:ci`
 
 #### Linting:
 - Run linter: `npm run lint`
