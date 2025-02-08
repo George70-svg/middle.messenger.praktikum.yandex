@@ -56,7 +56,7 @@ export class Input extends Block {
     }
 
     const hintContainer = this.element?.querySelector('.hint-container') as HTMLElement
-    const value = this.getValue()?.trim()
+    let value = this.getValue()?.trim()
     if (!hintContainer) return
 
     if (value) {
